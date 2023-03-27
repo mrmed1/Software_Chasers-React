@@ -7,18 +7,16 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import {BrowserRouter,Route,Routes} from 'react-router-dom'
-import Hello from './components/Hello';
+import {BrowserRouter} from 'react-router-dom'
+
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route element ={<App/>} path='/' />
-        <Route element ={<Hello/>} path='/Hello' />
-      </Routes>
+        <App/>
     </BrowserRouter>
     
   </React.StrictMode>
