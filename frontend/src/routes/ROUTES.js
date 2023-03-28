@@ -2,7 +2,7 @@ import Hello from "../components/Hello";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 
 const ROUTES =[
-    
+
     {
         path: "/students",
         name: "Manage papa",
