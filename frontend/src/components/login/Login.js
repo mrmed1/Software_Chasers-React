@@ -55,7 +55,7 @@ export default function Login() {
                 .then((response) => {
                     toast.success('Login Successful');
                     setTimeout(() => {
-                        navigate('/admin/student');
+                        navigate('/students');
                     },1000)
                 })
                 .catch((error) => {

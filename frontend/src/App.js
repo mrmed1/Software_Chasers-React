@@ -1,16 +1,18 @@
+import Box from '@mui/material/Box';
 import { useState } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes,redirect } from "react-router-dom";
 import "./App.css";
 import Hello from "./components/Hello";
 import Sidebar from "./components/Sidebar/Sidebar";
 import ROUTES from "./routes/ROUTES";
 import { styled } from "@mui/material/styles";
+import ListEtudiant from "./components/CrudEtudiant/ListEtudiant";
+import {isLoggedIn} from "./Service/auth.service";
 import Login from "./components/login/Login";
-import Box from "@mui/material/Box";
-
+import { Navigate } from "react-router-dom";
 function App() {
     const [open, setOpen] = useState(false);
-    const currenUser = { role: "ADMIN" };
+    const currenUser = {role: "ADMIN"};
 
     const drawerWidth = 240;
     const handleDrawerOpen = () => {
@@ -19,8 +21,8 @@ function App() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-        ({ theme, open }) => ({
+    const Main = styled("main", {shouldForwardProp: (prop) => prop !== "open"})(
+        ({theme, open}) => ({
             flexGrow: 1,
             padding: theme.spacing(3),
             transition: theme.transitions.create("margin", {
@@ -37,7 +39,7 @@ function App() {
             }),
         })
     );
-    const DrawerHeader = styled("div")(({ theme }) => ({
+    const DrawerHeader = styled("div")(({theme}) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "flex-end",
@@ -45,39 +47,33 @@ function App() {
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
     }));
-
-    const AuthLayout = () => (
-        <Login />
-    );
-
-    const DefaultLayout = () => (
-        <Box sx={{ display: "flex" }}>
-            <Sidebar
-                routes={ROUTES}
-                userRole={currenUser.role}
-                open={open}
-                handleDrawerClose={handleDrawerClose}
-                handleDrawerOpen={handleDrawerOpen}
-            />
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                <DrawerHeader />
-                <Routes>
-                    <Route exact path="/" element={<Hello />} />
-                    <Route exact path="/admin/students" element={<Hello />} />
-                    <Route exact path="/courses" element={<Hello />} />
-                    <Route exact path="/profile" element={<Hello />} />
-                </Routes>
-            </Box>
-        </Box>
-    );
-
     return (
-        <Routes>
-            <Route path="/auth" element={<AuthLayout />} />
-            <Route path="/" element={<DefaultLayout />} />
-            <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-    );
+        <>
+
+                <Box  sx={{ display: 'flex' }}>
+                    <Sidebar
+                        routes={ROUTES}
+                        userRole={currenUser.role}
+                        open={open}
+                        handleDrawerClose={handleDrawerClose}
+                        handleDrawerOpen={handleDrawerOpen}
+                    />
+                    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                        <DrawerHeader />
+                        <Routes>
+                            <Route exact path="/students" element={<ListEtudiant/>} />
+                            <Route exact path="/auth" element={<Login />} />
+                            <Route exact path="/profile" element={<Hello />} />
+                        </Routes>
+                    </Box>
+
+                </Box>
+
+
+
+        </>
+
+    )
 }
 
 export default App;
