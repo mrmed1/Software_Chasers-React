@@ -1,23 +1,14 @@
-import Hello from "../components/Hello";
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import StudentAccount from "../views/studentsViews/StudentAccount";
 
-const ROUTES =[
-    
-    {
-        path: "/students",
-        name: "Manage papa",
-        icon: <InboxIcon/>,
-        element: <Hello/>,
-        layout: "/admin",
-        allowedRoles :["ADMIN"]
-      },
-      {
-        path: "/melek",
-        name: "Manage cours",
-        icon: <InboxIcon/>,
-        element: <Hello/>,
-        layout: "/admin",
-        allowedRoles :["ADMIN"]
-      },
-]
-export default ROUTES
+const ROUTES = [
+  {
+    path: "/profile",
+    name: "My Account",
+    icon: <ManageAccountsIcon color="primary"/>,
+    element: <StudentAccount />,
+    layout: "/students",
+    allowedRoles: ["ADMIN"],
+  },
+];
+export default ROUTES;
