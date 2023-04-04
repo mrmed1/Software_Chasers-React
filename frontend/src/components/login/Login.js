@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,18 +12,19 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {auth} from "../../Service/auth.service";
+import {auth, connectedUser} from "../../Service/auth.service";
 import {useNavigate} from "react-router-dom";
 import toast, {Toaster} from 'react-hot-toast';
 import {Checkbox, FormControlLabel} from "@mui/material";
 
 const theme = createTheme();
-export default function Login() {
+export default function Login({ onLogin }) {
 
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isclub, setIsClub] = useState(false);
     const navigate = useNavigate();
     var type ='';
@@ -59,11 +60,16 @@ export default function Login() {
             }else {
                  type = "person"
             }
+
             auth(login, password,type)
                 .then((response) => {
                     toast.success('Login Successful');
+                    setIsLoggedIn(true);
+                    onLogin(isLoggedIn);
+
                     setTimeout(() => {
                         navigate('/students');
+                        window.location.reload()
                     },1000)
                 })
                 .catch((error) => {
@@ -73,7 +79,9 @@ export default function Login() {
 
         }
     };
-
+    useEffect(() => {
+        console.log(isLoggedIn); // will log the updated value of isLoggedIn
+    }, [isLoggedIn]);
     const handleChange = () => {
         setIsClub(!isclub);
     };

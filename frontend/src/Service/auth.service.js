@@ -25,3 +25,14 @@ export const isLoggedIn = () => {
     const token = getToken();
     return token !== null && token !== undefined;
 };
+
+export const connectedUser = () => {
+    if (isLoggedIn()) {
+        const token = getToken();
+
+        return  JSON.parse(atob(token.split('.')[1]));
+
+
+    }
+    return null;
+}

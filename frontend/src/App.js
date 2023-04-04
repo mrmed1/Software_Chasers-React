@@ -7,13 +7,18 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import ROUTES from "./routes/ROUTES";
 import { styled } from "@mui/material/styles";
 import ListEtudiant from "./components/CrudEtudiant/ListEtudiant";
-import {isLoggedIn} from "./Service/auth.service";
+import {connectedUser, isLoggedIn} from "./Service/auth.service";
 import Login from "./components/login/Login";
 import { Navigate } from "react-router-dom";
+import SecureRoute from "./components/SecureRoute/secureRoute";
 function App() {
     const [open, setOpen] = useState(false);
     const currenUser = {role: "ADMIN"};
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    function handleLogin(isLoggedIn) {
+        setIsLoggedIn(isLoggedIn);
+    }
     const drawerWidth = 240;
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -49,7 +54,7 @@ function App() {
     }));
     return (
         <>
-
+            {connectedUser() ?
                 <Box  sx={{ display: 'flex' }}>
                     <Sidebar
                         routes={ROUTES}
@@ -61,16 +66,15 @@ function App() {
                     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                         <DrawerHeader />
                         <Routes>
-                            <Route exact path="/students" element={<ListEtudiant/>} />
-                            <Route exact path="/auth" element={<Login />} />
+                            <Route element={<SecureRoute/>} >
+                                <Route exact path="/students" element={<ListEtudiant/>} />
+                            </Route>
+
                             <Route exact path="/profile" element={<Hello />} />
                         </Routes>
                     </Box>
 
-                </Box>
-
-
-
+                </Box> : <Login onLogin={handleLogin} />}
         </>
 
     )
