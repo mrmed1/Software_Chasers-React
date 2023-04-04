@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { Button, Card, Modal, Form, Icon, Dimmer, Loader } from "semantic-ui-react";
+import {
+  Button,
+  Card,
+  Modal,
+  Form,
+  Icon,
+  Dimmer,
+  Loader,
+  Popup,
+} from "semantic-ui-react";
 import {
   getAcount,
   updateProfile,
@@ -14,6 +23,7 @@ export default function UpdateProfile() {
   const [Email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [login, setLogin] = useState("");
 
   const queryClient = useQueryClient();
   //For Testing without authentification
@@ -46,38 +56,65 @@ export default function UpdateProfile() {
     },
     {
       onSuccess: () => toast.success("Profile updated successfully !"),
-      onError: (error) => toast.error(error.message),
+      onError: (error) => toast.error(error?.response?.data?.codeName),
       onSettled: () => queryClient.invalidateQueries("student"),
     }
   );
 
   if (isLoading)
     return (
-      <Dimmer active inverted >
+      <Dimmer active inverted>
         <Loader size="big">Loading...</Loader>
       </Dimmer>
     );
 
   function hundlSubmit(e) {
     e.preventDefault();
-    console.log(FirstName);
+    
     if (password !== confirmPassword) {
       //ReTurn Toast !
       toast.error("Oups Password Unmatched  !");
+      return;
     } else {
       let stdnt = data;
+
       if (FirstName !== "") {
         stdnt.firstname = FirstName;
       }
       if (Email !== "") {
+        const emailRegex = /\S+@\S+\.\S+/;
+
+        if (!emailRegex.test(Email)) {
+          toast.error("Please Enter Valid Email !");
+          return;
+        }
         stdnt.email = Email;
       }
+
       if (LastName !== "") {
         stdnt.lastname = LastName;
       }
+      if (password.length < 8) {
+        toast.error("Password should be at least 8 characters long");
 
-      console.log(stdnt);
-      UpdateProfileMutation.mutate(stdnt);
+        return;
+      }
+      stdnt.password = password;
+      if (login.length < 4) {
+        toast.error("Enter a valid Login");
+
+        return;
+      }
+      stdnt.login = login;
+
+      console.log("student State Updated", stdnt);
+      try {
+        UpdateProfileMutation.mutate(stdnt);
+      } catch (error) {
+        console.log(error)
+        toast.error("Bad Requests");
+      }
+      
     }
   }
 
@@ -129,6 +166,16 @@ export default function UpdateProfile() {
                   />
                 </Form.Group>
                 <Form.Group widths="equal">
+                <Form.Input
+                    fluid
+                    label="Login"
+                    type="text"
+                    placeholder="Login"
+                    onChange={(e) => setLogin(e.target.value)}
+                    required
+                    icon={"user"}
+                    defaultValue={data?.login}
+                  />
                   <Form.Input
                     fluid
                     label="password"
@@ -137,6 +184,7 @@ export default function UpdateProfile() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     icon={"lock"}
+                    
                   />
                   <Form.Input
                     type="password"
@@ -165,16 +213,19 @@ export default function UpdateProfile() {
           </Modal>
 
           <Card.Header>
-            <h1>Personal Information </h1>
+            <h1>Personal Informations </h1>
           </Card.Header>
           <br />
           {/* Render Profile */}
           <Card.Description>
             <Card.Header>
-              <h2>
+              <h2 style={{ color: "#1976D2" }}>
                 {data?.firstname} {data?.lastname}
               </h2>
             </Card.Header>
+            <Card.Meta>
+              <h4> Logged as <strong style={{ color: "#1976D2" }}>{data?.login}</strong></h4>
+            </Card.Meta>
             <Card.Meta>
               <h4>{data?.role}</h4>
             </Card.Meta>
@@ -199,17 +250,23 @@ export default function UpdateProfile() {
             )}
 
             <Card.Meta>
-              <Icon
-                onClick={onClickIdon}
-                name={data.isPublic ? "world" : "privacy"}
-                style={{
-                  cursor: "pointer",
-                  float: "right",
-                  marginRight: "25px",
-                }}
-                size={"big"}
-                color={data.isPublic ? "green" : "red"}
-              />{" "}
+            <Popup
+        content={"You can change your account visibility Here"}
+      
+        header={data.isPublic ?" Make Your Account Private":" Make Your Account Public"}
+        trigger={<Icon
+          onClick={onClickIdon}
+          name={data.isPublic ? "world" : "privacy"}
+          style={{
+            cursor: "pointer",
+            float: "right",
+            marginRight: "25px",
+          }}
+          size={"big"}
+          color={data.isPublic ? "green" : "red"}
+        />}
+            />{" "}
+              
               {data?.dog}
             </Card.Meta>
           </Card.Description>

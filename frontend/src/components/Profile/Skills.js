@@ -1,28 +1,31 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { Card, Modal, Form, Dropdown, Icon, Button } from "semantic-ui-react";
+import { Card, Modal, Form, Dropdown, Icon} from "semantic-ui-react";
 import { competenceList } from "../../Helpers/helper";
 import { addSkills } from "../../Service/studentService";
 import "./Skills.css";
 import { toast } from "react-hot-toast";
+import DeleteSkillsModal from "./DeleteSkillsModal";
 export default function Skills({ data, _id }) {
   const [SkillsList, setSkillsList] = useState(data);
-  const queryClient = useQueryClient();
 
-  
+
+  const queryClient = useQueryClient();
+ 
   const handleDropdownChange = (event, data) => {
     setSkillsList(data.value);
   };
 
+  
   const { mutate, isLoading } = useMutation(
     ({ Skills, _id }) => addSkills(Skills, _id),
     {
-      onSuccess: (data) => {
-        toast.success('Skills Are  Added Successfully !')
+      onSuccess: () => {
+        toast.success("Skills Are  Added Successfully !");
       },
       onError: (err) => {
-        console.log(err)
-        toast.error("Skills already exist on the CV")
+        console.log(err);
+        toast.error("Skills already exist on the CV");
       },
       onSettled: () => {
         queryClient.invalidateQueries("cv");
@@ -36,8 +39,8 @@ export default function Skills({ data, _id }) {
     const newSkills = {
       Skills: SkillsList,
     };
-    if(SkillsList.length===0){
-     return toast.error("Skills are required to continue")
+    if (SkillsList.length === 0) {
+      return toast.error("Skills are required to continue");
     }
     mutate({ Skills: newSkills, _id: _id });
   }
@@ -69,7 +72,6 @@ export default function Skills({ data, _id }) {
                 onChange={handleDropdownChange}
                 options={competenceList}
                 required
-                
               />
 
               <br />
@@ -93,7 +95,9 @@ export default function Skills({ data, _id }) {
           <ul className="skills__list">
             {data.map((skill, key) => (
               <li key={key} className="skills__list-item">
-                <Button color="blue" circular>{skill}</Button>
+               <DeleteSkillsModal skill={skill} _id={_id}/>
+              
+                
               </li>
             ))}
           </ul>

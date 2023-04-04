@@ -55,7 +55,7 @@ export function deleteExperience(Experience,id){
 }
 
 export function deleteSkills(Skills,id){
-    return axios.delete(`${URI}/student/Skills/${id}`).then((r)=>r.data)
+    return axios.delete(`${URI}/student/Skills/${id}/${Skills}`).then((r)=>r.data)
 }
 
 

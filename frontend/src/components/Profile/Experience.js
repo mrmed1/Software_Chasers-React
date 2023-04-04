@@ -40,7 +40,6 @@ export default function Experience({ data, _id }) {
             return (
               <>
                 <Card.Description key={key}>
-                  
                   <Card.Header>
                     <ExperienceModal
                       data={exp}
@@ -49,54 +48,56 @@ export default function Experience({ data, _id }) {
                       iconName="setting"
                     />
                     <DeleteExperience data={exp} _id={_id} />
-               
                     <h2>
-                    <Icon name='point' />
+                      <Icon name="point" color="blue" />
                       {exp?.jobTitle}
                       {"  "}, {"  "}
                       {"  "}
-                   
-
                       <strong style={{ color: "#1976D2" }}>
                         {exp?.companyName}
                       </strong>
                     </h2>
                   </Card.Header>
-                  <Card.Meta style={{marginLeft:"32px"}}>
+                  <Card.Meta style={{ marginLeft: "32px" }}>
                     <Icon name="calendar" /> from {exp?.startDate} to{" "}
                     {exp?.endDate}
                   </Card.Meta>
-                
+
                   <h4
                     style={{
                       marginTtop: "1em",
                       textAlign: "justify",
                       maxWidth: "820px",
-                      color:"black",
-                      lineHeight:"1.4em",
-                      wordSpacing:".5em",
-                      marginLeft:"32px"
+                      color: "black",
+                      lineHeight: "1.4em",
+                      wordSpacing: ".5em",
+                      marginLeft: "32px",
                     }}
                   >
                     {exp?.description}
                   </h4>
-                  <Card.Meta style={{marginLeft:"32px"}}>
-                  {exp.jobType && <h5>Domain : <strong style={{color:"#1976D2"}}> {exp.jobType}</strong></h5>}
+                  <Card.Meta style={{ marginLeft: "32px" }}>
+                    {exp.jobType && (
+                      <h5>
+                        Domain :{" "}
+                        <strong style={{ color: "#1976D2" }}>
+                          {" "}
+                          {exp.jobType}
+                        </strong>
+                      </h5>
+                    )}
                   </Card.Meta>
-                  
-                  <Card.Meta style={{marginLeft:"32px"}}>
-                    
+
+                  <Card.Meta style={{ marginLeft: "32px" }}>
                     <h5>
-                    Competences : <strong  style={{color:"#1976D2"}}>{exp?.competences.join(", ")}</strong>
-                  </h5>
+                      Competences :{" "}
+                      <strong style={{ color: "#1976D2" }}>
+                        {exp?.competences.join(", ")}
+                      </strong>
+                    </h5>
                   </Card.Meta>
-                  <div>
-                
-                  
-                  </div>
-                  
+                  <div></div>
                 </Card.Description>
-                
               </>
             );
           })}

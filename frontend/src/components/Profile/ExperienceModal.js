@@ -75,8 +75,11 @@ export default function ExperienceModal({data, add,_id ,iconName}) {
           competences: competences,
           place: place,
         };
-        if(!competences){
+        if(competences.length<1){
           return toast.error("Competences are required ! ");
+        }
+        if(!jobType){
+          return toast.error("Jobe Type is  required ! ");
         }
 
         if(add){

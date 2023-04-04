@@ -35,7 +35,7 @@ const emptyObject = {
                   <DeleteEducation data={edu}_id={_id}/>
               
                     <h2>
-                    <Icon name='point' />
+                    <Icon name='point' color='blue'  />
                      {edu.diploma} ,  {"   "} <strong style={{color:"#1976D2"}}>{edu.university}</strong></h2> 
 
                    
