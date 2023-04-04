@@ -6,10 +6,9 @@ import Hello from "./components/Hello";
 import Sidebar from "./components/Sidebar/Sidebar";
 import ROUTES from "./routes/ROUTES";
 import { styled } from "@mui/material/styles";
-import EventForm from './components/EventForm/EventForm';
+
 import Event from './components/Event/Event';
-import Enseignant from './components/Enseignants/Enseignant';
-import DataTable from './components/Table/DataTable';
+
 function App() {
   const [open, setOpen] = useState(false);
   const currenUser = { role: "ADMIN" };
@@ -60,12 +59,9 @@ function App() {
           <DrawerHeader />
               <Routes>
 
-          <Route exact path="/admin/students" element={<Hello />} />
-          <Route exact path="/courses" element={<Hello />} />
-          <Route exact path="/profile" element={<Hello />} />
-          <Route exact path="/Event/createEvent" element={<EventForm/>} />
+
           <Route exact path="/Event/" element={<Event/>} />
-          <Route exact path="/Enseignant/" element={<Enseignant/>} />
+   
         </Routes>
         </Box>
           
