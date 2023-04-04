@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
-import Hello from './components/Hello';
+import SignUp from "./components/SignUp/SignUp";
+import PwdUpdate from "./components/PwdUpdate/PwdUpdate";
+import SuiviEtatCompteAllumni from "./components/SuiviEtatCompteAllumni/SuiviEtatCompteAllumni";
+import Home from './components/Accueil/Home'
+//theme
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+//core
+import "primereact/resources/primereact.min.css";
+//icons
+import "primeicons/primeicons.css";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,11 +24,12 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route element ={<App/>} path='/' />
-        <Route element ={<Hello/>} path='/Hello' />
+          <Route element={<Home/>} path='/'/>
+          <Route element ={<PwdUpdate/>} path='/PwdUpdate' />
+          <Route element ={<SignUp/>} path='/SignUp' />
+          <Route element ={<SuiviEtatCompteAllumni/>} path='/SuiviEtatCompteAllumni' />
       </Routes>
     </BrowserRouter>
-    
   </React.StrictMode>
 );
 
