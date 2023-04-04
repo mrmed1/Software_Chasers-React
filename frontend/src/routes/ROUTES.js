@@ -1,22 +1,24 @@
-import Hello from "../components/Hello";
+import EventForm from "../components/EventForm/EventForm";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import Event from "../components/Event/Event";
+import Enseignant from "../components/Enseignants/Enseignant";
 
 const ROUTES =[
-    
-    {
-        path: "/students",
-        name: "Manage papa",
+   
+      {
+        path: "/",
+        name: "Add Event",
         icon: <InboxIcon/>,
-        element: <Hello/>,
-        layout: "/admin",
+        element: <Event/>,
+        layout: "/Event",
         allowedRoles :["ADMIN"]
       },
       {
-        path: "/melek",
-        name: "Manage cours",
+        path: "/",
+        name: "Add Enseignant",
         icon: <InboxIcon/>,
-        element: <Hello/>,
-        layout: "/admin",
+        element: <Enseignant/>,
+        layout: "/Enseignant",
         allowedRoles :["ADMIN"]
       },
 ]
