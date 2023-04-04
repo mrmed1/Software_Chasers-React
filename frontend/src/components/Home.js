@@ -32,7 +32,7 @@ function Home() {
  
 
   const handleEdit = (e) => {
-    console.log(e)
+    console.log("eeeeeeeeeeeeeeeeeeeeee",e)
     setSelectedEditEntity(e);
     console.log(selectedEditEntity)
     setEditDialogOpen(true);
