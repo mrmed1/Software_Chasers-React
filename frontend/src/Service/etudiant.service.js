@@ -6,7 +6,6 @@ import { API_URL } from "../Config/config";
 
 export function GetAllStudents() {
 
-
     return axios.get(`${API_URL}/Persons`)
         .then(response => {
             const allPersons = response.data;

@@ -15,6 +15,7 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {auth} from "../../Service/auth.service";
 import {useNavigate} from "react-router-dom";
 import toast, {Toaster} from 'react-hot-toast';
+import {Checkbox, FormControlLabel} from "@mui/material";
 
 const theme = createTheme();
 export default function Login() {
@@ -23,8 +24,9 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [isclub, setIsClub] = useState(false);
     const navigate = useNavigate();
-
+    var type ='';
     const handleLoginChange = (event) => {
         setLogin(event.target.value);
         setLoginError(false);
@@ -51,7 +53,13 @@ export default function Login() {
         }
 
         if (!hasError) {
-            auth(login, password)
+            if(isclub)
+            {
+                 type = "club"
+            }else {
+                 type = "person"
+            }
+            auth(login, password,type)
                 .then((response) => {
                     toast.success('Login Successful');
                     setTimeout(() => {
@@ -62,9 +70,13 @@ export default function Login() {
                     toast.error('Login Failed');
 
                 });
+
         }
     };
 
+    const handleChange = () => {
+        setIsClub(!isclub);
+    };
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
@@ -122,6 +134,10 @@ export default function Login() {
                                     setPasswordError(true);
                                 }
                             }}
+                        />
+                        <FormControlLabel
+                            control={<Checkbox value={isclub} onChange={handleChange} color="primary" />}
+                            label="Sign in as Club"
                         />
 
                         <Button

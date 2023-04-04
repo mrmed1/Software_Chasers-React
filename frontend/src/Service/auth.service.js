@@ -1,13 +1,11 @@
 import axios from 'axios';
 import { API_URL, TOKEN_KEY } from '../Config/config';
 
-export const auth = async (login, password) => {
+export const auth = async (login, password,type) => {
     try {
-        const response = await axios.post(`${API_URL}/auth`, { login, password });
-        console.log(response.data)
+        const response = await axios.post(`${API_URL}/auth`, { login, password,type });
         const token  = response.data;
         localStorage.setItem(TOKEN_KEY, token);
-
         return token;
     } catch (error) {
         console.log(error);
