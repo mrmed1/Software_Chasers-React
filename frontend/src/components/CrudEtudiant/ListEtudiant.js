@@ -15,6 +15,14 @@ export default function ListEtudiant() {
     const [selectedStudent, setSelectedStudent] = useState(null);
     const [deleteStudentDialog, setDeleteStudentDialog] = useState(false);
     const [addStudentDialogVisible, setAddStudentDialogVisible] = useState(false);
+    const [lastnameError, setLastnameError] = useState(false);
+    const [firstnameError, setFirstnameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [loginError, setLoginError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [levelError, setLevelError] = useState(false);
+    const [classError, setClassError] = useState(false);
+    const [dobError, setDobError] = useState(false);
     const [newStudent, setNewStudent] = useState({
         lastname: '',
         firstname: '',
@@ -106,7 +114,45 @@ export default function ListEtudiant() {
     const handleSubmit = (event) => {
         event.preventDefault();
         newStudent.role = "STUDENT";
-        createStudentMutation.mutate(newStudent);
+        let hasError = false;
+        if (!newStudent.lastname) {
+            setLastnameError(true);
+            hasError = true;
+        }
+
+        if (!newStudent.firstname) {
+            setFirstnameError(true);
+            hasError = true;
+        }
+        if (!newStudent.email) {
+            setEmailError(true);
+            hasError = true;
+        }
+        if (!newStudent.login) {
+            setLoginError(true);
+            hasError = true;
+        }
+        if (!newStudent.password) {
+            setPasswordError(true);
+            hasError = true;
+        }
+        if (!newStudent.level) {
+            setLevelError(true);
+            hasError = true;
+        }
+        if (!newStudent.class) {
+            setClassError(true);
+            hasError = true;
+        }
+        if (!newStudent.dob) {
+            setDobError(true);
+            hasError = true;
+        }
+
+        if (!hasError) {
+            createStudentMutation.mutate(newStudent);
+        }
+
     };
     /**this Section for delete Student**/
     const confirmDeleteStudent = (student) => {
@@ -223,6 +269,15 @@ export default function ListEtudiant() {
                             <div className="p-field">
                                 <label htmlFor="lastname">Last Name</label>
                                 <InputText id="lastname" type="text" value={newStudent.lastname}
+
+                                           autoFocus
+                                           error={lastnameError}
+                                           helperText={lastnameError ? 'Please enter a lastname' : ''}
+                                           onBlur={() => {
+                                               if (!newStudent.lastname) {
+                                                   setLastnameError(true);
+                                               }
+                                           }}
                                            onChange={(event) => setNewStudent({
                                                ...newStudent,
                                                lastname: event.target.value
@@ -231,6 +286,14 @@ export default function ListEtudiant() {
                             <div className="p-field">
                                 <label htmlFor="firstname">First Name</label>
                                 <InputText id="firstname" type="text" value={newStudent.firstname}
+                                           autoFocus
+                                           error={firstnameError}
+                                           helperText={firstnameError ? 'Please enter a fistname' : ''}
+                                           onBlur={() => {
+                                               if (!newStudent.firstname) {
+                                                   setFirstnameError(true);
+                                               }
+                                           }}
                                            onChange={(event) => setNewStudent({
                                                ...newStudent,
                                                firstname: event.target.value
