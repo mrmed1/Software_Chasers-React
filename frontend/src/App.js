@@ -1,11 +1,22 @@
 import Box from '@mui/material/Box';
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Home from './components/Home';
 import Hello from "./components/Hello";
 import Sidebar from "./components/Sidebar/Sidebar";
 import ROUTES from "./routes/ROUTES";
 import { styled } from "@mui/material/styles";
+import { Table } from 'react-bootstrap';
+import Add from './components/Add';
+import Edit from './components/Edit';
+import AddEventDialog from './components/AddEventDialog';
+import View from './components/View';
+import AddEvent from './components/AddEvent'
+import HomeEvent from './components/HomeEvent';
+ 
+
+
 function App() {
   const [open, setOpen] = useState(false);
   const currenUser = { role: "ADMIN" };
@@ -56,9 +67,19 @@ function App() {
           <DrawerHeader />
               <Routes>
 
-          <Route exact path="/admin/students" element={<Hello />} />
-          <Route exact path="/courses" element={<Hello />} />
-          <Route exact path="/profile" element={<Hello />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/create" element={<Add />} />
+          <Route exact path="/edit" element={<Edit />} />
+          <Route exact path="/view" element={<View />} />
+       <Route exact path="/AddEventDialog" element={<AddEventDialog />} />
+           <Route exact path="/AddEvent" element={<AddEvent />} />
+          <Route exact path="/HomeEvent" element={<HomeEvent />} />
+
+ 
+          
+
+          
+        {/*   <Route exact path="/profile" element={<Hello />} /> */}
         </Routes>
         </Box>
           

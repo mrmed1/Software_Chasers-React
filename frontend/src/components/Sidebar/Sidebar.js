@@ -28,7 +28,7 @@ const Sidebar = ({
   handleDrawerOpen,
   open,
 }) => {
-  const drawerWidth = 240;
+  const drawerWidth = 340;
   const location = useLocation();
   
   const filteredRoutes = routes.filter((route) =>

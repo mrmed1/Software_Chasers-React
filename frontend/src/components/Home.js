@@ -12,6 +12,7 @@ function Home() {
   let history = useNavigate();
   const [clubs, setClubs] = useState([]);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [selectedEditEntity, setSelectedEditEntity] = useState({});
 
   //fonction getby id trajaali persons 
 
@@ -30,7 +31,16 @@ function Home() {
 
  
 
-
+  const handleEdit = (e) => {
+    console.log(e)
+    setSelectedEditEntity(e);
+    console.log(selectedEditEntity)
+    setEditDialogOpen(true);
+  };
+  const updateEntity = async (id, updateEntity) => {
+    const response = await api.updateClub(id, updateEntity);
+    setClubs(response.data);
+  };
 
   const handleDelete = async (id) => {
     if (
@@ -69,7 +79,16 @@ function Home() {
 
   return (
     <Fragment>
-
+      {selectedEditEntity && (
+        <EditEventDialog
+          open={editDialogOpen}
+          onClose={() => {
+            setEditDialogOpen(false);
+          }}
+          selectedEditEvent={selectedEditEntity}
+          onSave={updateEntity}
+        />
+      )}
 
       <div style={{ margin: "10rem" }}>
         <Table striped bordered hover size="sm">
