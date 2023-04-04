@@ -12,8 +12,8 @@ import Add from './components/Add';
 import Edit from './components/Edit';
 import AddEventDialog from './components/AddEventDialog';
 import View from './components/View';
-import AddEvent from './components/AddEvent'
-import HomeEvent from './components/HomeEvent';
+//import AddEvent from './components/AddEvent'
+//import HomeEvent from './components/HomeEvent';
  
 
 
@@ -72,8 +72,8 @@ function App() {
           <Route exact path="/edit" element={<Edit />} />
           <Route exact path="/view" element={<View />} />
        <Route exact path="/AddEventDialog" element={<AddEventDialog />} />
-           <Route exact path="/AddEvent" element={<AddEvent />} />
-          <Route exact path="/HomeEvent" element={<HomeEvent />} />
+           {/* <Route exact path="/AddEvent" element={<AddEvent />} />
+          <Route exact path="/HomeEvent" element={<HomeEvent />} /> */}
 
  
           
