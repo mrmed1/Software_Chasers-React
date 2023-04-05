@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {auth, connectedUser} from "../../Service/auth.service";
+import {auth} from "../../Service/auth.service";
 import {useNavigate} from "react-router-dom";
 import toast, {Toaster} from 'react-hot-toast';
 import {Checkbox, FormControlLabel} from "@mui/material";

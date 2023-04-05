@@ -1,4 +1,4 @@
-import {Navigate, Outlet, Route} from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
 import {connectedUser} from "../../Service/auth.service";
 
 const SecureRoute = (props) => {

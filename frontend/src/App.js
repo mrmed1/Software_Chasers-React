@@ -7,7 +7,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import ROUTES from "./routes/ROUTES";
 import { styled } from "@mui/material/styles";
 import ListEtudiant from "./components/CrudEtudiant/ListEtudiant";
-import {connectedUser, isLoggedIn} from "./Service/auth.service";
+import {connectedUser} from "./Service/auth.service";
 import Login from "./components/login/Login";
 import { Navigate } from "react-router-dom";
 import SecureRoute from "./components/SecureRoute/secureRoute";
