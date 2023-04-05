@@ -14,6 +14,7 @@ import {
 
 const AddDialog = ({ open, onClose, onSubmit, title, attributes }) => {
   const today = new Date().toISOString().slice(0, 10);
+  const [touched, setTouched] = useState({});
 
   const initialState = Object.fromEntries(
     attributes.map((attr) => [
@@ -77,7 +78,13 @@ const AddDialog = ({ open, onClose, onSubmit, title, attributes }) => {
                     multiline={attr.multiline}
                     minRows={attr.minRows}
                     maxRows={attr.maxRows}
-                 
+                    error={touched[attr.name] && !values[attr.name]} 
+                    helperText={
+                      touched[attr.name] && !values[attr.name]
+                        ? "This field is required"
+                        : " "
+                    } 
+                    onBlur={() => setTouched((prevTouched) => ({ ...prevTouched, [attr.name]: true }))} 
                   />
                 )}
               </>
