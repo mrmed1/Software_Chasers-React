@@ -69,8 +69,7 @@ export default function Login() {
                     },1000)
                 })
                 .catch((error) => {
-                    toast.error('Login Failed');
-
+                    toast.error(error.toString());
                 });
 
         }
