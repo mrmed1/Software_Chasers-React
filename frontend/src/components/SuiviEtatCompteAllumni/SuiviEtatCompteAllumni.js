@@ -59,14 +59,12 @@ export default function UpdatePwd() {
                 setButtonColor("red");
                 setButtonText("Refuser");
             }
-
         })
             .catch(error =>{
                 console.error(error);
                 setButtonColor("gray");
                 setButtonText("Utilisateur n'existe pas");
             });
-
     };
 
     return (

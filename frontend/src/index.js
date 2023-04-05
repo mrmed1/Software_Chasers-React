@@ -7,8 +7,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
-import SignUp from "./components/SignUp/SignUp";
-import PwdUpdate from "./components/PwdUpdate/PwdUpdate";
+
 import SuiviEtatCompteAllumni from "./components/SuiviEtatCompteAllumni/SuiviEtatCompteAllumni";
 import Home from './components/Accueil/Home'
 //theme
@@ -25,14 +24,11 @@ root.render(
     <BrowserRouter>
       <Routes>
           <Route element={<Home/>} path='/'/>
-          <Route element ={<PwdUpdate/>} path='/PwdUpdate' />
-          <Route element ={<SignUp/>} path='/SignUp' />
           <Route element ={<SuiviEtatCompteAllumni/>} path='/SuiviEtatCompteAllumni' />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );
-
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
