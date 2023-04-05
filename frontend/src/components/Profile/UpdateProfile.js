@@ -35,7 +35,7 @@ export default function UpdateProfile() {
   const visibilityMutation = useMutation(({ id }) => updateVisibility(id), {
     onSuccess: () =>
       toast.success(
-        data.isPublic
+        data?.isPublic
           ? "Your profile is now private ! "
           : "Your Profile is available for all !"
       ),
@@ -83,7 +83,7 @@ export default function UpdateProfile() {
       }
       if (Email !== "") {
         const emailRegex = /\S+@\S+\.\S+/;
-
+        
         if (!emailRegex.test(Email)) {
           toast.error("Please Enter Valid Email !");
           return;
@@ -120,7 +120,8 @@ export default function UpdateProfile() {
 
   return (
     <>
-      <Card centered fluid>
+    {data&&
+    <Card centered fluid>
         <Card.Content>
           {/* Update Section  */}
           <Modal
@@ -253,17 +254,17 @@ export default function UpdateProfile() {
             <Popup
         content={"You can change your account visibility Here"}
       
-        header={data.isPublic ?" Make Your Account Private":" Make Your Account Public"}
+        header={data?.isPublic ?" Make Your Account Private":" Make Your Account Public"}
         trigger={<Icon
           onClick={onClickIdon}
-          name={data.isPublic ? "world" : "privacy"}
+          name={data?.isPublic ? "world" : "privacy"}
           style={{
             cursor: "pointer",
             float: "right",
             marginRight: "25px",
           }}
           size={"big"}
-          color={data.isPublic ? "green" : "red"}
+          color={data?.isPublic ? "green" : "red"}
         />}
             />{" "}
               
@@ -272,6 +273,8 @@ export default function UpdateProfile() {
           </Card.Description>
         </Card.Content>
       </Card>
+    }
+      
     </>
   );
 }
