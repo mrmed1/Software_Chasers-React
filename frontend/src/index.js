@@ -8,8 +8,6 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import SignUp from "./components/SignUp/SignUp";
-import PwdUpdate from "./components/PwdUpdate/PwdUpdate";
-import SuiviEtatCompteAllumni from "./components/SuiviEtatCompteAllumni/SuiviEtatCompteAllumni";
 import Home from './components/Accueil/Home'
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";
@@ -25,9 +23,7 @@ root.render(
     <BrowserRouter>
       <Routes>
           <Route element={<Home/>} path='/'/>
-          <Route element ={<PwdUpdate/>} path='/PwdUpdate' />
           <Route element ={<SignUp/>} path='/SignUp' />
-          <Route element ={<SuiviEtatCompteAllumni/>} path='/SuiviEtatCompteAllumni' />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
