@@ -23,3 +23,18 @@
 .p-calendar .p-inputtext {
     width: auto !important;
 }
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+
+.p-invalid{
+    border-color: red;
+}
+
+input:valid {
+    border-color: #ced4da;
+}
