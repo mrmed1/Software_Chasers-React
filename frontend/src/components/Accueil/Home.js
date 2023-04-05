@@ -11,15 +11,6 @@ import { useNavigate } from 'react-router-dom';
 const theme = createTheme();
 export default function Home (){
     const navigate = useNavigate();
-
-    const handleSignUpClick = () => {
-        navigate('/SignUp');
-    };
-
-    const handleSuiviCompteClick = () => {
-        navigate('/SuiviEtatCompteAllumni');
-    };
-
     const handleChangePwdClick = () => {
         navigate('/PwdUpdate');
     };
@@ -51,8 +42,6 @@ export default function Home (){
                         <HomeIcon />
                     </Avatar>
                     <Box style={divStyle} >
-                            <Button style={buttonStyle} color="secondary" variant="outlined" onClick={handleSignUpClick}>Sign-Up Allumni (t32)</Button>
-                            <Button  style={buttonStyle} color="secondary" variant="outlined" onClick={handleSuiviCompteClick}>Suivi Compte Allumni (t33)</Button>
                             <Button style={buttonStyle}  color="secondary" variant="outlined" onClick={handleChangePwdClick}>Changer PWD (t19)</Button>
                     </Box>
                 </Box>
