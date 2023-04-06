@@ -1,0 +1,19 @@
+.club-details {
+    font-size: 1.1em;
+    line-height: 1.5em;
+    margin-top: 1em;
+    color: #333;
+   
+  }
+  
+  .club-details strong {
+    font-weight: 600;
+    
+  }
+  
+  .club-details p {
+    margin-bottom: 0.5em;
+    
+  }
+  
+  

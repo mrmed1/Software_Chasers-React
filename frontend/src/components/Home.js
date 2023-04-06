@@ -6,8 +6,11 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
 import { Button, Table } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import EditEventDialog from "./Edit";
-
+ 
+import SeeClub from "./SeeClub";
+import EditClub from "./EditClub";
+import { Icon } from "semantic-ui-react";
+import {Toaster, toast} from "react-hot-toast"
 function Home() {
   let history = useNavigate();
   const [clubs, setClubs] = useState([]);
@@ -21,7 +24,7 @@ function Home() {
       try {
         const res = await api.getAllClub();
         setClubs(res);
-        console.log(clubs);
+        console.log("clubssssssss",clubs);
       } catch (e) {
         console.log(e);
       }
@@ -46,12 +49,11 @@ function Home() {
     if (
       window.confirm("are you sure that you wanted to delete that Club record ")
     ) {
-      alert(id);
+       
       const response = await api.deleteClub(id);
       if (response.status === 200) {
-        Toast.success(response.clubs);
-       // window.location.reload();
-// Reload the current page from the server
+        toast.success("deleted successfully");
+
 
 
       setClubs([]);
@@ -79,16 +81,8 @@ function Home() {
 
   return (
     <Fragment>
-      {selectedEditEntity && (
-        <EditEventDialog
-          open={editDialogOpen}
-          onClose={() => {
-            setEditDialogOpen(false);
-          }}
-          selectedEditEvent={selectedEditEntity}
-          onSave={updateEntity}
-        />
-      )}
+      <Toaster/>
+     
 
       <div style={{ margin: "10rem" }}>
         <Table striped bordered hover size="sm">
@@ -99,6 +93,7 @@ function Home() {
               <th>members</th>
               <th>President</th>
               <th>responsible</th>
+              <th>Banned</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -112,28 +107,19 @@ function Home() {
                       <td>{item.members.map((member) => { return member.lastname +' '+ member.firstname + ' '})}</td>
                       <td>{item.president.lastname} {item.president.firstname}</td>
                       <td>{item.responsible.lastname} {item.responsible.firstname}</td>
+                      <td><Icon name="check circle" color={item.isBaned? "red":"green"}/></td>
                       <td>
                          
-                          <Button
-                            onClick={() =>
-                              handleEdit(
-                                item
-                        
-                              )
-                            }
-                          >
-                            Edit
-                          </Button>
+                         
                         
                         &nbsp;
                         <Button onClick={() => handleDelete(item._id)}>
                           Delete
                         </Button>
                         &nbsp;
-                        <Link to={"/view"}>
-                          {/* <Button onClick={()=> handleView(item._id, item.name, item.dac, item.members,item.president, item.responsible)}>view</Button> */}
-                          <Button>view</Button>
-                        </Link>
+                        <SeeClub data={item}/>
+                        <EditClub data={item}/>
+                          
                       </td>
                     </tr>
                   );

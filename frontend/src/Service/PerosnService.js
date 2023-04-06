@@ -38,6 +38,35 @@ export const getAllTeachers = async () => {
       return personsWithLabels;
 
     } 
+    
    
     
 
+    export const getAllTeachersV2 = async () => {
+      // await delay(500)
+      const result = await Axios.get("https://school.eastus.cloudapp.azure.com/api/Persons",header())
+      console.log('teachers :'+result);
+      const teachers=result.data.filter(person => person.role === 'TEACHER');
+      return teachers
+
+
+    
+
+      
+      
+     
+    }
+    export const getAllStudentsV2 = async () => {
+      // await delay(500)
+      const result = await Axios.get("https://school.eastus.cloudapp.azure.com/api/Persons",header())
+      console.log('Students :'+result);
+      const Students=result.data.filter(person => person.role === 'STUDENT');
+      return Students
+
+      
+    
+
+      
+      
+     
+    }
