@@ -3,10 +3,9 @@ import * as api from "../Service/ClubService";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
-import { Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
-import { Button, Table } from "react-bootstrap";
+ import { Button, Table } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import EditEventDialog from "./Edit";
+ 
 
 function Home() {
   let history = useNavigate();
@@ -79,16 +78,7 @@ function Home() {
 
   return (
     <Fragment>
-      {selectedEditEntity && (
-        <EditEventDialog
-          open={editDialogOpen}
-          onClose={() => {
-            setEditDialogOpen(false);
-          }}
-          selectedEditEvent={selectedEditEntity}
-          onSave={updateEntity}
-        />
-      )}
+     
 
       <div style={{ margin: "10rem" }}>
         <Table striped bordered hover size="sm">
@@ -114,16 +104,7 @@ function Home() {
                       <td>{item.responsible.lastname} {item.responsible.firstname}</td>
                       <td>
                          
-                          <Button
-                            onClick={() =>
-                              handleEdit(
-                                item
-                        
-                              )
-                            }
-                          >
-                            Edit
-                          </Button>
+                          
                         
                         &nbsp;
                         <Button onClick={() => handleDelete(item._id)}>

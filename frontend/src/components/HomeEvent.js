@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
  
-
+import './HomeEvent.css';
 function HomeEvent() {
   let history = useNavigate();
   const [data, setData] = useState([]);
