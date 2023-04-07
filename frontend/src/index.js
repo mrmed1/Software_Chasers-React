@@ -8,15 +8,26 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {BrowserRouter} from 'react-router-dom'
+import {ReactQueryDevtools} from "react-query/devtools";
+import {QueryClient, QueryClientProvider} from "react-query";
 
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 
+//core
+import "primereact/resources/primereact.min.css";
 
+//icons
+import "primeicons/primeicons.css";
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
         <App/>
+        <ReactQueryDevtools initialIsOpen />
+        </QueryClientProvider>
     </BrowserRouter>
     
   </React.StrictMode>
