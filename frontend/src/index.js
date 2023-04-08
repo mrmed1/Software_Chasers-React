@@ -10,7 +10,7 @@ import '@fontsource/roboto/700.css';
 import {BrowserRouter} from 'react-router-dom'
 import {ReactQueryDevtools} from "react-query/devtools";
 import {QueryClient, QueryClientProvider} from "react-query";
-
+import 'semantic-ui-css/semantic.min.css'
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 
 //core
