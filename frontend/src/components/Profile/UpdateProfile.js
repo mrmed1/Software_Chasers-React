@@ -16,6 +16,7 @@ import {
   updateVisibility,
 } from "../../Service/studentService";
 import toast from "react-hot-toast";
+import {connectedUser} from "../../Service/auth.service";
 
 export default function UpdateProfile() {
   const [FirstName, setFirstName] = useState("");
@@ -27,7 +28,7 @@ export default function UpdateProfile() {
 
   const queryClient = useQueryClient();
   //For Testing without authentification
-  const id = "6430be534390cd7773aebde9";
+  const id = connectedUser()._id;
   const { isLoading, data } = useQuery(["student"], () => getAcount(id), {
     retry: false,
   });

@@ -21,11 +21,14 @@ import Home from "./components/Accueil/Home";
 import StudentAccount from "./views/studentsViews/StudentAccount";
 import CreateEventClub from "./components/EventClub/CreateEventClub/CreateEventClub";
 import HomeEvent from "./components/EventClub/HomeEvent";
+import HomeClub from "./components/Club/HomeClub";
+ import AddClub from "./components/Club/Add";
 
 function App() {
     const [open, setOpen] = useState(false);
     const currenUser = {role: "ADMIN"};
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
     function handleLogin(isLoggedIn) {
         setIsLoggedIn(isLoggedIn);
@@ -72,13 +75,16 @@ function App() {
                         <Route exact path="/Event/" element={<Event/>}/>
                         <Route exact path="/students/profile" element={<StudentAccount />} />
                         <Route exact path="/Enseignant/" element={<Enseignant/>}/>
-                        <Route exact path="/profile" element={<Hello/>}/>
                         <Route element={<Home/>} path='/'/>
                         <Route element={<PwdUpdate/>} path='/PwdUpdate'/>
                         <Route element={<SignUp/>} path='/SignUp'/>
                         <Route element={<SuiviEtatCompteAllumni/>} path='/SuiviEtatCompteAllumni'/>
                         <Route exact path="/AddEvent" element={<CreateEventClub />} />
                         <Route exact path="/HomeEvent" element={<HomeEvent />} />
+
+                        <Route exact path="/HomeClub" element={<HomeClub />} />
+
+                        <Route exact path="/create" element={<AddClub />} />
                     </Routes>
                 </Box>
 

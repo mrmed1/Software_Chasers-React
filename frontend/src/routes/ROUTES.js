@@ -9,6 +9,9 @@ import UpdatePwd from "../components/PwdUpdate/PwdUpdate";
 import StudentAccount from "../views/studentsViews/StudentAccount";
 import CreateEventClub from "../components/EventClub/CreateEventClub/CreateEventClub";
 import HomeEvent from "../components/EventClub/HomeEvent";
+
+import HomeClub from "../components/Club/HomeClub";
+
 const ROUTES = [
 
     {
@@ -82,5 +85,13 @@ const ROUTES = [
         layout: "/HomeEvent",
         allowedRoles: ["ADMIN"],
     },
+    {
+        path: "/",
+        name: "All Club",
+        icon: <InboxIcon/>,
+        element: <HomeClub />,
+        layout: "/HomeClub",
+        allowedRoles: ["ADMIN"],
+    }
 ]
 export default ROUTES
