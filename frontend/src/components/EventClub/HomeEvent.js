@@ -62,6 +62,7 @@ function HomeEvent() {
         <Fragment>
 
             <Toaster/>
+            <h2 style={{textAlign:"center"}}>List of Event Club</h2>
             <div style={{margin: "10rem"}}>
                 <Table striped bordered hover size="sm">
                     <TableHead>

@@ -76,7 +76,8 @@ function HomeClub() {
   return (
     <Fragment>
       <Toaster/>
-     
+
+      <h2 style={{textAlign:"center"}}>List of Club</h2>
 
       <div style={{ margin: "10rem" }}>
         <Table striped bordered hover size="sm">
@@ -102,7 +103,7 @@ function HomeClub() {
                       <TableCell>{item.president?.lastname} {item.president?.firstname}</TableCell>
                       <TableCell>{item.responsible?.lastname} {item.responsible?.firstname}</TableCell>
                       <TableCell><Icon name="check circle" color={item.isBaned? "red":"green"}/></TableCell>
-                      <TableRow>
+                      <TableRow style={{display:"flex"}}>
                          
                          
                         
