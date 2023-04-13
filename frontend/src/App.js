@@ -2,27 +2,17 @@ import Box from '@mui/material/Box';
 import {useState} from "react";
 import {Route, Routes, redirect} from "react-router-dom";
 import "./App.css";
-import Hello from "./components/Hello";
 import Sidebar from "./components/Sidebar/Sidebar";
 import ROUTES from "./routes/ROUTES";
 import {styled} from "@mui/material/styles";
-import ListEtudiant from "./components/CrudEtudiant/ListEtudiant";
 import {connectedUser} from "./Service/auth.service";
 import Login from "./components/login/Login";
-import {Navigate} from "react-router-dom";
 import SecureRoute from "./components/SecureRoute/secureRoute";
-import PwdUpdate from "./components/PwdUpdate/PwdUpdate";
-import SuiviEtatCompteAllumni from "./components/SuiviEtatCompteAllumni/SuiviEtatCompteAllumni";
 
-import Enseignant from "./components/Enseignants/Enseignant";
-import Event from "./components/Event/Event";
-import SignUp from "./components/SignUp/SignUp";
-import Home from "./components/Accueil/Home";
+
 import StudentAccount from "./views/studentsViews/StudentAccount";
-import CreateEventClub from "./components/EventClub/CreateEventClub/CreateEventClub";
-import HomeEvent from "./components/EventClub/HomeEvent";
-import HomeClub from "./components/Club/HomeClub";
- import AddClub from "./components/Club/Add";
+
+import PFAList from './components/PFA/PFAList';
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -70,21 +60,15 @@ function App() {
                     <DrawerHeader/>
                     <Routes>
                         <Route element={<SecureRoute/>}>
-                            <Route exact path="/students" element={<ListEtudiant/>}/>
+                        
                         </Route>
-                        <Route exact path="/Event/" element={<Event/>}/>
+                      
                         <Route exact path="/students/profile" element={<StudentAccount />} />
-                        <Route exact path="/Enseignant/" element={<Enseignant/>}/>
-                        <Route element={<Home/>} path='/'/>
-                        <Route element={<PwdUpdate/>} path='/PwdUpdate'/>
-                        <Route element={<SignUp/>} path='/SignUp'/>
-                        <Route element={<SuiviEtatCompteAllumni/>} path='/SuiviEtatCompteAllumni'/>
-                        <Route exact path="/AddEvent" element={<CreateEventClub />} />
-                        <Route exact path="/HomeEvent" element={<HomeEvent />} />
+                       
+                       
 
-                        <Route exact path="/HomeClub" element={<HomeClub />} />
-
-                        <Route exact path="/create" element={<AddClub />} />
+                       
+                        <Route exact path="/teacher/PFA" element={<PFAList />} />
                     </Routes>
                 </Box>
 

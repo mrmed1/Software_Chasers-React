@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState} from 'react';
+import {useEffect, useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,12 +18,13 @@ import toast, {Toaster} from 'react-hot-toast';
 import {Checkbox, FormControlLabel} from "@mui/material";
 
 const theme = createTheme();
-export default function Login() {
+export default function Login({ onLogin }) {
 
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isclub, setIsClub] = useState(false);
     const navigate = useNavigate();
     var type ='';
@@ -55,26 +56,32 @@ export default function Login() {
         if (!hasError) {
             if(isclub)
             {
-                type = "club"
+                 type = "club"
             }else {
-                type = "person"
+                 type = "person"
             }
 
             auth(login, password,type)
                 .then((response) => {
                     toast.success('Login Successful');
+                    setIsLoggedIn(true);
+                    onLogin(isLoggedIn);
+
                     setTimeout(() => {
                         navigate('/students');
                         window.location.reload()
                     },1000)
                 })
                 .catch((error) => {
-                    toast.error(error.toString());
+                    toast.error('Login Failed');
+
                 });
 
         }
     };
-
+    useEffect(() => {
+        console.log(isLoggedIn); // will log the updated value of isLoggedIn
+    }, [isLoggedIn]);
     const handleChange = () => {
         setIsClub(!isclub);
     };
@@ -108,8 +115,8 @@ export default function Login() {
                             onChange={handleLoginChange}
                             autoComplete="login"
                             autoFocus
-                            error={loginError}
-                            helperText={loginError ? 'Please enter a login' : ''}
+                               error={loginError}
+                                 helperText={loginError ? 'Please enter a login' : ''}
                             onBlur={() => {
                                 if (!login) {
                                     setLoginError(true);
