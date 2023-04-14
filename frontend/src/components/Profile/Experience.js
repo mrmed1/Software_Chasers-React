@@ -4,7 +4,7 @@ import { Card, Icon } from "semantic-ui-react";
 import ExperienceModal from "./ExperienceModal";
 import DeleteExperience from "./DeleteExperience";
 
-export default function Experience({ data, _id }) {
+export default function Experience({ data, _id,role }) {
   //Loop data and get all the experiences !
 
   const emptyExperience = {
@@ -42,6 +42,7 @@ export default function Experience({ data, _id }) {
                 <Card.Description key={key}>
                   <Card.Header>
                     <ExperienceModal
+                      role={role}
                       data={exp}
                       add={false}
                       _id={_id}

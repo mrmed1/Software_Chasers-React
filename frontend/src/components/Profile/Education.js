@@ -3,7 +3,7 @@ import {  Card, Icon } from 'semantic-ui-react'
 import DeleteEducation from './DeleteEducation';
 import EducationModal from './EducationModal';
 
-export default function Education({data,_id}) {
+export default function Education({data,_id,role}) {
 
 
   
@@ -31,7 +31,7 @@ const emptyObject = {
                 <Card.Description key={edu._id}>
                   <Card.Header>
                
-                  <EducationModal  data={edu} add={false}_id={_id} iconName="setting"/>
+                  <EducationModal  data={edu} add={false}_id={_id} iconName="setting" role={role}/>
                   <DeleteEducation data={edu}_id={_id}/>
               
                     <h2>

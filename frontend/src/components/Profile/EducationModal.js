@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { Modal, Form, Dropdown, Icon } from "semantic-ui-react";
+import { Modal, Form, Dropdown, Icon, Popup } from "semantic-ui-react";
 import { clubList } from "../../Helpers/helper";
 import { addEducation, updateEducation } from "../../Service/studentService";
 import toast from "react-hot-toast";
-export default function EducationModal({ data, add, _id, iconName }) {
+export default function EducationModal({ data, add, _id, iconName, role }) {
   const [diploma, setDiploma] = useState(data.diploma);
   const [university, setUniversity] = useState(data.startDate);
   const [startDate, setStartDate] = useState(data.startDate);
   const [endDate, setEndDte] = useState(data.endDate);
   const [clubs, setClubs] = useState(data.clubs);
+
+  const aUthorization = add ? false : role === "ALUMNI" ? true : false;
 
   const queryClient = useQueryClient();
 
@@ -73,11 +75,23 @@ export default function EducationModal({ data, add, _id, iconName }) {
   return (
     <Modal
       trigger={
-        <Icon
-          name={iconName}
-          color="blue"
-          size="big"
-          style={{ float: "right", cursor: "pointer", marginLeft: "8px" }}
+        <Popup
+          inverted
+          trigger={
+            <Icon
+              name={iconName}
+              color="blue"
+              size="big"
+              style={{ float: "right", cursor: "pointer", marginLeft: "8px" }}
+              disabled={aUthorization}
+            />
+          }
+          content={
+            !aUthorization
+              ? "Update your Education "
+              : "You are Unauthorized to update "
+          }
+          position="top left"
         />
       }
     >
