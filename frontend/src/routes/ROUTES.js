@@ -2,7 +2,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 
 import StudentAccount from "../views/studentsViews/StudentAccount";
 
-import PFAList from "../components/PFA/PFAList";
+import CrudPFA from '../views/teacherViews/CrudPFA';
 
 const ROUTES = [
 
@@ -19,7 +19,7 @@ const ROUTES = [
         path: "/PFA",
         name: "PFA",
         icon: <InboxIcon/>,
-        element: <PFAList />,
+        element: <CrudPFA />,
         layout: "/teacher",
         allowedRoles: ["ADMIN"],
     }
