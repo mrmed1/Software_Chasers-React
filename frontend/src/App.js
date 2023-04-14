@@ -10,7 +10,6 @@ import Login from "./components/login/Login";
 import SecureRoute from "./components/SecureRoute/secureRoute";
 
 import StudentAccount from "./views/studentsViews/StudentAccount";
-import CrudPFA from "./views/teacherViews/CrudPFA";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -75,7 +74,7 @@ function App() {
                 element={<StudentAccount />}
               />
 
-              <Route exact path="/teacher/PFA" element={<CrudPFA />} />
+         
             </Routes>
           </Box>
         </Box>
