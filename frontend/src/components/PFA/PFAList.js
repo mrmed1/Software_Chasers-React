@@ -5,10 +5,9 @@ import DeletePFA from "./DeletePFA";
 import PFAModal from "./PFAModal";
 import { connectedUser } from "../../Service/auth.service";
 
-
-export default function PFAList({data}) {
+export default function PFAList({ data }) {
   const teacher_id = connectedUser()._id;
-
+  const ROLE = connectedUser().role;
   const emptyData = {
     description: "",
     title: "",
@@ -19,20 +18,18 @@ export default function PFAList({data}) {
     univId: null,
   };
 
-  function getNamesAndLastnames (array) {
+  function getNamesAndLastnames(array) {
     const namesAndLastnames = array.map(
       (item) => `${item.firstname} ${item.lastname}`
     );
-     const namesAndLastnamesString = namesAndLastnames.join(" , ");
-     
-    return namesAndLastnamesString
-  };
+    const namesAndLastnamesString = namesAndLastnames.join(" , ");
 
+    return namesAndLastnamesString;
+  }
 
   return (
     data && (
       <>
-        
         <div
           style={{
             display: "flex",
@@ -60,7 +57,12 @@ export default function PFAList({data}) {
                 >
                   <Card>
                     <Card.Content>
-                      <Icon name="check circle" color={PFA.isPicked?"green": "red"} corner style={{float :"right"}}/>
+                      <Icon
+                        name="check circle"
+                        color={PFA.isPicked ? "green" : "red"}
+                        corner
+                        style={{ float: "right" }}
+                      />
                       <Card.Header>{PFA?.title}</Card.Header>
                       <Card.Meta>
                         Created By{" "}
@@ -72,11 +74,15 @@ export default function PFAList({data}) {
                         {PFA?.isPublished ? "Published" : "Pending..."}
                       </Card.Meta>
                       <Card.Description>{PFA?.description}</Card.Description>
-                      
                     </Card.Content>
-                   
+
                     <Card.Content extra>
-                  {PFA?.studentsId?.length >0  &&  <h5><Icon name="user circle" color="blue"/>{ getNamesAndLastnames(PFA?.studentsId)}</h5>}  
+                      {PFA?.studentsId?.length > 0 && (
+                        <h5>
+                          <Icon name="user circle" color="blue" />
+                          {getNamesAndLastnames(PFA?.studentsId)}
+                        </h5>
+                      )}
                       <h5>
                         Technologies :{" "}
                         <strong style={{ color: "black" }}>
@@ -89,30 +95,31 @@ export default function PFAList({data}) {
                           justifyContent: "space-evenly",
                         }}
                       >
-                        {!PFA.isPublished && (
-                          <DeletePFA
-                            data={PFA}
-                            teacher_id={teacher_id}
-                            iconName={"send"}
-                            isPublished={true}
-                          />
+                        {ROLE === "TEACHER" && (
+                          <>
+                            <DeletePFA
+                              data={PFA}
+                              teacher_id={teacher_id}
+                              iconName={"send"}
+                              isPublished={true}
+                            />
+                            <DeletePFA
+                              data={PFA}
+                              teacher_id={teacher_id}
+                              iconName={"trash"}
+                              isPublished={false}
+                            />
+                            <PFAModal
+                              add={false}
+                              data={PFA}
+                              teacher_id={teacher_id}
+                              iconName="setting"
+                            />
+                          </>
                         )}
-
-                        <DeletePFA
-                          data={PFA}
-                          teacher_id={teacher_id}
-                          iconName={"trash"}
-                          isPublished={false}
-                        />
-                        <PFAModal
-                          add={false}
-                          data={PFA}
-                          teacher_id={teacher_id}
-                          iconName="setting"
-                        />
+                     
                       </div>
                     </Card.Content>
-                    
                   </Card>
                 </Grid.Column>
               );
