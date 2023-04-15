@@ -4,11 +4,15 @@ import { Toaster } from "react-hot-toast";
 import { useQuery } from "react-query";
 
 import { Dimmer, Loader, Message } from 'semantic-ui-react';
-import { fetchPfaList } from '../../Service/internshipService';
+import { fetchValidatedResponsablePFA } from '../../Service/studentService';
 
-export default function CrudPFA() {
-    const { data, isLoading ,error} = useQuery("PFAList", fetchPfaList);
 
+
+
+export default function PickPFAstudent() {
+
+    const { data, isLoading,error } = useQuery("ValidatedResponsablePFA", fetchValidatedResponsablePFA);
+    
     if (isLoading)
     return (
       <Dimmer active inverted>
@@ -19,7 +23,7 @@ export default function CrudPFA() {
     return (
       <Message negative floating size="big" attached="top">
         <Message.Header>
-         {error?.response?.data?.message || error.message}
+         {error?.response?.data?.message || error?.message}
         </Message.Header>
       
       </Message>
@@ -28,7 +32,7 @@ export default function CrudPFA() {
     <>
     
     <Toaster />
-    <PFAList data={data}/>
+    {data && <PFAList data={data}/> }
     </>
    
   )

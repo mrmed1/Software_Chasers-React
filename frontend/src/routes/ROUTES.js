@@ -3,6 +3,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 
 import CrudPFA from '../views/teacherViews/CrudPFA';
 import MyPFA from '../views/teacherViews/MyPFA';
+import PickPFAstudent from '../views/studentsViews/PickPFAstudent';
 
 const ROUTES = [
 
@@ -21,6 +22,15 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <CrudPFA />,
         layout: "/teacher",
+        allowedRoles: ["ADMIN"],
+    },
+
+    {
+        path: "/PFA",
+        name: "Pick PFA",
+        icon: <InboxIcon/>,
+        element: <PickPFAstudent />,
+        layout: "/students",
         allowedRoles: ["ADMIN"],
     }
 ]

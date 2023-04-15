@@ -11,6 +11,7 @@ import SecureRoute from "./components/SecureRoute/secureRoute";
 
 import CrudPFA from "./views/teacherViews/CrudPFA";
 import MyPFA from "./views/teacherViews/MyPFA";
+import PickPFAstudent from "./views/studentsViews/PickPFAstudent";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -72,6 +73,7 @@ function App() {
            
               <Route exact path="/teacher/PFA" element={<CrudPFA />} />
               <Route exact path="/teacher/myPFA" element={<MyPFA />} />
+              <Route exact path="/students/PFA" element={<PickPFAstudent />} />
             </Routes>
           </Box>
         </Box>
