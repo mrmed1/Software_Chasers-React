@@ -37,12 +37,14 @@ export default function PFAList({ data }) {
             alignItems: "center",
           }}
         >
-          <PFAModal
-            add={true}
-            iconName={"pencil"}
-            data={emptyData}
-            teacher_id={teacher_id}
-          />
+          {ROLE === "TEACHER" && (
+            <PFAModal
+              add={true}
+              iconName={"pencil"}
+              data={emptyData}
+              teacher_id={teacher_id}
+            />
+          )}
         </div>
 
         <Grid columns="four" padded="vertically" centered doubling>
@@ -117,7 +119,6 @@ export default function PFAList({ data }) {
                             />
                           </>
                         )}
-                     
                       </div>
                     </Card.Content>
                   </Card>
