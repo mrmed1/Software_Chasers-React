@@ -65,3 +65,8 @@ export function deleteSkills(Skills,id){
 export function fetchValidatedResponsablePFA(){
     return axios.get(`${URI}/teacher/PFA/validated`).then(r=>r.data)
 }
+
+//pick PFA
+export function tooglePickedPFA(pfa,studentsId){
+    return axios.put(`${URI}/student/PFA/togglePFA/${pfa._id}`,{studentsId}).then(r=>r.data)
+}

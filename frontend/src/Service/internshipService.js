@@ -23,6 +23,20 @@ export function updatePFA(pfa){
 export function deletePFA(pfa){
     return axios.delete(`${URI}/Internship/${pfa._id}`).then(r=>r.data)
 }
+
 export function publishPFA(pfa){
     return axios.put(`${URI}/teacher/PFA/Publishe/${pfa._id}`).then(r=>r.data)
 }
+
+
+
+
+//ADMIN
+export function fetchPublishedPFA(){
+    return axios.get(`${URI}/teacher/PFA/Published`).then(r=>r.data.data)
+}
+
+export function toogleValideResponsiblePFA(pfa){
+    return axios.put(`${URI}/teacher/PFA/responsible/${pfa._id}`).then(r=>r.data)
+}
+

@@ -4,15 +4,13 @@ import { Toaster } from "react-hot-toast";
 import { useQuery } from "react-query";
 
 import { Dimmer, Loader, Message } from 'semantic-ui-react';
-import { fetchValidatedResponsablePFA } from '../../Service/studentService';
+import { fetchPublishedPFA } from '../../Service/internshipService';
 
 
 
+export default function PublishedPFa() {
+    const { data, isLoading,error } = useQuery("PublishedPFA", fetchPublishedPFA);
 
-export default function PickPFAstudent() {
-
-    const { data, isLoading,error } = useQuery("ValidatedResponsablePFA", fetchValidatedResponsablePFA);
-    console.log("ValidatedResponsablePFA",data)
     if (isLoading)
     return (
       <Dimmer active inverted>

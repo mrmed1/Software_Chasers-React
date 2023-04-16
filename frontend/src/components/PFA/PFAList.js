@@ -4,6 +4,7 @@ import React from "react";
 import DeletePFA from "./DeletePFA";
 import PFAModal from "./PFAModal";
 import { connectedUser } from "../../Service/auth.service";
+import ValidationAndPick from "./ValidationAndPick";
 
 export default function PFAList({ data }) {
   const teacher_id = connectedUser()._id;
@@ -117,7 +118,22 @@ export default function PFAList({ data }) {
                             />
                           </>
                         )}
-                     
+                        {ROLE === "STUDENT" && (
+                          <ValidationAndPick
+                            data={PFA}
+                            iconName={"hand point up"}
+                            _id={teacher_id}
+                            student={true}
+                          />
+                        )}
+                           {ROLE === "ADMIN" && (
+                          <ValidationAndPick
+                            data={PFA}
+                            iconName={"check circle"}
+                            _id={teacher_id}
+                            student={false}
+                          />
+                        )}
                       </div>
                     </Card.Content>
                   </Card>
