@@ -36,4 +36,9 @@ export const fetchEnseignants = async () => {
   }
 
   
+export function fetchMyPFA(){
+  return axios.get(`${URI}/teacher/PFA`).then(r=>r.data)
+}
+
+  
   
