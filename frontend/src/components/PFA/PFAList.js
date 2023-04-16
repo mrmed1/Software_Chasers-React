@@ -1,9 +1,10 @@
-import { Grid, Card, Icon } from "semantic-ui-react";
+import { Grid, Card, Icon, List, Input, Checkbox } from "semantic-ui-react";
 import React from "react";
 
 import DeletePFA from "./DeletePFA";
 import PFAModal from "./PFAModal";
 import { connectedUser } from "../../Service/auth.service";
+import ValidationAndPick from "./ValidationAndPick";
 
 export default function PFAList({ data }) {
   const teacher_id = connectedUser()._id;
@@ -37,17 +38,43 @@ export default function PFAList({ data }) {
             alignItems: "center",
           }}
         >
-          {ROLE === "TEACHER" && (
-            <PFAModal
-              add={true}
-              iconName={"pencil"}
-              data={emptyData}
-              teacher_id={teacher_id}
-            />
-          )}
+          <PFAModal
+            add={true}
+            iconName={"pencil"}
+            data={emptyData}
+            teacher_id={teacher_id}
+          />
         </div>
+  
+         
+          <List  animated inverted  relaxed  horizontal>
+          <List.Item >   <Input icon="search" placeholder="Search..." /></List.Item>
+            <List.Item >  <Checkbox label='See My PFA'  /></List.Item>
+              <List.Item as="a" >
+              is Publish By a Teacher ?
+              <List.List>
+                <List.Item as=""><Checkbox label='Published'  /></List.Item>
+               
+              </List.List>
+            </List.Item>
+            <List.Item as="a">
+              is Picked By a Student ?
+              <List.List  >
+                <List.Item as="a"><Checkbox label='Picked'  /></List.Item>
+               
+              </List.List>
+            </List.Item>
+            <List.Item as="a">
+              is Validated By a Admin ?
+              <List.List>
+                <List.Item as="a"><Checkbox label='Validated'  /></List.Item>
+             
+              </List.List>
+            </List.Item>
+          </List>
+     
 
-        <Grid columns="four" padded="vertically" centered doubling>
+        <Grid columns="three" padded="vertically" centered doubling>
           <Grid.Row>
             {data.map((PFA) => {
               return (
@@ -60,9 +87,8 @@ export default function PFAList({ data }) {
                   <Card>
                     <Card.Content>
                       <Icon
-                        name="check circle"
+                        name="hand lizard"
                         color={PFA.isPicked ? "green" : "red"}
-                        corner
                         style={{ float: "right" }}
                       />
                       <Card.Header>{PFA?.title}</Card.Header>
@@ -118,6 +144,22 @@ export default function PFAList({ data }) {
                               iconName="setting"
                             />
                           </>
+                        )}
+                        {ROLE === "STUDENT" && (
+                          <ValidationAndPick
+                            data={PFA}
+                            iconName={"hand point up"}
+                            _id={teacher_id}
+                            student={true}
+                          />
+                        )}
+                        {ROLE === "ADMIN" && (
+                          <ValidationAndPick
+                            data={PFA}
+                            iconName={"check circle"}
+                            _id={teacher_id}
+                            student={false}
+                          />
                         )}
                       </div>
                     </Card.Content>

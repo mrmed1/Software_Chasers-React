@@ -59,3 +59,12 @@ export function deleteSkills(Skills,id){
     return axios.delete(`${URI}/student/Skills/${id}/${Skills}`).then((r)=>r.data)
 }
 
+//Get PFA list validated 
+export function fetchValidatedResponsablePFA(){
+    return axios.get(`${URI}/teacher/PFA/validated`).then(r=>r.data)
+}
+
+//pick PFA
+export function tooglePickedPFA(pfa,studentsId){
+    return axios.put(`${URI}/student/PFA/togglePFA/${pfa._id}`,{studentsId}).then(r=>r.data)
+}
