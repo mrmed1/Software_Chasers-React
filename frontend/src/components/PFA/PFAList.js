@@ -1,5 +1,5 @@
 import { Grid, Card, Icon, List, Input, Checkbox } from "semantic-ui-react";
-import React from "react";
+import React, { useMemo, useState } from "react";
 
 import DeletePFA from "./DeletePFA";
 import PFAModal from "./PFAModal";
@@ -9,6 +9,9 @@ import ValidationAndPick from "./ValidationAndPick";
 export default function PFAList({ data }) {
   const teacher_id = connectedUser()._id;
   const ROLE = connectedUser().role;
+  const [searchTitle, setSearchTitle] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("");
+
   const emptyData = {
     description: "",
     title: "",
@@ -28,6 +31,37 @@ export default function PFAList({ data }) {
     return namesAndLastnamesString;
   }
 
+  const filteredInternships = useMemo(() => {
+    return data.filter((internship) => {
+      if (selectedFilter === "isPublished") {
+        return internship.isPublished;
+      } else if (selectedFilter === "isValidResponsible") {
+        return internship.isValidResponsible;
+      } else if (selectedFilter === "isPicked") {
+        return internship.isPicked;
+      } else if (selectedFilter === "createdBy") {
+        // Include filter for createdBy
+        return internship.createdBy._id === teacher_id; // Check if createdBy matches the current user's ID
+      } else {
+        return (
+          internship.title.toLowerCase().includes(searchTitle.toLowerCase()) ||
+          internship.isPublished ||
+          internship.isValidResponsible ||
+          internship.isPicked
+        );
+      }
+    });
+  }, [data, searchTitle, selectedFilter, teacher_id]);
+
+  const handleFilterChange = (filter) => {
+    if (selectedFilter === filter) {
+      setSelectedFilter("");
+    } else {
+      setSelectedFilter(filter);
+    }
+
+    setSearchTitle("");
+  };
   return (
     data && (
       <>
@@ -45,38 +79,66 @@ export default function PFAList({ data }) {
             teacher_id={teacher_id}
           />
         </div>
-  
-         
-          <List  animated inverted  relaxed  horizontal>
-          <List.Item >   <Input icon="search" placeholder="Search..." /></List.Item>
-            <List.Item >  <Checkbox label='See My PFA'  /></List.Item>
-              <List.Item as="a" >
-              is Publish By a Teacher ?
-              <List.List>
-                <List.Item as=""><Checkbox label='Published'  /></List.Item>
-               
-              </List.List>
-            </List.Item>
-            <List.Item as="a">
-              is Picked By a Student ?
-              <List.List  >
-                <List.Item as="a"><Checkbox label='Picked'  /></List.Item>
-               
-              </List.List>
-            </List.Item>
-            <List.Item as="a">
-              is Validated By a Admin ?
-              <List.List>
-                <List.Item as="a"><Checkbox label='Validated'  /></List.Item>
-             
-              </List.List>
-            </List.Item>
-          </List>
-     
+
+        <List animated inverted relaxed horizontal>
+          <List.Item>
+            {" "}
+            <Input
+              icon="search"
+              placeholder="Search..."
+              value={searchTitle}
+              onChange={(e) => setSearchTitle(e.target.value)}
+            />
+          </List.Item>
+          <List.Item>
+            {" "}
+            <Checkbox
+              label="Created By Me"
+              checked={selectedFilter === "createdBy"}
+              onChange={() => handleFilterChange("createdBy")}
+            />
+          </List.Item>
+          <List.Item as="a">
+            is Publish By a Teacher ?
+            <List.List>
+              <List.Item as="">
+                <Checkbox
+                  label="Published"
+                  checked={selectedFilter === "isPublished"}
+                  onChange={() => handleFilterChange("isPublished")}
+                />
+              </List.Item>
+            </List.List>
+          </List.Item>
+          <List.Item as="a">
+            is Picked By a Student ?
+            <List.List>
+              <List.Item as="a">
+                <Checkbox
+                  label="Picked"
+                  checked={selectedFilter === "isPicked"}
+                  onChange={() => handleFilterChange("isPicked")}
+                />
+              </List.Item>
+            </List.List>
+          </List.Item>
+          <List.Item as="a">
+            is Validated By an Admin ?
+            <List.List>
+              <List.Item as="a">
+                <Checkbox
+                  label="Validated"
+                  checked={selectedFilter === "isValidResponsible"}
+                  onChange={() => handleFilterChange("isValidResponsible")}
+                />
+              </List.Item>
+            </List.List>
+          </List.Item>
+        </List>
 
         <Grid columns="three" padded="vertically" centered doubling>
           <Grid.Row>
-            {data.map((PFA) => {
+            {filteredInternships.map((PFA) => {
               return (
                 <Grid.Column
                   key={PFA?._id}
