@@ -10,6 +10,7 @@ import {Calendar} from "primereact/calendar";
 import {Checkbox, FormControlLabel, Switch} from "@mui/material";
 import './ListEtudiant.css';
 import toast, {Toaster} from "react-hot-toast";
+import DetailsDialog from './DetailsDialog';
 
 export default function ListEtudiant() {
     const [selectedStudent, setSelectedStudent] = useState(null);
@@ -25,6 +26,7 @@ export default function ListEtudiant() {
     const [phoneError, setPhoneError] = useState(false);
     const [dobError, setDobError] = useState(false);
     const [touched, setTouched] = useState(false);
+    const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
 
     const [newStudent, setNewStudent] = useState({
         lastname: '',
@@ -223,15 +225,31 @@ export default function ListEtudiant() {
         }
 
     };
+    const handleRowClick = (data) => {
 
+        setSelectedStudent(data);
+      console.log(data)
+     
+          setOpenDetailsDialog(true);
+    
+      };
     return (<div className="card">
         <Toaster/>
+        {selectedStudent && (
+        <DetailsDialog
+            open={openDetailsDialog}
+            onClose={() => {
+              setOpenDetailsDialog(false);
+            }}
+            selectedData={selectedStudent}
+           
+          />)}
         <h2>List of students</h2>
         <div className="datatable-container">
             <DataTable value={students} editMode="row" selectionMode="single" header={header}
-                       onRowEditComplete={onRowEditComplete} dataKey="_id" selection={selectedStudent}
+                       onRowEditComplete={onRowEditComplete} dataKey="_id" 
                        responsive={true}
-                       onSelectionChange={(e) => setSelectedStudent(e.value)}>
+                       onSelectionChange={(e) =>handleRowClick(e.value)}>
                 <Column header="#" headerStyle={{width: '3rem'}}
                         body={(data, options) => options.rowIndex + 1}></Column>
                 <Column field="lastname" header="Last Name" editor={(options) => textEditor(options)}

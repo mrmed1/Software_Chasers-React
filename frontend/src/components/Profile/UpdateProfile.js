@@ -25,6 +25,8 @@ export default function UpdateProfile() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [login, setLogin] = useState("");
+  
+
 
   const queryClient = useQueryClient();
   //For Testing without authentification
@@ -32,7 +34,8 @@ export default function UpdateProfile() {
   const { isLoading, data } = useQuery(["student"], () => getAcount(id), {
     retry: false,
   });
-
+  const [level, setLevel] = useState(data?.level);
+  const [classe, setClasse] = useState(data?.class);
   const visibilityMutation = useMutation(({ id }) => updateVisibility(id), {
     onSuccess: () =>
       toast.success(
@@ -166,9 +169,7 @@ export default function UpdateProfile() {
                     required
                     icon={"mail"}
                   />
-                </Form.Group>
-                <Form.Group widths="equal">
-                <Form.Input
+                   <Form.Input
                     fluid
                     label="Login"
                     type="text"
@@ -178,6 +179,28 @@ export default function UpdateProfile() {
                     icon={"user"}
                     defaultValue={data?.login}
                   />
+                </Form.Group>
+                <Form.Group widths="equal">
+                <Form.Input
+                    fluid
+                    type="number"
+                    label="Level"
+                    placeholder="level"
+                    onChange={(e) => setLevel(e.target.value)}
+                    defaultValue={data?.level}
+                    required
+                  />
+                   <Form.Input
+                    fluid
+                    type="text"
+                    label="Class"
+                    placeholder="Class"
+                    onChange={(e) => setClasse(e.target.value)}
+                    defaultValue={data?.class}
+                    required
+                   
+                  />
+               
                   <Form.Input
                     fluid
                     label="password"
