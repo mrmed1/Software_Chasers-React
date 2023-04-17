@@ -1,4 +1,12 @@
-import { Grid, Card, Icon, List, Input, Checkbox } from "semantic-ui-react";
+import {
+  Grid,
+  Card,
+  Icon,
+  List,
+  Input,
+  Checkbox,
+  Popup,
+} from "semantic-ui-react";
 import React, { useMemo, useState } from "react";
 
 import DeletePFA from "./DeletePFA";
@@ -36,16 +44,15 @@ export default function PFAList({ data }) {
       if (selectedFilter === "isPublished") {
         return internship.isPublished;
       } else if (selectedFilter === "isValidResponsible") {
-        return internship.isValidResponsible;
+        return internship.isValidResponsable;
       } else if (selectedFilter === "isPicked") {
         return internship.isPicked;
       } else if (selectedFilter === "createdBy") {
         return internship.createdBy._id === teacher_id;
       } else {
-        return (
-          internship.title.toLowerCase().includes(searchTitle.toLowerCase()) 
-          
-        );
+        return internship.title
+          .toLowerCase()
+          .includes(searchTitle.toLowerCase());
       }
     });
   }, [data, searchTitle, selectedFilter, teacher_id]);
@@ -153,11 +160,33 @@ export default function PFAList({ data }) {
                 >
                   <Card>
                     <Card.Content>
-                      <Icon
-                        name="hand lizard"
-                        color={PFA.isPicked ? "green" : "red"}
-                        style={{ float: "right" }}
+                      <Popup
+                        trigger={
+                          <Icon
+                            name="hand lizard"
+                            color={PFA.isPicked ? "green" : "red"}
+                            style={{ float: "right" }}
+                          />
+                        }
+                        position="top center"
+                        content="Picked By Student"
+                        
                       />
+                       <Popup
+                        trigger={
+                          <Icon
+                          name="check circle"
+                          color={PFA.isValidResponsable ? "green" : "red"}
+                          style={{ float: "right" }}
+                          />
+                        }
+                      
+                        position="top center"
+                        content="Validated By An Admin"
+                        
+                      />
+
+                   
                       <Card.Header>{PFA?.title}</Card.Header>
                       <Card.Meta>
                         Created By{" "}
