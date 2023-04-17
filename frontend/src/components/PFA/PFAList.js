@@ -40,14 +40,11 @@ export default function PFAList({ data }) {
       } else if (selectedFilter === "isPicked") {
         return internship.isPicked;
       } else if (selectedFilter === "createdBy") {
-        // Include filter for createdBy
-        return internship.createdBy._id === teacher_id; // Check if createdBy matches the current user's ID
+        return internship.createdBy._id === teacher_id;
       } else {
         return (
-          internship.title.toLowerCase().includes(searchTitle.toLowerCase()) ||
-          internship.isPublished ||
-          internship.isValidResponsible ||
-          internship.isPicked
+          internship.title.toLowerCase().includes(searchTitle.toLowerCase()) 
+          
         );
       }
     });
@@ -72,12 +69,14 @@ export default function PFAList({ data }) {
             alignItems: "center",
           }}
         >
-          <PFAModal
-            add={true}
-            iconName={"pencil"}
-            data={emptyData}
-            teacher_id={teacher_id}
-          />
+          {ROLE === "TEACHER" && (
+            <PFAModal
+              add={true}
+              iconName={"pencil"}
+              data={emptyData}
+              teacher_id={teacher_id}
+            />
+          )}
         </div>
 
         <List animated inverted relaxed horizontal>
@@ -90,26 +89,30 @@ export default function PFAList({ data }) {
               onChange={(e) => setSearchTitle(e.target.value)}
             />
           </List.Item>
-          <List.Item>
-            {" "}
-            <Checkbox
-              label="Created By Me"
-              checked={selectedFilter === "createdBy"}
-              onChange={() => handleFilterChange("createdBy")}
-            />
-          </List.Item>
-          <List.Item as="a">
-            is Publish By a Teacher ?
-            <List.List>
-              <List.Item as="">
-                <Checkbox
-                  label="Published"
-                  checked={selectedFilter === "isPublished"}
-                  onChange={() => handleFilterChange("isPublished")}
-                />
-              </List.Item>
-            </List.List>
-          </List.Item>
+          {ROLE === "TEACHER" && (
+            <List.Item>
+              {" "}
+              <Checkbox
+                label="Created By Me"
+                checked={selectedFilter === "createdBy"}
+                onChange={() => handleFilterChange("createdBy")}
+              />
+            </List.Item>
+          )}
+          {ROLE === "TEACHER" && (
+            <List.Item as="a">
+              <List.List>
+                <List.Item as="">
+                  <Checkbox
+                    label="Published"
+                    checked={selectedFilter === "isPublished"}
+                    onChange={() => handleFilterChange("isPublished")}
+                  />
+                </List.Item>
+              </List.List>
+            </List.Item>
+          )}
+
           <List.Item as="a">
             is Picked By a Student ?
             <List.List>
@@ -122,18 +125,20 @@ export default function PFAList({ data }) {
               </List.Item>
             </List.List>
           </List.Item>
-          <List.Item as="a">
-            is Validated By an Admin ?
-            <List.List>
-              <List.Item as="a">
-                <Checkbox
-                  label="Validated"
-                  checked={selectedFilter === "isValidResponsible"}
-                  onChange={() => handleFilterChange("isValidResponsible")}
-                />
-              </List.Item>
-            </List.List>
-          </List.Item>
+          {(ROLE === "TEACHER" || ROLE === "ADMIN") && (
+            <List.Item as="a">
+              is Validated By an Admin ?
+              <List.List>
+                <List.Item as="a">
+                  <Checkbox
+                    label="Validated"
+                    checked={selectedFilter === "isValidResponsible"}
+                    onChange={() => handleFilterChange("isValidResponsible")}
+                  />
+                </List.Item>
+              </List.List>
+            </List.Item>
+          )}
         </List>
 
         <Grid columns="three" padded="vertically" centered doubling>
