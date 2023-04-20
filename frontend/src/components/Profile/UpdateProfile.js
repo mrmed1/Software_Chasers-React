@@ -12,11 +12,13 @@ import {
 } from "semantic-ui-react";
 import {
   getAcount,
+  toggleStyleCv,
   updateProfile,
   updateVisibility,
 } from "../../Service/studentService";
 import toast from "react-hot-toast";
 import { connectedUser } from "../../Service/auth.service";
+import CV from "./CV";
 
 export default function UpdateProfile() {
   const [FirstName, setFirstName] = useState("");
@@ -61,7 +63,11 @@ export default function UpdateProfile() {
       onSettled: () => queryClient.invalidateQueries("student"),
     }
   );
-
+  const toggleStyleMutation = useMutation(() => toggleStyleCv(), {
+    onSuccess: (data) => toast.success(data),
+    onError: (err) => toast.success(err.message),
+    onSettled: () => queryClient.invalidateQueries("student"),
+  });
   if (isLoading)
     return (
       <Dimmer active inverted>
@@ -117,11 +123,35 @@ export default function UpdateProfile() {
       }
     }
   }
+  let style;
+  const darkMode = {
+    card: { backgroundColor: "#23283e" },
+    header: { color: "#cdcdff" },
+    btn: { color: "#5bc0de " },
+    text: { color: "#bdbddd" },
+    text2: { color: "#f2f2f2" },
+  };
+  const lightMode = {
+    card: { backgroundColor: "" },
+    header: { color: "" },
+    btn: { color: "" },
+    text: { color: "black" },
+    text2: { color: "" },
+  };
+
+  if (data.style === "dark") {
+    style = darkMode;
+  } else {
+    style = lightMode;
+  }
+  function toggleStyleIcon(){
+    toggleStyleMutation.mutate();
+  }
 
   return (
     <>
       {data && (
-        <Card centered fluid>
+        <Card centered fluid style={style.card}>
           <Card.Content>
             {/* Update Section  */}
             <Modal
@@ -213,7 +243,7 @@ export default function UpdateProfile() {
             </Modal>
 
             <Card.Header>
-              <h1>Personal Informations </h1>
+              <h1 style={style.header}>Personal Informations </h1>
             </Card.Header>
             <br />
             {/* Render Profile */}
@@ -224,36 +254,48 @@ export default function UpdateProfile() {
                 </h2>
               </Card.Header>
               <Card.Meta>
-                <h4>
+                <h4 style={style.text}>
                   {" "}
                   Logged as{" "}
                   <strong style={{ color: "#1976D2" }}>{data?.login}</strong>
                 </h4>
               </Card.Meta>
               <Card.Meta>
-                <h4>{data?.role}</h4>
+                <h4 style={style.text2}>{data?.role}</h4>
               </Card.Meta>
               <br />
               <Card.Meta>
-                From{" "}
-                <strong>
-                  {data?.level} {data?.class}
+                <strong style={style.text2}>
+                  Level : {data?.level} ,Class: {data?.class}
                 </strong>{" "}
               </Card.Meta>
-              <Card.Meta>
-                <Icon name="calendar times" align left />
-                {data?.dob}
-              </Card.Meta>
-              <Card.Meta>
+              {data?.dob && (
+                <Card.Meta style={style.text2}>
+                  <Icon name="calendar times" align left />
+                  {data?.dob}
+                </Card.Meta>
+              )}
+              <Card.Meta style={style.text2}>
                 <Icon name="mail" align left /> {data?.email}
               </Card.Meta>
               {data?.dog && (
-                <Card.Meta>
+                <Card.Meta style={style.text2}>
                   <Icon name="graduation" align left /> {data?.dog}
                 </Card.Meta>
               )}
 
               <Card.Meta>
+              <Icon
+              onClick={toggleStyleIcon}
+              color={data?.style==="dark"?"teal":"grey"}
+                 size={"big"}
+                  name={data?.style==="dark"?"sun":"moon"}
+                  style={{
+                    cursor: "pointer",
+                    float: "right",
+                    marginRight: "25px",
+                  }}
+                />
                 <Popup
                   content={"You can change your account visibility Here"}
                   header={
@@ -274,13 +316,19 @@ export default function UpdateProfile() {
                       color={data?.isPublic ? "green" : "red"}
                     />
                   }
-                />{" "}
+
+                />
+                
+             
+                
+                {" "}
                 {data?.dog}
               </Card.Meta>
             </Card.Description>
           </Card.Content>
         </Card>
       )}
+      <CV Mode={style} />
     </>
   );
 }

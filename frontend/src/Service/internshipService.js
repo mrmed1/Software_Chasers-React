@@ -8,8 +8,8 @@ export function fetchPfaList() {
     .get(`${URI}/Internship`)
     .then((r) => r.data.filter((pfa) => pfa.type === "PFA"));
 }
-export function getunivList(){
-    return axios.get(`${URI}/Univ`).then(r=>r.data)
+export function getuniv(){
+    return axios.get(`${URI}/univ/get/currentUnivYear`).then(r=>r.data)
 }
 
 

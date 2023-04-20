@@ -44,6 +44,10 @@ export function updateExperience(Experience,id){
     return axios.put(`${URI}/student/Experience/${id}/${Experience._id}`,Experience).then((r)=>r.data.data)
 }
 
+export function toggleStyleCv(){
+    return axios.put(`${URI}/student/toggleStyle`).then((r)=>r.data)
+}
+
 
 
 

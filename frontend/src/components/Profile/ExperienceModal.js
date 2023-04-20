@@ -16,7 +16,8 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
   const [place, setPlace] = useState(data?.place);
   const queryClient = useQueryClient();
 
-  const aUthorization = add ? false : role === "ALUMNI" ? true : false;
+  const aUthorization = add ? false :( data.role === role ? false : true)
+
   const handleDropdownChange = (event, data) => {
     setCompetences(data.value);
   };
@@ -24,16 +25,16 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
     setJobType(value);
   };
 
-  const createExperienceMutation = useMutation({
-    mutationFn: (Experience) => {
-      addExperience(Experience, _id);
-    },
-    onError: () => toast.error("Oups somthing went wrong !"),
-    onSuccess: () => toast.success("Experience  Created successfully !"),
-    onSettled: () => {
-      queryClient.invalidateQueries("cv");
-    },
-  });
+  const createExperienceMutation = useMutation(
+    ({ Experience, _id }) => addExperience(Experience, _id),
+    {
+      onSuccess: () => toast.success("Experience  Created successfully !"),
+      onError: () => toast.error("Oups somthing went wrong !"),
+      onSettled: () => {
+        queryClient.invalidateQueries("cv");
+      },
+    }
+  );
 
   const UpdateExperienceMutation = useMutation(
     ({ Experience, _id }) => updateExperience(Experience, _id),
@@ -59,6 +60,7 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
       description: description,
       competences: competences,
       place: place,
+      role:role
     };
     if (competences.length < 1) {
       return toast.error("Competences are required ! ");
@@ -68,32 +70,30 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
     }
 
     if (add) {
-      createExperienceMutation.mutate(Experience, _id);
+    
+      console.log("Experience",Experience)
+
+      createExperienceMutation.mutate({ Experience, _id });
     } else {
       Experience._id = data._id;
 
-      UpdateExperienceMutation.mutate({ Experience, _id });
+      UpdateExperienceMutation.mutate({ Experience:Experience, _id:_id });
     }
   }
   return (
     <Modal
       trigger={
-        <div>
-         <Popup
-        inverted
-          trigger={
-            <Icon
-              name={iconName}
-              color="blue"
-              size="big"
-              style={{ float: "right", cursor: "pointer", marginLeft: "8px" }}
-              disabled={aUthorization}
-            />
-          }
-          content={!aUthorization?"Update your Experience ": "You are Unauthorized to update "}
-          position="top left"
-        />
-        </div>
+       
+         
+              <Icon
+                name={iconName}
+                color="blue"
+                size="big"
+                style={{ float: "right", cursor: "pointer", marginLeft: "8px" }}
+                disabled={aUthorization}
+              />
+           
+       
        
       }
     >

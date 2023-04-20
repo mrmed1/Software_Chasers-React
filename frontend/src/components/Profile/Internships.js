@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Icon } from "semantic-ui-react";
 
-export default function Internships({ data }) {
+export default function Internships({ data ,style}) {
   function getNamesAndLastnames(array) {
     const namesAndLastnames = array.map(
       (item) => `${item.firstname} ${item.lastname}`
@@ -12,9 +12,9 @@ export default function Internships({ data }) {
   }
 
   return (
-    <Card centered fluid>
-      <Card.Header>
-        <h1>Internships</h1>
+    <Card centered fluid style={style?.card}>
+      <Card.Header  style={{marginLeft:"1rem"}}>
+        <h1 style={style?.header}>Internships</h1>
       </Card.Header>
 
       {data &&
@@ -25,27 +25,27 @@ export default function Internships({ data }) {
                 <br />
                 <Card.Description>
                   <Card.Header>
-                    <h2>
+                    <h2  style={style?.text2}>
                       {internship?.title},{" "}
-                      <strong>{internship?.company}</strong>
+                      <strong style={{ color: "#1976D2" }}>{internship?.company}</strong>
                     </h2>
                   </Card.Header>
-                  <Card.Meta>{internship?.type}</Card.Meta>
-                  <Card.Meta>{internship.univId ? data.univId : ""}</Card.Meta>
+                  <Card.Meta style={style?.text2}>{internship?.type}</Card.Meta>
+                  <Card.Meta style={style?.text2}>{internship.univId ? data.univId?.name : ""}</Card.Meta>
                   <br />
                   <h4
                     style={{
                       marginTtop: "1em",
                       textAlign: "justify",
                       maxWidth: "820px",
-                      color: "black",
+                     color: style?.text.color,
                       lineHeight: "1.4em",
                       wordSpacing: ".5em",
                     }}
                   >
                     {internship?.description}
                   </h4>
-                  <h4>
+                  <h4 style={style?.text2}>
                     {" "}
                     <Icon name="user" circular color="blue" />{" "}
                     {getNamesAndLastnames(internship?.studentsId)}
