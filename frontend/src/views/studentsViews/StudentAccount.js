@@ -8,7 +8,7 @@ export default function StudentAccount() {
     <>
       <Toaster />
       <UpdateProfile />
-      <CV />
+    
     </>
   );
 }
