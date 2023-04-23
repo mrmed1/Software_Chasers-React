@@ -1,7 +1,6 @@
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 
 
-import CrudPFA from '../views/teacherViews/CrudPFA';
 import MyPFA from '../views/teacherViews/MyPFA';
 
 const ROUTES = [
@@ -14,14 +13,6 @@ const ROUTES = [
         layout: "/teacher",
         allowedRoles: ["ADMIN"],
     },
-    
-    {
-        path: "/PFA",
-        name: "PFA",
-        icon: <InboxIcon/>,
-        element: <CrudPFA />,
-        layout: "/teacher",
-        allowedRoles: ["ADMIN"],
-    }
+   
 ]
 export default ROUTES

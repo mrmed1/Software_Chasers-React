@@ -6,7 +6,7 @@ import { Dimmer, Loader, Message } from "semantic-ui-react";
 import { Toaster } from "react-hot-toast";
 
 export default function MyPFA() {
-  const { data, isLoading, error } = useQuery("MyPFA", fetchMyPFA);
+  const { data, isLoading, error } = useQuery("PFAList", fetchMyPFA);
 
   if (isLoading)
     return (

@@ -4,16 +4,14 @@ import { Modal, Form, Dropdown, Icon } from "semantic-ui-react";
 import toast from "react-hot-toast";
 import { competenceList } from "../../Helpers/helper";
 import {
-  getunivList,
+  getuniv,
   createPFA,
   updatePFA,
 } from "../../Service/internshipService";
 
 export default function PFAModal({ data, teacher_id, add, iconName }) {
   const [title, setTitle] = useState(data?.title);
-  const [studentsMembers, setStudentsMembers] = useState(data?.nbStudent);
   const [description, setDescription] = useState(data?.description);
-  const [univId, setUnivId] = useState(data?.univId);
   const [technologyId, settechnologyId] = useState(data?.technologyId);
   const formRef = useRef(null);
 
@@ -21,7 +19,8 @@ export default function PFAModal({ data, teacher_id, add, iconName }) {
 
   const queryClient = useQueryClient();
 
-  const { data: univList } = useQuery("univ", getunivList);
+  const { data: currentUniv } = useQuery("currentUniv", getuniv);
+
 
   const { mutate, isLoading } = useMutation(({ pfa }) => createPFA(pfa), {
     onSuccess: () => {
@@ -44,9 +43,7 @@ export default function PFAModal({ data, teacher_id, add, iconName }) {
     },
   });
 
-  const handleUnivIdChange = (event, { value }) => {
-    setUnivId(value);
-  };
+
   const handleDropdownChange = (event, data) => {
     settechnologyId(data.value);
   };
@@ -55,17 +52,16 @@ export default function PFAModal({ data, teacher_id, add, iconName }) {
     e.preventDefault();
     const newData = {
       title: title,
-      univId: univId,
+      univId:currentUniv?._id ,
       technologyId: technologyId,
       description: description,
       type: "PFA",
-      nbStudent: parseInt(studentsMembers),
       createdBy: teacher_id,
     };
 
     if (add) {
       try {
-        if (univId == null) {
+        if (currentUniv == null) {
           return toast.error(
             "You should wait untill the The admin add a University year"
           );
@@ -120,18 +116,7 @@ export default function PFAModal({ data, teacher_id, add, iconName }) {
               required
             />
 
-            <Form.Select
-              fluid
-              options={univList?.map((univ) => ({
-                value: univ._id,
-                text: univ.name,
-              }))}
-              label="Universal Year"
-              placeholder="Universal Year"
-              onChange={handleUnivIdChange}
-              required
-            value={univId}
-            />
+            
             <Dropdown
               floating
               placeholder="Search Technologies"
@@ -146,15 +131,7 @@ export default function PFAModal({ data, teacher_id, add, iconName }) {
               required
             />
           </Form.Group>
-          <Form.Input
-            type="Number"
-            label="Student Number"
-            placeholder="Enter a Number of studebts"
-            onChange={(e) => setStudentsMembers(e.target.value)}
-          //  value={studentsMembers}
-            defaultValue={data?.nbStudent}
-            required
-          />
+          
 
           <Form.TextArea
             label="Description "

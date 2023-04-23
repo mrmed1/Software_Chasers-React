@@ -9,7 +9,6 @@ import { connectedUser } from "./Service/auth.service";
 import Login from "./components/login/Login";
 import SecureRoute from "./components/SecureRoute/secureRoute";
 
-import CrudPFA from "./views/teacherViews/CrudPFA";
 import MyPFA from "./views/teacherViews/MyPFA";
 
 function App() {
@@ -69,9 +68,10 @@ function App() {
             <Routes>
               <Route element={<SecureRoute />}></Route>
 
-           
-              <Route exact path="/teacher/PFA" element={<CrudPFA />} />
+      
+     
               <Route exact path="/teacher/myPFA" element={<MyPFA />} />
+              
             </Routes>
           </Box>
         </Box>

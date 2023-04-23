@@ -30,13 +30,15 @@ export default function DeletePFA({ data, teacher_id, isPublished, iconName }) {
 
     setOpen(false);
   };
+
+  const PublishTestIcon = isPublished && !data.isPublished ? "green" :"red"
   const handleCancel = () => setOpen(false);
   return (
     <div>
       <div>
         <Icon
           name={iconName}
-          color={iconName === "trash" ? "red" : "green"}
+          color={PublishTestIcon}
           disabled={teacher_id === data?.createdBy._id ? false : true}
           onClick={show}
           style={{ float: "right", cursor: "pointer" }}
