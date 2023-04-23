@@ -19,7 +19,7 @@ export default function PFAModal({ data, teacher_id, add, iconName }) {
 
   const queryClient = useQueryClient();
 
-  const { data: currentUniv } = useQuery("currentUniv", getuniv());
+  const { data: currentUniv } = useQuery("currentUniv", getuniv);
 
 
   const { mutate, isLoading } = useMutation(({ pfa }) => createPFA(pfa), {
@@ -52,7 +52,7 @@ export default function PFAModal({ data, teacher_id, add, iconName }) {
     e.preventDefault();
     const newData = {
       title: title,
-      univId:currentUniv._id ,
+      univId:currentUniv?._id ,
       technologyId: technologyId,
       description: description,
       type: "PFA",

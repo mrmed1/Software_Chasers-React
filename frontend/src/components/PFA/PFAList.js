@@ -27,7 +27,7 @@ export default function PFAList({ data }) {
     type: "PFA",
     createdBy: teacher_id,
     technologyId: [],
-    univId: null,
+    univId: "",
   };
 
   function getNamesAndLastnames(array) {
