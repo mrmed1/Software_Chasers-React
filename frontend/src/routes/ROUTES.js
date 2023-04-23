@@ -1,27 +1,18 @@
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 
-import StudentAccount from "../views/studentsViews/StudentAccount";
-
-import CrudPFA from '../views/teacherViews/CrudPFA';
+import PublishedPFa from "../views/adminViews/PublishedPFa";
 
 const ROUTES = [
 
-    {
-        path: "/profile",
-        name: "Show Profile",
-        icon: <InboxIcon/>,
-        element: <StudentAccount />,
-        layout: "/students",
-        allowedRoles: ["ADMIN"],
-    },
-    
-    {
-        path: "/PFA",
-        name: "PFA",
-        icon: <InboxIcon/>,
-        element: <CrudPFA />,
-        layout: "/teacher",
-        allowedRoles: ["ADMIN"],
-    }
+   
+  {
+    path: "/PFA",
+    name: "Validate PFA",
+    icon: <InboxIcon />,
+    element: <PublishedPFa />,
+    layout: "/admin",
+    allowedRoles: ["ADMIN"],
+  },
+
 ]
 export default ROUTES

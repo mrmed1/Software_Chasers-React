@@ -8,9 +8,8 @@ import { styled } from "@mui/material/styles";
 import { connectedUser } from "./Service/auth.service";
 import Login from "./components/login/Login";
 import SecureRoute from "./components/SecureRoute/secureRoute";
+import PublishedPFa from "./views/adminViews/PublishedPFa";
 
-import StudentAccount from "./views/studentsViews/StudentAccount";
-import CrudPFA from "./views/teacherViews/CrudPFA";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -68,14 +67,8 @@ function App() {
             <DrawerHeader />
             <Routes>
               <Route element={<SecureRoute />}></Route>
-
-              <Route
-                exact
-                path="/students/profile"
-                element={<StudentAccount />}
-              />
-
-              <Route exact path="/teacher/PFA" element={<CrudPFA />} />
+              <Route exact path="/admin/PFA" element={<PublishedPFa />} />
+       
             </Routes>
           </Box>
         </Box>
