@@ -19,8 +19,7 @@ export default function PFAModal({ data, teacher_id, add, iconName }) {
 
   const queryClient = useQueryClient();
 
-  const { data: currentUniv } = useQuery("currentUniv", getuniv());
-
+  const { data: currentUniv } = useQuery("currentUniv", getuniv);
 
   const { mutate, isLoading } = useMutation(({ pfa }) => createPFA(pfa), {
     onSuccess: () => {
@@ -52,7 +51,7 @@ export default function PFAModal({ data, teacher_id, add, iconName }) {
     e.preventDefault();
     const newData = {
       title: title,
-      univId:currentUniv._id ,
+      univId:currentUniv?._id ,
       technologyId: technologyId,
       description: description,
       type: "PFA",
@@ -66,9 +65,8 @@ export default function PFAModal({ data, teacher_id, add, iconName }) {
             "You should wait untill the The admin add a University year"
           );
         }
-        console.log("STATES: ",newData)
-        console.log("teacher_id: ",teacher_id)
-        
+      
+       
         mutate({ pfa: newData });
        
       } catch (err) {
