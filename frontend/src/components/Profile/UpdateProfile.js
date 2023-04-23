@@ -9,6 +9,9 @@ import {
   Dimmer,
   Loader,
   Popup,
+  Segment,
+  Portal,
+  Header,
 } from "semantic-ui-react";
 import {
   getAcount,
@@ -27,10 +30,14 @@ export default function UpdateProfile() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [login, setLogin] = useState("");
-
+  const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
-  //For Testing without authentification
+
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+
   const id = connectedUser()._id;
+  const ROLE = connectedUser().role;
   const { isLoading, data } = useQuery(["student"], () => getAcount(id), {
     retry: false,
   });
@@ -144,7 +151,7 @@ export default function UpdateProfile() {
   } else {
     style = lightMode;
   }
-  function toggleStyleIcon(){
+  function toggleStyleIcon() {
     toggleStyleMutation.mutate();
   }
 
@@ -244,6 +251,23 @@ export default function UpdateProfile() {
 
             <Card.Header>
               <h1 style={style.header}>Personal Informations </h1>
+
+              <Portal onClose={handleClose} open={open}>
+                <Segment
+                  style={{
+                    left: "40%",
+                    position: "fixed",
+                    top: "50%",
+                    zIndex: 1000,
+                  }}
+                >
+                  <Header>Authorization Notice For Graduated Students</Header>
+                  <p>
+                    As an Alumni you can't modify your previous Educations and
+                    Experiences
+                  </p>
+                </Segment>
+              </Portal>
             </Card.Header>
             <br />
             {/* Render Profile */}
@@ -285,11 +309,24 @@ export default function UpdateProfile() {
               )}
 
               <Card.Meta>
-              <Icon
-              onClick={toggleStyleIcon}
-              color={data?.style==="dark"?"teal":"grey"}
-                 size={"big"}
-                  name={data?.style==="dark"?"sun":"moon"}
+                {ROLE === "ALUMNI" && (
+                  <Icon
+                    name="bullhorn"
+                    style={{
+                      cursor: "pointer",
+                      float: "right",
+                      marginRight: "1rem",
+                    }}
+                    size="big"
+                    color="blue"
+                    onClick={handleOpen}
+                  />
+                )}
+                <Icon
+                  onClick={toggleStyleIcon}
+                  color={data?.style === "dark" ? "teal" : "grey"}
+                  size={"big"}
+                  name={data?.style === "dark" ? "sun" : "moon"}
                   style={{
                     cursor: "pointer",
                     float: "right",
@@ -316,12 +353,7 @@ export default function UpdateProfile() {
                       color={data?.isPublic ? "green" : "red"}
                     />
                   }
-
-                />
-                
-             
-                
-                {" "}
+                />{" "}
                 {data?.dog}
               </Card.Meta>
             </Card.Description>
