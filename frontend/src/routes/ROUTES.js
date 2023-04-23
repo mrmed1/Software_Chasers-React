@@ -15,13 +15,6 @@ const ROUTES = [
     layout: "/students",
     allowedRoles: ["ADMIN"],
   },
-  {
-    path: "/PFA",
-    name: "Validate PFA",
-    icon: <InboxIcon />,
-    element: <PublishedPFa />,
-    layout: "/admin",
-    allowedRoles: ["ADMIN"],
-  },
+
 ];
 export default ROUTES;

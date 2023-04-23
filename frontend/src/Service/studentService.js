@@ -44,6 +44,10 @@ export function updateExperience(Experience,id){
     return axios.put(`${URI}/student/Experience/${id}/${Experience._id}`,Experience).then((r)=>r.data.data)
 }
 
+export function toggleStyleCv(){
+    return axios.put(`${URI}/student/toggleStyle`).then((r)=>r.data)
+}
+
 
 
 
@@ -59,9 +63,7 @@ export function deleteSkills(Skills,id){
     return axios.delete(`${URI}/student/Skills/${id}/${Skills}`).then((r)=>r.data)
 }
 
-
 //Get PFA list validated 
-
 export function fetchValidatedResponsablePFA(){
     return axios.get(`${URI}/teacher/PFA/validated`).then(r=>r.data)
 }

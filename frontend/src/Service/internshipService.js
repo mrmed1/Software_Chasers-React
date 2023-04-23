@@ -8,8 +8,8 @@ export function fetchPfaList() {
     .get(`${URI}/Internship`)
     .then((r) => r.data.filter((pfa) => pfa.type === "PFA"));
 }
-export function getunivList(){
-    return axios.get(`${URI}/Univ`).then(r=>r.data)
+export function getuniv(){
+    return axios.get(`${URI}/univ/get/currentUnivYear`).then(r=>r.data)
 }
 
 
@@ -23,13 +23,9 @@ export function updatePFA(pfa){
 export function deletePFA(pfa){
     return axios.delete(`${URI}/Internship/${pfa._id}`).then(r=>r.data)
 }
-
 export function publishPFA(pfa){
     return axios.put(`${URI}/teacher/PFA/Publishe/${pfa._id}`).then(r=>r.data)
 }
-
-
-
 
 //ADMIN
 export function fetchPublishedPFA(){
@@ -40,3 +36,8 @@ export function toogleValideResponsiblePFA(pfa){
     return axios.put(`${URI}/teacher/PFA/responsible/${pfa._id}`).then(r=>r.data)
 }
 
+
+export function getInternshipsByStudentId(){
+    return axios.get(`${URI}/student/MyInternships`).then(r=>r.data.data)
+}
+    
