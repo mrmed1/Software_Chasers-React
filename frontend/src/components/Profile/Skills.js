@@ -6,7 +6,7 @@ import { addSkills } from "../../Service/studentService";
 import "./Skills.css";
 import { toast } from "react-hot-toast";
 import DeleteSkillsModal from "./DeleteSkillsModal";
-export default function Skills({ data, _id }) {
+export default function Skills({ data, _id ,style}) {
   const [SkillsList, setSkillsList] = useState(data);
 
 
@@ -45,7 +45,7 @@ export default function Skills({ data, _id }) {
     mutate({ Skills: newSkills, _id: _id });
   }
   return (
-    <Card centered fluid>
+    <Card centered fluid style={style.card}>
       <Card.Content>
         {/* add Experience */}
         <Modal
@@ -91,7 +91,7 @@ export default function Skills({ data, _id }) {
         {/** Render Experiences !  */}
 
         <section className="section skills" id="skills">
-          <h2 className="section__title">Skills</h2>
+          <h2 className="section__title" style={style.header}>Skills</h2>
           <ul className="skills__list">
             {data.map((skill, key) => (
               <li key={key} className="skills__list-item">

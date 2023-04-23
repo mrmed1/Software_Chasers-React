@@ -11,7 +11,8 @@ export default function EducationModal({ data, add, _id, iconName, role }) {
   const [endDate, setEndDte] = useState(data.endDate);
   const [clubs, setClubs] = useState(data.clubs);
 
-  const aUthorization = add ? false : role === "ALUMNI" ? true : false;
+  const aUthorization = add ? false :( data.role === role ? false : true)
+  console.log(data,aUthorization,role)
 
   const queryClient = useQueryClient();
 
@@ -54,10 +55,12 @@ export default function EducationModal({ data, add, _id, iconName, role }) {
       startDate: startDate,
       endDate: endDate,
       clubs: clubs,
+      role:role
     };
 
     if (add) {
       try {
+       
         mutate({ Education: newData, _id: _id });
       } catch (err) {
         alert("Oups!");
@@ -73,32 +76,27 @@ export default function EducationModal({ data, add, _id, iconName, role }) {
   };
 
   return (
+    
     <Modal
       trigger={
-        <Popup
-          inverted
-          trigger={
-            <Icon
+      
+     
+        <Icon
               name={iconName}
               color="blue"
               size="big"
               style={{ float: "right", cursor: "pointer", marginLeft: "8px" }}
               disabled={aUthorization}
+              
             />
-          }
-          content={
-            !aUthorization
-              ? "Update your Education "
-              : "You are Unauthorized to update "
-          }
-          position="top left"
-        />
+         
+        
       }
     >
       <Modal.Header>
         {add
-          ? "Create new Experience"
-          : `Update Your Experience in ${data.university}`}{" "}
+          ? "Create new Education"
+          : `Update Your Education in ${data.university}`}{" "}
       </Modal.Header>
       <Modal.Content>
         <Form onSubmit={handleSave}>
