@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { Modal, Form, Dropdown, Icon } from "semantic-ui-react";
+import { Modal, Form, Dropdown, Icon, Popup } from "semantic-ui-react";
 import { clubList } from "../../Helpers/helper";
 import { addEducation, updateEducation } from "../../Service/studentService";
 import toast from "react-hot-toast";
-export default function EducationModal({ data, add, _id, iconName }) {
+export default function EducationModal({ data, add, _id, iconName, role }) {
   const [diploma, setDiploma] = useState(data.diploma);
   const [university, setUniversity] = useState(data.startDate);
   const [startDate, setStartDate] = useState(data.startDate);
   const [endDate, setEndDte] = useState(data.endDate);
   const [clubs, setClubs] = useState(data.clubs);
+
+  const aUthorization = add ? false :( data.role === role ? false : true)
+  console.log(data,aUthorization,role)
 
   const queryClient = useQueryClient();
 
@@ -52,10 +55,12 @@ export default function EducationModal({ data, add, _id, iconName }) {
       startDate: startDate,
       endDate: endDate,
       clubs: clubs,
+      role:role
     };
 
     if (add) {
       try {
+       
         mutate({ Education: newData, _id: _id });
       } catch (err) {
         alert("Oups!");
@@ -71,20 +76,27 @@ export default function EducationModal({ data, add, _id, iconName }) {
   };
 
   return (
+    
     <Modal
       trigger={
+      
+     
         <Icon
-          name={iconName}
-          color="blue"
-          size="big"
-          style={{ float: "right", cursor: "pointer", marginLeft: "8px" }}
-        />
+              name={iconName}
+              color="blue"
+              size="big"
+              style={{ float: "right", cursor: "pointer", marginLeft: "8px" }}
+              disabled={aUthorization}
+              
+            />
+         
+        
       }
     >
       <Modal.Header>
         {add
-          ? "Create new Experience"
-          : `Update Your Experience in ${data.university}`}{" "}
+          ? "Create new Education"
+          : `Update Your Education in ${data.university}`}{" "}
       </Modal.Header>
       <Modal.Content>
         <Form onSubmit={handleSave}>
