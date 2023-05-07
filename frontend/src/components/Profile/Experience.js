@@ -4,8 +4,8 @@ import { Card, Icon } from "semantic-ui-react";
 import ExperienceModal from "./ExperienceModal";
 import DeleteExperience from "./DeleteExperience";
 
-export default function Experience({ data, _id }) {
-  //Loop data and get all the experiences !
+export default function Experience({ data, _id,role,style }) {
+  
 
   const emptyExperience = {
     jobTitle: "",
@@ -18,8 +18,11 @@ export default function Experience({ data, _id }) {
     competences: [],
   };
 
+ 
+
+
   return (
-    <Card centered fluid>
+    <Card centered fluid style={style.card}>
       <Card.Content>
         {/* add Experience */}
 
@@ -28,10 +31,11 @@ export default function Experience({ data, _id }) {
           data={emptyExperience}
           iconName="pencil"
           add={true}
+          role={role}
         />
         {/** Render Experiences !  */}
         <Card.Header>
-          <h1>My Experiences </h1>
+          <h1 style={style.header}>My Experiences </h1>
         </Card.Header>
         <br />
 
@@ -42,13 +46,14 @@ export default function Experience({ data, _id }) {
                 <Card.Description key={key}>
                   <Card.Header>
                     <ExperienceModal
+                      role={role}
                       data={exp}
                       add={false}
                       _id={_id}
                       iconName="setting"
                     />
-                    <DeleteExperience data={exp} _id={_id} />
-                    <h2>
+                    <DeleteExperience data={exp} _id={_id} role={role} />
+                    <h2 style={style.text2}>
                       <Icon name="point" color="blue" />
                       {exp?.jobTitle}
                       {"  "}, {"  "}
@@ -58,7 +63,7 @@ export default function Experience({ data, _id }) {
                       </strong>
                     </h2>
                   </Card.Header>
-                  <Card.Meta style={{ marginLeft: "32px" }}>
+                  <Card.Meta style={{ marginLeft: "32px",color:style.text.color }}>
                     <Icon name="calendar" /> from {exp?.startDate} to{" "}
                     {exp?.endDate}
                   </Card.Meta>
@@ -68,7 +73,7 @@ export default function Experience({ data, _id }) {
                       marginTtop: "1em",
                       textAlign: "justify",
                       maxWidth: "820px",
-                      color: "black",
+                      color: style.text.color,
                       lineHeight: "1.4em",
                       wordSpacing: ".5em",
                       marginLeft: "32px",
@@ -78,7 +83,7 @@ export default function Experience({ data, _id }) {
                   </h4>
                   <Card.Meta style={{ marginLeft: "32px" }}>
                     {exp.jobType && (
-                      <h5>
+                      <h5 style={style.text2}>
                         Domain :{" "}
                         <strong style={{ color: "#1976D2" }}>
                           {" "}
@@ -89,7 +94,7 @@ export default function Experience({ data, _id }) {
                   </Card.Meta>
 
                   <Card.Meta style={{ marginLeft: "32px" }}>
-                    <h5>
+                    <h5  style={style.text2}>
                       Competences :{" "}
                       <strong style={{ color: "#1976D2" }}>
                         {exp?.competences.join(", ")}
