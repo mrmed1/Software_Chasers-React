@@ -29,6 +29,8 @@ import CrudPFA from "./views/teacherViews/CrudPFA";
 import MyPFA from "./views/teacherViews/MyPFA";
 import PickPFAstudent from "./views/studentsViews/PickPFAstudent";
 import PublishedPFa from "./views/adminViews/PublishedPFa";
+import ValiderAlumni from "./components/ValiderCompteAlumni/ValiderAlumni";
+
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -113,6 +115,8 @@ function App() {
               <Route exact path="/teacher/myPFA" element={<MyPFA />} />
               <Route exact path="/admin/PFA" element={<PublishedPFa />} />
               <Route exact path="/students/PFA" element={<PickPFAstudent />} />
+              <Route exact path="/ValiderAlumni" element={<ValiderAlumni />} />
+
             </Routes>
           </Box>
         </Box>
