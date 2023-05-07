@@ -11,6 +11,8 @@ import CreateEventClub from "../components/EventClub/CreateEventClub/CreateEvent
 import HomeEvent from "../components/EventClub/HomeEvent";
 
 import HomeClub from "../components/Club/HomeClub";
+import ValiderAlumni from "../components/ValiderCompteAlumni/ValiderAlumni";
+
 
 const ROUTES = [
 
@@ -91,6 +93,15 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <HomeClub />,
         layout: "/HomeClub",
+        allowedRoles: ["ADMIN"],
+    }
+    ,
+    {
+        path: "/",
+        name: "Valider Compte Alumni",
+        icon: <InboxIcon/>,
+        element: <ValiderAlumni />,
+        layout: "/ValiderAlumni",
         allowedRoles: ["ADMIN"],
     }
 ]

@@ -23,6 +23,8 @@ import CreateEventClub from "./components/EventClub/CreateEventClub/CreateEventC
 import HomeEvent from "./components/EventClub/HomeEvent";
 import HomeClub from "./components/Club/HomeClub";
  import AddClub from "./components/Club/Add";
+import ValiderAlumni from "./components/ValiderCompteAlumni/ValiderAlumni";
+
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -85,6 +87,9 @@ function App() {
                         <Route exact path="/HomeClub" element={<HomeClub />} />
 
                         <Route exact path="/create" element={<AddClub />} />
+
+                        <Route exact path="/ValiderAlumni" element={<ValiderAlumni />} />
+
                     </Routes>
                 </Box>
 
