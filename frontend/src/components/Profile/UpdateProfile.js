@@ -146,7 +146,7 @@ export default function UpdateProfile() {
     text2: { color: "" },
   };
 
-  if (data.style === "dark") {
+  if (data?.style === "dark") {
     style = darkMode;
   } else {
     style = lightMode;

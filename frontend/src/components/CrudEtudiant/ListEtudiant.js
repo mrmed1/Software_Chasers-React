@@ -223,8 +223,8 @@ export default function ListEtudiant() {
         }
 
     };
-
-    return (<div className="card">
+ 
+    return (<div >
         <Toaster/>
         <h2>List of students</h2>
         <div className="datatable-container">

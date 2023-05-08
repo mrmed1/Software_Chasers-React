@@ -98,7 +98,7 @@ export default function ValiderAlumni() {
         );
     };
 
-    return (<div className="card">
+    return (<div >
         <Toaster/>
         <h1 className="titre">List of Alumni</h1>
         <>
