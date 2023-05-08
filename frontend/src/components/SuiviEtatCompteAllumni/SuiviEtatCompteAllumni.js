@@ -116,7 +116,7 @@ export default function SuiviEtatCompteAllumni() {
                                 fullWidth
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
-                                style={{ backgroundColor: buttonColor }}                            >
+                                style={{ backgroundColor: buttonColor ,pointerEvents : "none"}}                            >
                                 {buttonText}
                             </Button>
                         )

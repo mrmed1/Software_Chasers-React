@@ -14,6 +14,7 @@ import CrudPFA from '../views/teacherViews/CrudPFA';
 import MyPFA from '../views/teacherViews/MyPFA';
 import PickPFAstudent from "../views/studentsViews/PickPFAstudent";
 import PublishedPFa from "../views/adminViews/PublishedPFa";
+import ValiderAlumni from "../components/ValiderCompteAlumni/ValiderAlumni";
 
 
 const ROUTES = [
@@ -96,6 +97,7 @@ const ROUTES = [
         element: <HomeClub />,
         layout: "/HomeClub",
         allowedRoles: ["ADMIN"],
+
     },
     ///PFA
 
@@ -132,5 +134,15 @@ const ROUTES = [
         layout: "/admin",
         allowedRoles: ["ADMIN"],
       },
+
+    ,
+    {
+        path: "/",
+        name: "Valider Compte Alumni",
+        icon: <InboxIcon/>,
+        element: <ValiderAlumni />,
+        layout: "/ValiderAlumni",
+        allowedRoles: ["ADMIN"],
+    }
 ]
 export default ROUTES
