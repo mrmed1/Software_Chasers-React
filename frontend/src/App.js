@@ -30,6 +30,9 @@ import MyPFA from "./views/teacherViews/MyPFA";
 import PickPFAstudent from "./views/studentsViews/PickPFAstudent";
 import PublishedPFa from "./views/adminViews/PublishedPFa";
 import ValiderAlumni from "./components/ValiderCompteAlumni/ValiderAlumni";
+import SummerIntern from "./components/InternshipStudent/SummerIntern";
+import InsertSummerIntern from "./views/studentsViews/InsertSummerIntern";
+import EventForStudent from "./components/EventClub/EventForStudent";
 
 
 function App() {
@@ -116,7 +119,8 @@ function App() {
               <Route exact path="/admin/PFA" element={<PublishedPFa />} />
               <Route exact path="/students/PFA" element={<PickPFAstudent />} />
               <Route exact path="/ValiderAlumni" element={<ValiderAlumni />} />
-
+              <Route exact path="/SummerIntern" element={<InsertSummerIntern />} />
+              <Route exact path="/EventForStudent" element={<EventForStudent />} />
             </Routes>
           </Box>
         </Box>

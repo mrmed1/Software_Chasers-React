@@ -15,6 +15,8 @@ import MyPFA from '../views/teacherViews/MyPFA';
 import PickPFAstudent from "../views/studentsViews/PickPFAstudent";
 import PublishedPFa from "../views/adminViews/PublishedPFa";
 import ValiderAlumni from "../components/ValiderCompteAlumni/ValiderAlumni";
+import SummerIntern from "../components/InternshipStudent/SummerIntern";
+import EventForStudent from "../components/EventClub/EventForStudent";
 
 
 const ROUTES = [
@@ -142,6 +144,23 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <ValiderAlumni />,
         layout: "/ValiderAlumni",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "Create Summer Internship",
+        icon: <InboxIcon/>,
+        element: <SummerIntern />,
+        layout: "/SummerIntern",
+        allowedRoles: ["ADMIN"],
+    }
+    ,
+    {
+        path: "/",
+        name: "Event Club Student",
+        icon: <InboxIcon/>,
+        element: <EventForStudent />,
+        layout: "/EventForStudent",
         allowedRoles: ["ADMIN"],
     }
 ]
