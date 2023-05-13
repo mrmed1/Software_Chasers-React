@@ -16,7 +16,7 @@ import PickPFAstudent from "../views/studentsViews/PickPFAstudent";
 import PublishedPFa from "../views/adminViews/PublishedPFa";
 import ValiderAlumni from "../components/ValiderCompteAlumni/ValiderAlumni";
 import EventClub from "../components/EventClubComponent/EventClub";
-
+import EventClubContainer from "../components/EventContainer/EventClubContainer";
 const ROUTES = [
 
     {
@@ -151,7 +151,15 @@ const ROUTES = [
         element: <EventClub />,
         layout: "/EventClub",
         allowedRoles: ["ADMIN"],
-    }
+    },
+    {
+        path: "/",
+        name: "Event Club cards",
+        icon: <InboxIcon/>,
+        element: <EventClubContainer />,
+        layout: "/EventClubContainer",
+        allowedRoles: ["ADMIN"],
+    },
     
 ]
 export default ROUTES
