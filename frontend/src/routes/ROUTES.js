@@ -166,6 +166,7 @@ const ROUTES = [
         allowedRoles: ["ADMIN"],
     },
     {
+        path: "/",
         name: "My Event",
         icon: <InboxIcon/>,
         element: <EventClub />,
