@@ -151,7 +151,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <DemandeVacation />,
         layout: "/DemandeVacation",
-        allowedRoles: ["ALLUMNI"],
+        allowedRoles: ["ADMIN"],
     }
 
 ]
