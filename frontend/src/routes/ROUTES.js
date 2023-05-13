@@ -15,8 +15,12 @@ import MyPFA from '../views/teacherViews/MyPFA';
 import PickPFAstudent from "../views/studentsViews/PickPFAstudent";
 import PublishedPFa from "../views/adminViews/PublishedPFa";
 import ValiderAlumni from "../components/ValiderCompteAlumni/ValiderAlumni";
+import SummerIntern from "../components/InternshipStudent/SummerIntern";
+import EventForStudent from "../components/EventClub/EventForStudent";
+import InsertPFEIntern from "../views/studentsViews/InsertPFEIntern";
 import EventClub from "../components/EventClubComponent/EventClub";
 import EventClubContainer from "../components/EventContainer/EventClubContainer";
+
 const ROUTES = [
 
     {
@@ -146,6 +150,22 @@ const ROUTES = [
     },
     {
         path: "/",
+        name: "Create Summer Internship",
+        icon: <InboxIcon/>,
+        element: <SummerIntern />,
+        layout: "/SummerIntern",
+        allowedRoles: ["ADMIN"],
+    }
+    ,
+    {
+        path: "/",
+        name: "Create PFE Internship",
+        icon: <InboxIcon/>,
+        element: <InsertPFEIntern />,
+        layout: "/InsertPFEIntern",
+        allowedRoles: ["ADMIN"],
+    }
+
         name: "My Event",
         icon: <InboxIcon/>,
         element: <EventClub />,
