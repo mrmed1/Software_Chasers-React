@@ -1,0 +1,5 @@
+.event-description {
+    height: calc(5 * 1.2em); /* Set the height to 5 lines */
+    line-height: 1.2em; /* Set the line height to match the font size */
+  }
+  
