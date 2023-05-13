@@ -1,7 +1,8 @@
 import DataTable from "../Table/DataTable";
 import { useState, useEffect } from "react";
 import * as api from "../../Service/EventServices";
-
+import { Backdrop } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 export default function Event() {
   const [events, setEvents] = useState([]);
   const [univ, setUniv] = useState({});
@@ -37,6 +38,12 @@ export default function Event() {
       width: "100",
       disablePadding: true,
       label: "Type",
+    },
+    {
+      id: "date",
+      width: "100",
+      disablePadding: true,
+      label: "Date",
     },
 
     {
@@ -79,6 +86,20 @@ export default function Event() {
       detailsAttribute: true,
       object: false,
       required: true
+    },
+    {
+      name: "eventDate",
+      width: "15%",
+      label: "Date",
+      id: "date",
+      multiline: false,
+      displayed:true,
+      addAttribute:true,
+      editAttribute: true,
+      detailsAttribute: true,
+      object: false,
+      required: true,
+      type: "date"
     },
     {
       name: "description",
@@ -134,7 +155,14 @@ export default function Event() {
 
   return (
     <>
-      
+     
+     <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+        onClick={!loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       {loading && <div>Loading</div>}
       {!loading && (
         <>

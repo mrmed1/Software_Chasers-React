@@ -18,7 +18,8 @@ import ValiderAlumni from "../components/ValiderCompteAlumni/ValiderAlumni";
 import SummerIntern from "../components/InternshipStudent/SummerIntern";
 import EventForStudent from "../components/EventClub/EventForStudent";
 import InsertPFEIntern from "../views/studentsViews/InsertPFEIntern";
-
+import EventClub from "../components/EventClubComponent/EventClub";
+import EventClubContainer from "../components/EventContainer/EventClubContainer";
 
 const ROUTES = [
 
@@ -164,5 +165,21 @@ const ROUTES = [
         layout: "/InsertPFEIntern",
         allowedRoles: ["ADMIN"],
     }
+
+        name: "My Event",
+        icon: <InboxIcon/>,
+        element: <EventClub />,
+        layout: "/EventClub",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "Event Club cards",
+        icon: <InboxIcon/>,
+        element: <EventClubContainer />,
+        layout: "/EventClubContainer",
+        allowedRoles: ["ADMIN"],
+    },
+    
 ]
 export default ROUTES
