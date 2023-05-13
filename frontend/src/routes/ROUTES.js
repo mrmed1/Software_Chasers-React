@@ -164,8 +164,8 @@ const ROUTES = [
         element: <InsertPFEIntern />,
         layout: "/InsertPFEIntern",
         allowedRoles: ["ADMIN"],
-    }
-
+    },
+    {
         name: "My Event",
         icon: <InboxIcon/>,
         element: <EventClub />,
