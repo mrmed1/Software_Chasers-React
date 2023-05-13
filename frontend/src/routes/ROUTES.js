@@ -20,7 +20,9 @@ import EventForStudent from "../components/EventClub/EventForStudent";
 import InsertPFEIntern from "../views/studentsViews/InsertPFEIntern";
 import EventClub from "../components/EventClubComponent/EventClub";
 import EventClubContainer from "../components/EventContainer/EventClubContainer";
+import StatisticsPFE from "../components/StatisticsPFE/StatisticsPFE";
 import DemandeVacation from "../components/Vacations/DemandeVacation";
+
 
 
 const ROUTES = [
@@ -140,8 +142,6 @@ const ROUTES = [
         layout: "/admin",
         allowedRoles: ["ADMIN"],
       },
-
-    ,
     {
         path: "/",
         name: "Valider Compte Alumni",
@@ -183,7 +183,14 @@ const ROUTES = [
         layout: "/EventClubContainer",
         allowedRoles: ["ADMIN"],
     },
-
+    {
+        path: "/",
+        name: "StatisticsPFE",
+        icon: <InboxIcon/>,
+        element: <StatisticsPFE />,
+        layout: "/StatisticsPFE",
+        allowedRoles: ["ADMIN"],
+    },
     {
         path: "/",
         name: "Demander Vacations",
