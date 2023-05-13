@@ -17,6 +17,7 @@ import PublishedPFa from "../views/adminViews/PublishedPFa";
 import ValiderAlumni from "../components/ValiderCompteAlumni/ValiderAlumni";
 import SummerIntern from "../components/InternshipStudent/SummerIntern";
 import EventForStudent from "../components/EventClub/EventForStudent";
+import InsertPFEIntern from "../views/studentsViews/InsertPFEIntern";
 
 
 const ROUTES = [
@@ -157,10 +158,10 @@ const ROUTES = [
     ,
     {
         path: "/",
-        name: "Event Club Student",
+        name: "Create PFE Internship",
         icon: <InboxIcon/>,
-        element: <EventForStudent />,
-        layout: "/EventForStudent",
+        element: <InsertPFEIntern />,
+        layout: "/InsertPFEIntern",
         allowedRoles: ["ADMIN"],
     }
 ]

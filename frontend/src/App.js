@@ -33,6 +33,7 @@ import ValiderAlumni from "./components/ValiderCompteAlumni/ValiderAlumni";
 import SummerIntern from "./components/InternshipStudent/SummerIntern";
 import InsertSummerIntern from "./views/studentsViews/InsertSummerIntern";
 import EventForStudent from "./components/EventClub/EventForStudent";
+import InsertPFEIntern from "./views/studentsViews/InsertPFEIntern";
 
 
 function App() {
@@ -120,7 +121,7 @@ function App() {
               <Route exact path="/students/PFA" element={<PickPFAstudent />} />
               <Route exact path="/ValiderAlumni" element={<ValiderAlumni />} />
               <Route exact path="/SummerIntern" element={<InsertSummerIntern />} />
-              <Route exact path="/EventForStudent" element={<EventForStudent />} />
+              <Route exact path="/InsertPFEIntern" element={<InsertPFEIntern />} />
             </Routes>
           </Box>
         </Box>

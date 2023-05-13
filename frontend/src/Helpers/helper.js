@@ -318,5 +318,5 @@ export const clubList = clubs.map((club) => ({
 
 export const countryOptions = countries.map((country) => ({
     label: country.name,
-    value: country.code,
+    value: country.name,
 }));

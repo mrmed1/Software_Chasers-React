@@ -50,3 +50,8 @@
 .form-submit-button:hover {
     background-color: #005ea3;
 }
+
+.b_title {
+    font-size: 18px;
+    color: dodgerblue;
+}

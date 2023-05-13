@@ -1,16 +1,16 @@
 import {useQuery, useQueryClient} from "react-query";
-import {getInternshipsByStudentId, getInternshipsByStudentIdAndType} from "../../Service/internshipService";
+import {getInternshipsByStudentIdAndType} from "../../Service/internshipService";
 import {Dimmer, Loader, Message} from "semantic-ui-react";
-import {Toaster} from "react-hot-toast";
-import PFAList from "../../components/PFA/PFAList";
 import React from "react";
+import {Toaster} from "react-hot-toast";
 import SummerIntern from "../../components/InternshipStudent/SummerIntern";
+import PFEIntern from "../../components/InternshipStudent/PFEIntern";
 
-export default function InsertSummerIntern() {
 
+export default function InsertPFEIntern() {
     const queryClient = useQueryClient();
 
-    const { data, isLoading, error } = useQuery('internshipsByStudentIdAndType', () => getInternshipsByStudentIdAndType('SUMMER'));
+    const { data, isLoading, error } = useQuery('internshipsByStudentIdAndType', () => getInternshipsByStudentIdAndType('PFE'));
     if (isLoading)
         return (
             <Dimmer active inverted>
@@ -26,13 +26,11 @@ export default function InsertSummerIntern() {
 
             </Message>
         );
-    console.log(data)
     return (
-
         <>
             <Toaster />
-            <h1>Summer Internship</h1>
-            <SummerIntern intern={data} />
+            <h1>PFE Internship</h1>
+            <PFEIntern intern={data} />
         </>
-    );
+    )
 }
