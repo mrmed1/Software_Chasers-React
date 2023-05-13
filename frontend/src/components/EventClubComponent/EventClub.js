@@ -1,11 +1,10 @@
-import DataTable from "../Table/DataTable";
+import DataTable from "./DataTable";
 import { useState, useEffect } from "react";
-import * as api from "../../Service/EnseignantServices";
+import * as api from "../../Service/EventClubService";
 import toast, { Toaster } from "react-hot-toast";
 import { Backdrop } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
-
-export default function Enseignant() {
+export default function EventClub() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [reload, setReload] = useState(false);
@@ -14,9 +13,12 @@ export default function Enseignant() {
     async function fetchData() {
       try {
         setLoading(true);
-        const res = await api.fetchEnseignants();
-        setData(res);
-        setLoading(false);
+        setTimeout(async () => {
+          const res = await api.getEventClubById();
+          setData(res);
+          setLoading(false);
+        }, 500);
+       
       } catch (e) {
         setLoading(false);
         console.log(e);
@@ -26,49 +28,55 @@ export default function Enseignant() {
   }, [reload]);
   const headCells = [
     {
-      id: "firstname",
+      id: "name",
       width: "20",
       disablePadding: true,
-      label: "First Name",
+      label: "Title",
       align: "left",
     },
     {
-      id: "lastname",
-      width: "100",
+      id: "domain",
+      width: "20",
       disablePadding: true,
-      label: "Last name",
+      label: "Domain",
       align: "left",
     },
     {
-      id: "login",
+      id: "eventDate",
       width: "50",
       disablePadding: true,
-      label: "Login",
+      label: "Event Date",
       align: "left",
     },
     {
-      id: "email",
+      id: "numberOfPlaces",
+      width: "20",
+      disablePadding: true,
+      label: "Nb Places",
+      align: "left",
+    },
+    {
+      id: "startDate",
       width: "50",
       disablePadding: true,
-      label: "Email",
+      label: "Start Date",
+      align: "left",
+    },
+    {
+      id: "endDate",
+      width: "50",
+      disablePadding: true,
+      label: "End Date",
       align: "left",
     },
 
     {
-      id: "phone",
+      id: "participant",
       width: "50",
       disablePadding: true,
-      label: "Phone",
+      label: "Participants",
       align: "left",
     },
-    {
-      id: "Responsible",
-      width: "50",
-      disablePadding: true,
-      label: "Responsible",
-      align: "center",
-    },
-
     {
       id: "Action",
       width: "10",
@@ -80,10 +88,10 @@ export default function Enseignant() {
 
   const attributes = [
     {
-      name: "firstname",
+      name: "name",
       width: "17%",
-      label: "First Name",
-      id: "firstname",
+      label: "Title",
+      id: "name",
       multiline: false,
       detailsAttribute: true,
       addAttribute: true,
@@ -94,47 +102,24 @@ export default function Enseignant() {
       required: true,
     },
     {
-      name: "lastname",
+      name: "description",
       width: "17%",
-      label: "Last name",
-      id: "lastname",
-      multiline: false,
+      label: "Description",
+      id: "description",
+      multiline: true,
       detailsAttribute: true,
-      addAttribute: true,
+      addAttribute: false,
       editAttribute: true,
-      displayed: true,
-      object: false,
-      type: "text",
-      required: true,
-    },
-    {
-      name: "login",
-      width: "17%",
-      label: "Login",
-      id: "login",
-      multiline: false,
-      detailsAttribute: true,
-      editAttribute: true,
-      displayed: true,
-      object: false,
-      type: "text",
-    },
-    {
-      name: "password",
-      width: "17%",
-      label: "Password",
-      id: "password",
-      multiline: false,
-      detailsAttribute: false,
       displayed: false,
       object: false,
       type: "text",
+      required: true,
     },
     {
-      name: "email",
-      width: "20%",
-      label: "Email",
-      id: "email",
+      name: "domain",
+      width: "15%",
+      label: "Domain",
+      id: "domain",
       multiline: false,
       detailsAttribute: true,
       addAttribute: true,
@@ -145,10 +130,22 @@ export default function Enseignant() {
       required: true,
     },
     {
-      name: "phone",
-      width: "17%",
-      label: "Phone",
-      id: "phone",
+      name: "eventDate",
+      width: "12%",
+      label: "Event Date",
+      id: "eventDate",
+      multiline: false,
+      detailsAttribute: true,
+      editAttribute: true,
+      displayed: true,
+      object: false,
+      type: "date",
+    },
+    {
+      name: "numberOfPlaces",
+      width: "11%",
+      label: "Nb Places",
+      id: "numberOfPlaces",
       multiline: false,
       detailsAttribute: true,
       addAttribute: true,
@@ -158,77 +155,71 @@ export default function Enseignant() {
       type: "text",
       required: true,
     },
-
     {
-      name: "dob",
-      width: "20%",
-      label: "Date of birth",
-      id: "date",
+      name: "startDate",
+      width: "12%",
+      label: "Start Date",
+      id: "startDate",
+      multiline: false,
+      detailsAttribute: true,
+      editAttribute: true,
+      displayed: true,
+      object: false,
+      type: "date",
+    },
+    {
+      name: "endDate",
+      width: "12%",
+      label: "End Date",
+      id: "endDate",
       multiline: false,
       detailsAttribute: true,
       addAttribute: true,
       editAttribute: true,
-      displayed: false,
+      displayed: true,
       object: false,
       type: "date",
       required: true,
     },
     {
-      name: "isResponsible",
-      width: "15%",
-      label: "Responsible",
-      id: "Responsible",
+      name: "participant",
+      width: "20%",
+      label: "Participant",
+      id: "participant",
       multiline: false,
       detailsAttribute: false,
       addAttribute: true,
       editAttribute: true,
       displayed: true,
       object: false,
-      type: "checkbox",
+      type: "button",
+      required: true,
     },
-    {
-      name: "isPublic",
-      width: "",
-      label: "Public Account",
-      id: "isPublic",
-      multiline: false,
-      detailsAttribute: false,
-      addAttribute: true,
-      editAttribute: true,
-      displayed: false,
-      object: false,
-      type: "checkbox",
-    },
+
   ];
-  const addEnseignant = async (enseignant) => {
-    const res = await api.addEnseignant(enseignant);
+ 
 
-    setReload(!reload);
-    return res;
-
-  };
-
-  const deleteEnseignant = async (enseignant) => {
-    const res = await api.deleteEnseignant(enseignant._id);
+  const deleteEventClub = async (eventClub) => {
+    const res = await api.deleteEventClub(eventClub._id);
     setReload(!reload);
     return res;
   };
 
-  const updateEnseignant = async (id, enseignant) => {
-    const res = await api.updateEnseignant(id, enseignant);
+  const updateEventClub = async (id, eventClub) => {
+   const res = await api.updateEventClub(id, eventClub);
     setReload(!reload);
-    return res;
+    return res; 
   };
 
   return (
-    <> 
-    <Backdrop
-       sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-       open={loading}
-       onClick={!loading}
-     >
-       <CircularProgress color="inherit" />
-     </Backdrop>
+    <>
+     <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+        onClick={!loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       {loading && <div>Loading</div>}
       {!loading && (
         <>
@@ -237,12 +228,12 @@ export default function Enseignant() {
           <DataTable
             setReload={setReload}
             headCells={headCells}
-            addModel={addEnseignant}
-            deleteModel={deleteEnseignant}
-            updateModel={updateEnseignant}
+           
+            deleteModel={deleteEventClub}
+            updateModel={updateEventClub}
             data={data}
             attributes={attributes}
-            title="Enseignant"
+            title="My Event"
             reloadData={reload}
           />
         </>
