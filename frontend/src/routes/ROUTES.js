@@ -15,6 +15,7 @@ import MyPFA from '../views/teacherViews/MyPFA';
 import PickPFAstudent from "../views/studentsViews/PickPFAstudent";
 import PublishedPFa from "../views/adminViews/PublishedPFa";
 import ValiderAlumni from "../components/ValiderCompteAlumni/ValiderAlumni";
+import DemandeVacation from "../components/Vacations/DemandeVacation";
 
 
 const ROUTES = [
@@ -143,6 +144,15 @@ const ROUTES = [
         element: <ValiderAlumni />,
         layout: "/ValiderAlumni",
         allowedRoles: ["ADMIN"],
+    }   ,
+    {
+        path: "/",
+        name: "Demander Vacations",
+        icon: <InboxIcon/>,
+        element: <DemandeVacation />,
+        layout: "/DemandeVacation",
+        allowedRoles: ["ALLUMNI"],
     }
+
 ]
 export default ROUTES
