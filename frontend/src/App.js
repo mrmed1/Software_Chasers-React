@@ -38,6 +38,7 @@ import InsertPFEIntern from "./views/studentsViews/InsertPFEIntern";
 //EventClub 
 import EventClub from './components/EventClubComponent/EventClub';
 import EventClubContainer from './components/EventContainer/EventClubContainer';
+import StatisticsPFE from "./components/StatisticsPFE/StatisticsPFE";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -127,7 +128,7 @@ function App() {
               <Route exact path="/InsertPFEIntern" element={<InsertPFEIntern />} />
               <Route exact path="/EventClubContainer" element={<EventClubContainer />} />
               <Route exact path="/EventClub" element={<EventClub />} />
-                      
+              <Route exact path="/StatisticsPFE" element={<StatisticsPFE />} />
             </Routes>
           </Box>
         </Box>

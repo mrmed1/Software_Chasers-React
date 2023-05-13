@@ -20,6 +20,7 @@ import EventForStudent from "../components/EventClub/EventForStudent";
 import InsertPFEIntern from "../views/studentsViews/InsertPFEIntern";
 import EventClub from "../components/EventClubComponent/EventClub";
 import EventClubContainer from "../components/EventContainer/EventClubContainer";
+import StatisticsPFE from "../components/StatisticsPFE/StatisticsPFE";
 
 const ROUTES = [
 
@@ -179,6 +180,15 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <EventClubContainer />,
         layout: "/EventClubContainer",
+        allowedRoles: ["ADMIN"],
+    },
+    ,
+    {
+        path: "/",
+        name: "StatisticsPFE",
+        icon: <InboxIcon/>,
+        element: <StatisticsPFE />,
+        layout: "/StatisticsPFE",
         allowedRoles: ["ADMIN"],
     },
     
