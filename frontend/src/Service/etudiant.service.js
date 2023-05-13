@@ -10,7 +10,6 @@ export function GetAllStudents() {
         .then(response => {
             const allPersons = response.data;
             return  allPersons.filter(person => person.role === 'STUDENT');
-
         });
 }
 

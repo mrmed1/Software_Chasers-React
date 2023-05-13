@@ -30,8 +30,15 @@ import MyPFA from "./views/teacherViews/MyPFA";
 import PickPFAstudent from "./views/studentsViews/PickPFAstudent";
 import PublishedPFa from "./views/adminViews/PublishedPFa";
 import ValiderAlumni from "./components/ValiderCompteAlumni/ValiderAlumni";
+import SummerIntern from "./components/InternshipStudent/SummerIntern";
+import InsertSummerIntern from "./views/studentsViews/InsertSummerIntern";
+import EventForStudent from "./components/EventClub/EventForStudent";
+import InsertPFEIntern from "./views/studentsViews/InsertPFEIntern";
 import DemandeVacation from "./components/Vacations/DemandeVacation";
 
+//EventClub
+import EventClub from './components/EventClubComponent/EventClub';
+import EventClubContainer from './components/EventContainer/EventClubContainer';
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -117,6 +124,11 @@ function App() {
               <Route exact path="/admin/PFA" element={<PublishedPFa />} />
               <Route exact path="/students/PFA" element={<PickPFAstudent />} />
               <Route exact path="/ValiderAlumni" element={<ValiderAlumni />} />
+              <Route exact path="/SummerIntern" element={<InsertSummerIntern />} />
+              <Route exact path="/InsertPFEIntern" element={<InsertPFEIntern />} />
+              <Route exact path="/EventClubContainer" element={<EventClubContainer />} />
+              <Route exact path="/EventClub" element={<EventClub />} />
+
               <Route exact path="/DemandeVacation" element={<DemandeVacation />} />
 
             </Routes>

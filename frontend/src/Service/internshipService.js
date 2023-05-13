@@ -40,4 +40,15 @@ export function toogleValideResponsiblePFA(pfa){
 export function getInternshipsByStudentId(){
     return axios.get(`${URI}/student/MyInternships`).then(r=>r.data.data)
 }
-    
+
+export function createInternship(Internship){
+    return axios.post(`${URI}/Internship`,Internship).then(r=>r.data)
+}
+
+export function getInternshipsByStudentIdAndType(type){
+    return axios.get(`${URI}/student/MyInternbytype/${type}`).then(r=>r.data.data)
+}
+
+export function deleteInternship(id){
+    return axios.delete(`${URI}/Internship/${id}`).then(r=>r.data)
+}
