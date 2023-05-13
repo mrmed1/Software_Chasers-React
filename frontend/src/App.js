@@ -34,10 +34,12 @@ import SummerIntern from "./components/InternshipStudent/SummerIntern";
 import InsertSummerIntern from "./views/studentsViews/InsertSummerIntern";
 import EventForStudent from "./components/EventClub/EventForStudent";
 import InsertPFEIntern from "./views/studentsViews/InsertPFEIntern";
+import DemandeVacation from "./components/Vacations/DemandeVacation";
 
-//EventClub 
+//EventClub
 import EventClub from './components/EventClubComponent/EventClub';
 import EventClubContainer from './components/EventContainer/EventClubContainer';
+import StatisticsPFE from "./components/StatisticsPFE/StatisticsPFE";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -127,7 +129,10 @@ function App() {
               <Route exact path="/InsertPFEIntern" element={<InsertPFEIntern />} />
               <Route exact path="/EventClubContainer" element={<EventClubContainer />} />
               <Route exact path="/EventClub" element={<EventClub />} />
-                      
+              <Route exact path="/StatisticsPFE" element={<StatisticsPFE />} />
+              <Route exact path="/DemandeVacation" element={<DemandeVacation />} />
+
+
             </Routes>
           </Box>
         </Box>
