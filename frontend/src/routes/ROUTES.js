@@ -15,7 +15,7 @@ import MyPFA from '../views/teacherViews/MyPFA';
 import PickPFAstudent from "../views/studentsViews/PickPFAstudent";
 import PublishedPFa from "../views/adminViews/PublishedPFa";
 import ValiderAlumni from "../components/ValiderCompteAlumni/ValiderAlumni";
-
+import EventClub from "../components/EventClubComponent/EventClub";
 
 const ROUTES = [
 
@@ -143,6 +143,15 @@ const ROUTES = [
         element: <ValiderAlumni />,
         layout: "/ValiderAlumni",
         allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "My Event",
+        icon: <InboxIcon/>,
+        element: <EventClub />,
+        layout: "/EventClub",
+        allowedRoles: ["ADMIN"],
     }
+    
 ]
 export default ROUTES
