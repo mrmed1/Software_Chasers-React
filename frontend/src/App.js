@@ -23,6 +23,14 @@ import CreateEventClub from "./components/EventClub/CreateEventClub/CreateEventC
 import HomeEvent from "./components/EventClub/HomeEvent";
 import HomeClub from "./components/Club/HomeClub";
  import AddClub from "./components/Club/Add";
+import Admin from './components/CrudAdmin/Admin';
+import EventCard from './components/EventCard/EventCard';
+import EventClubContainer from './components/EventContainer/EventClubContainer';
+import EventContainer from './components/EventContainer/EventContainer';
+ 
+import SearchResults from './components/Search/SearchResultList';
+import SearchList from './components/Search/SearchList';
+import EventClub from './components/EventClubComponent/EventClub';
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -75,6 +83,7 @@ function App() {
                         <Route exact path="/Event/" element={<Event/>}/>
                         <Route exact path="/students/profile" element={<StudentAccount />} />
                         <Route exact path="/Enseignant/" element={<Enseignant/>}/>
+                        <Route exact path="/Admin/" element={<Admin/>}/>
                         <Route element={<Home/>} path='/'/>
                         <Route element={<PwdUpdate/>} path='/PwdUpdate'/>
                         <Route element={<SignUp/>} path='/SignUp'/>
@@ -85,6 +94,13 @@ function App() {
                         <Route exact path="/HomeClub" element={<HomeClub />} />
 
                         <Route exact path="/create" element={<AddClub />} />
+                        <Route exact path="/EventCard" element={<EventCard />} />
+                        <Route exact path="/EventClubContainer" element={<EventClubContainer />} />
+                        <Route exact path="/EventContainer" element={<EventContainer />} />
+                        <Route exact path="/EventClub" element={<EventClub />} />
+                         
+                        <Route exact path="/SearchResults" element={<SearchResults />} />
+                        <Route exact path="/SearchList" element={<SearchList />} />
                     </Routes>
                 </Box>
 

@@ -18,6 +18,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useLocation, Link } from "react-router-dom";
 import {Button} from "primereact/button";
+ 
+import SearchBar2 from "../Search/SearchBar2";
 const Sidebar = ({
   routes,
   userRole,
@@ -123,10 +125,13 @@ const Sidebar = ({
           <Typography variant="h6" noWrap component="div">
             Software_Chasers-React
           </Typography>
+   
 
+           <SearchBar2/>
+              
           <Button  onClick={logoutFn} style={{marginLeft:"auto",backgroundColor:"red"}}><strong style={{color: "white"}}>Logout</strong> </Button>
         </Toolbar>
-      </AppBar>²
+      </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>

@@ -38,6 +38,12 @@ export default function Event() {
       disablePadding: true,
       label: "Type",
     },
+    {
+      id: "date",
+      width: "100",
+      disablePadding: true,
+      label: "Date",
+    },
 
     {
       id: "description",
@@ -79,6 +85,20 @@ export default function Event() {
       detailsAttribute: true,
       object: false,
       required: true
+    },
+    {
+      name: "eventDate",
+      width: "15%",
+      label: "Date",
+      id: "date",
+      multiline: false,
+      displayed:true,
+      addAttribute:true,
+      editAttribute: true,
+      detailsAttribute: true,
+      object: false,
+      required: true,
+      type: "date"
     },
     {
       name: "description",

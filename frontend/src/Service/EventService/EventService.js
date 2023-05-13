@@ -6,14 +6,14 @@ const URI =API_URL;
 export const addEventClub = async (EventClub) => {
 
   console.log('before add'+EventClub)
-  const result = await axios.post("https://school.eastus.cloudapp.azure.com/api/EventClub", EventClub)
+  const result = await axios.post("http://localhost:3000/api/EventClub", EventClub)
   console.log(result.data)
   return result.data;
 }
 
 export const getAllEventClub = async () => {
     // await delay(500)
-    const result = await axios.get(`https://school.eastus.cloudapp.azure.com/api/EventClub` )
+    const result = await axios.get(`http://localhost:3000/api/EventClub` )
     console.log(result.data)
     return result.data;
   }
@@ -28,7 +28,7 @@ export const getAllEventClub = async () => {
  
   export const deleteEventClub = async (id) => {
     try {
-      const response = await axios.delete(`https://school.eastus.cloudapp.azure.com/api/EventClub/${id}`);
+      const response = await axios.delete(`http://localhost:3000/api/EventClub/${id}`);
       console.log(response);
       return response.data;
     } catch (error) {

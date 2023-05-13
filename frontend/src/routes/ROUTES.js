@@ -11,6 +11,10 @@ import CreateEventClub from "../components/EventClub/CreateEventClub/CreateEvent
 import HomeEvent from "../components/EventClub/HomeEvent";
 
 import HomeClub from "../components/Club/HomeClub";
+import Admin from "../components/CrudAdmin/Admin";
+import EventClubContainer from "../components/EventContainer/EventClubContainer";
+import EventContainer from "../components/EventContainer/EventContainer";
+import EventClub from "../components/EventClubComponent/EventClub";
 
 const ROUTES = [
 
@@ -28,6 +32,14 @@ const ROUTES = [
         icon: <InboxIcon />,
         element: <Enseignant />,
         layout: "/Enseignant",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "List Admins",
+        icon: <InboxIcon />,
+        element: <Admin />,
+        layout: "/Admin",
         allowedRoles: ["ADMIN"],
     },
     {
@@ -91,6 +103,31 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <HomeClub />,
         layout: "/HomeClub",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "Event Club cards",
+        icon: <InboxIcon/>,
+        element: <EventClubContainer />,
+        layout: "/EventClubContainer",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "Event Isamm cards",
+        icon: <InboxIcon/>,
+        element: <EventContainer />,
+        layout: "/EventContainer",
+        allowedRoles: ["ADMIN"],
+    }
+    ,
+    {
+        path: "/",
+        name: "My Event",
+        icon: <InboxIcon/>,
+        element: <EventClub />,
+        layout: "/EventClub",
         allowedRoles: ["ADMIN"],
     }
 ]

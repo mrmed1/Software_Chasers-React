@@ -2,6 +2,17 @@ import axios from  '../Config/interceptors';
 import { API_URL } from "../Config/config";
 
 
+export function  GetAllPublicStudents() {
+    console.log('allPersons  api call:'+`${API_URL}/Persons`);
+    return  axios.get(`${API_URL}/Persons`)
+        .then(response => {
+            const allPersons = response.data;
+            console.log('allPersons  data:'+response.data);
+            console.log(allPersons.filter(person =>(( person.role === 'STUDENT'|| person.role === 'ALUMNI')&&person.isPublic)));
+            return  allPersons.filter(person =>( person.role === 'STUDENT'|| person.role === 'ALUMNI')&&person.isPublic);
+
+        });
+}
 
 
 export function GetAllStudents() {

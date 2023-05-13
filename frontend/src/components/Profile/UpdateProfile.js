@@ -80,7 +80,11 @@ export default function UpdateProfile() {
       toast.error("Oups Password Unmatched  !");
       return;
     } else {
+      
       let stdnt = data;
+      stdnt.level=level;
+      stdnt.class=classe;
+      console.log('stdnt',stdnt);
 
       if (FirstName !== "") {
         stdnt.firstname = FirstName;

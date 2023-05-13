@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-
+import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -32,7 +32,7 @@ function getComparator(order, orderBy) {
 }
 
 function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
+  const stabilizedThis = array?.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) {
@@ -52,6 +52,7 @@ function Container({
   handleRowClick,
   reloadData,
   setReload,
+  handleShowParticipantsDialog
 }) {
   const [allData, setAllData] = React.useState(data);
   const [order, setOrder] = React.useState("asc");
@@ -74,6 +75,7 @@ function Container({
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -125,8 +127,12 @@ function Container({
                               ) : (
                                 <CloseIcon />
                               )
-                            ) : attribute.type == "date" ? (
-                              new Date(row[attribute.name]).toLocaleDateString()
+                            ) : attribute.type == "button" ? (
+                              <Button variant="outlined"   onClick={() => handleShowParticipantsDialog(row['participant'])}>
+                                Show Participants
+                              </Button>
+                            )  : attribute.type == "date" ? (
+                              new Date( row[attribute.name]).toLocaleDateString()
                             ) : (
                               row[attribute.name]
                             )}
