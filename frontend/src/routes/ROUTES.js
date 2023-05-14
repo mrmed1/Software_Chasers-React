@@ -24,6 +24,7 @@ import StatisticsPFE from "../components/StatisticsPFE/StatisticsPFE";
 import DemandeVacation from "../components/Vacations/DemandeVacation";
 import ListDemande from "../components/Vacations/ListDemande";
 import SeeListPFE from "../views/adminViews/SeeListPFE";
+import DemandExpertContract from "../components/Vacations/DemandExpertContract";
 
 
 
@@ -216,6 +217,14 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <SeeListPFE />,
         layout: "/SeeListPFE",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "Demnde Expert Contract",
+        icon: <InboxIcon/>,
+        element: <DemandExpertContract />,
+        layout: "/DemandeExpertContract",
         allowedRoles: ["ADMIN"],
     }
 

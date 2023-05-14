@@ -4,13 +4,15 @@ import { Column } from "primereact/column";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import React, { useEffect, useState } from "react";
-import { GetAllDemandeVacation, getOwner } from "../../Service/SouhailaTasksServer";
+import {GetAllDemandeEXPERTCONTRACT, GetAllDemandeVacation} from "../../Service/SouhailaTasksServer";
 import ClassIcon from '@mui/icons-material/Class';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 
 export default function ListDemande() {
     const [isLoading, setIsLoading] = useState(true);
     const [listDemande, setListDemande] = useState([]);
+
     const [selectedDemande, setSelectedDemande] = useState(null);
     const dob = selectedDemande?.owner?.dob;
     const dateOfBirth = new Date(dob);
@@ -27,6 +29,7 @@ export default function ListDemande() {
             setListDemande(data);
             setIsLoading(false);
         });
+
     }, []);
 
     const actionBodyTemplate = (rowData) => {
@@ -64,6 +67,7 @@ export default function ListDemande() {
 
                             <Column body={actionBodyTemplate}></Column>
                         </DataTable>
+
                         {/* dialog */}
                         <Dialog className="dialog-container" position={"center"} style={{ width: '30vw',marginTop:'5vw' }} breakpoints={{ '960px': '75vw', '641px': '100vw' }} visible={selectedDemande !== null} onHide={() => setSelectedDemande(null)}>
                             {selectedDemande && (
