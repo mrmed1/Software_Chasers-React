@@ -51,6 +51,7 @@ import PickPFETeacher from "./views/teacherViews/PickPFETeacher";
 import SearchList from './components/Search/SearchList';
 import EventContainer from './components/EventContainer/EventContainer';
  
+import Admin from './components/CrudAdmin/Admin';
 function App() {
   const [open, setOpen] = useState(false);
   const currenUser = { role: "ADMIN" };
@@ -148,7 +149,7 @@ function App() {
               <Route exact path="/DemandeExpertContract" element={< DemandExpertContract/>} />
               <Route exact path="/SearchList" element={<SearchList />} />
               <Route exact path="/EventContainer" element={<EventContainer />} />
-                    
+              <Route exact path="/Admin/" element={<Admin/>}/>
             </Routes>
           </Box>
         </Box>
