@@ -22,6 +22,7 @@ import EventClub from "../components/EventClubComponent/EventClub";
 import EventClubContainer from "../components/EventContainer/EventClubContainer";
 import StatisticsPFE from "../components/StatisticsPFE/StatisticsPFE";
 import DemandeVacation from "../components/Vacations/DemandeVacation";
+import SeeListPFE from "../views/adminViews/SeeListPFE";
 
 
 
@@ -197,6 +198,14 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <DemandeVacation />,
         layout: "/DemandeVacation",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "See List PFE",
+        icon: <InboxIcon/>,
+        element: <SeeListPFE />,
+        layout: "/SeeListPFE",
         allowedRoles: ["ADMIN"],
     }
 
