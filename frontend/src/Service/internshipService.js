@@ -3,6 +3,22 @@ import { API_URL } from "../Config/config";
 
 const URI = API_URL;
 
+export async function fetchInternshipsByStudentId(id) {
+    try {
+        console.log('ids',id);
+
+        const internships = await axios.get(`${URI}/internship/byStudentId/`+id);
+     
+   
+  
+      console.log('internships', internships.data.data);
+      return internships.data.data;
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  }
+  
 export function fetchPfaList() {
   return axios
     .get(`${URI}/Internship`)
