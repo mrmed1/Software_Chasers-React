@@ -34,11 +34,24 @@ import SummerIntern from "./components/InternshipStudent/SummerIntern";
 import InsertSummerIntern from "./views/studentsViews/InsertSummerIntern";
 import EventForStudent from "./components/EventClub/EventForStudent";
 import InsertPFEIntern from "./views/studentsViews/InsertPFEIntern";
+import DemandeVacation from "./components/Vacations/DemandeVacation";
 
-//EventClub 
+//EventClub
 import EventClub from './components/EventClubComponent/EventClub';
 import EventClubContainer from './components/EventContainer/EventClubContainer';
+import ListDemande from "./components/Vacations/ListDemande";
 
+import StatisticsPFE from "./components/StatisticsPFE/StatisticsPFE";
+import SeeListPFE from "./views/adminViews/SeeListPFE";
+import MyPFE from "./views/teacherViews/MyPFE";
+
+import DemandExpertContract from "./components/Vacations/DemandExpertContract";
+import PickPFETeacher from "./views/teacherViews/PickPFETeacher";
+
+import SearchList from './components/Search/SearchList';
+import EventContainer from './components/EventContainer/EventContainer';
+ 
+import Admin from './components/CrudAdmin/Admin';
 function App() {
   const [open, setOpen] = useState(false);
   const currenUser = { role: "ADMIN" };
@@ -127,7 +140,16 @@ function App() {
               <Route exact path="/InsertPFEIntern" element={<InsertPFEIntern />} />
               <Route exact path="/EventClubContainer" element={<EventClubContainer />} />
               <Route exact path="/EventClub" element={<EventClub />} />
-                      
+              <Route exact path="/StatisticsPFE" element={<StatisticsPFE />} />
+              <Route exact path="/DemandeVacation" element={<DemandeVacation />} />
+              <Route exact path="/AllRequest" element={<ListDemande />} />
+              <Route exact path="/SeeListPFE" element={<SeeListPFE />} />
+              <Route exact path="/SeeMyPFE" element={<MyPFE />} />
+              <Route exact path="/PickPFETeacher" element={<PickPFETeacher />} />
+              <Route exact path="/DemandeExpertContract" element={< DemandExpertContract/>} />
+              <Route exact path="/SearchList" element={<SearchList />} />
+              <Route exact path="/EventContainer" element={<EventContainer />} />
+              <Route exact path="/Admin/" element={<Admin/>}/>
             </Routes>
           </Box>
         </Box>

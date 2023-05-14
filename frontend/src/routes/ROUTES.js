@@ -20,7 +20,15 @@ import EventForStudent from "../components/EventClub/EventForStudent";
 import InsertPFEIntern from "../views/studentsViews/InsertPFEIntern";
 import EventClub from "../components/EventClubComponent/EventClub";
 import EventClubContainer from "../components/EventContainer/EventClubContainer";
-
+import StatisticsPFE from "../components/StatisticsPFE/StatisticsPFE";
+import DemandeVacation from "../components/Vacations/DemandeVacation";
+import ListDemande from "../components/Vacations/ListDemande";
+import SeeListPFE from "../views/adminViews/SeeListPFE";
+import MyPFE from "../views/teacherViews/MyPFE";
+import DemandExpertContract from "../components/Vacations/DemandExpertContract";
+import PickPFETeacher from "../views/teacherViews/PickPFETeacher";
+import EventContainer from "../components/EventContainer/EventContainer";
+import Admin from "../components/CrudAdmin/Admin";
 const ROUTES = [
 
     {
@@ -138,8 +146,6 @@ const ROUTES = [
         layout: "/admin",
         allowedRoles: ["ADMIN"],
       },
-
-    ,
     {
         path: "/",
         name: "Valider Compte Alumni",
@@ -181,6 +187,80 @@ const ROUTES = [
         layout: "/EventClubContainer",
         allowedRoles: ["ADMIN"],
     },
-    
+    {
+        path: "/",
+        name: "StatisticsPFE",
+        icon: <InboxIcon/>,
+        element: <StatisticsPFE />,
+        layout: "/StatisticsPFE",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "Demander Vacations",
+        icon: <InboxIcon/>,
+        element: <DemandeVacation />,
+        layout: "/DemandeVacation",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "All Request",
+        icon: <InboxIcon/>,
+        element: <ListDemande />,
+        layout: "/AllRequest",
+        allowedRoles: ["ADMIN"],
+
+    },
+    {
+        path: "/",
+        name: "See List PFE",
+        icon: <InboxIcon/>,
+        element: <SeeListPFE />,
+        layout: "/SeeListPFE",
+        allowedRoles: ["ADMIN"],
+    },
+
+    {
+        path: "/",
+        name: "See My PFE",
+        icon: <InboxIcon/>,
+        element: <MyPFE />,
+        layout: "/SeeMyPFE",
+        allowedRoles: ["ADMIN"],
+    }
+    ,
+    {
+        path: "/",
+        name: "Pick PFE Teacher",
+        icon: <InboxIcon/>,
+        element: <PickPFETeacher />,
+        layout: "/PickPFETeacher",
+        allowedRoles: ["ADMIN"],
+    },{
+        path: "/",
+        name: "Demnde Expert Contract",
+        icon: <InboxIcon/>,
+        element: <DemandExpertContract />,
+        layout: "/DemandeExpertContract",
+        allowedRoles: ["ADMIN"],
+    },
+     {
+        path: "/",
+        name: "Event Isamm cards",
+        icon: <InboxIcon/>,
+        element: <EventContainer />,
+        layout: "/EventContainer",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "List Admins",
+        icon: <InboxIcon />,
+        element: <Admin />,
+        layout: "/Admin",
+        allowedRoles: ["ADMIN"],
+    },
+
 ]
 export default ROUTES

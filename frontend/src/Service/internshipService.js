@@ -3,6 +3,22 @@ import { API_URL } from "../Config/config";
 
 const URI = API_URL;
 
+export async function fetchInternshipsByStudentId(id) {
+    try {
+        console.log('ids',id);
+
+        const internships = await axios.get(`${URI}/internship/byStudentId/`+id);
+     
+   
+  
+      console.log('internships', internships.data.data);
+      return internships.data.data;
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  }
+  
 export function fetchPfaList() {
   return axios
     .get(`${URI}/Internship`)
@@ -51,4 +67,23 @@ export function getInternshipsByStudentIdAndType(type){
 
 export function deleteInternship(id){
     return axios.delete(`${URI}/Internship/${id}`).then(r=>r.data)
+}
+
+export function GetAllPFE(){
+    return axios.get(`${URI}/Internship/list/pfe`).then(r=>r.data.data)
+}
+
+export function GetMyPFE(){
+    return axios.get(`${URI}/teacher/PFE`).then(r=>r.data)
+}
+export function GetPFEforPick() {
+    return axios.get(`${URI}/internship/listpfe/forpick`).then((r) => r.data.data);
+}
+
+export function togglePFE(id){
+    return axios.put(`${URI}/internship/PFE/togglePFE/${id}`).then(r=>r.data)
+}
+
+export function unpickPFE(id){
+    return axios.put(`${URI}/internship/unpick/${id}`).then(r=>r.data)
 }
