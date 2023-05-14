@@ -26,7 +26,7 @@ import ListDemande from "../components/Vacations/ListDemande";
 import SeeListPFE from "../views/adminViews/SeeListPFE";
 import MyPFE from "../views/teacherViews/MyPFE";
 import DemandExpertContract from "../components/Vacations/DemandExpertContract";
-
+import PickPFETeacher from "../views/teacherViews/PickPFETeacher";
 
 
 const ROUTES = [
@@ -220,15 +220,7 @@ const ROUTES = [
         layout: "/SeeListPFE",
         allowedRoles: ["ADMIN"],
     },
-    {
-        path: "/",
-        name: "Demnde Expert Contract",
-        icon: <InboxIcon/>,
-        element: <DemandExpertContract />,
-        layout: "/DemandeExpertContract",
-        allowedRoles: ["ADMIN"],
-    }
-    ,
+
     {
         path: "/",
         name: "See My PFE",
@@ -237,6 +229,23 @@ const ROUTES = [
         layout: "/SeeMyPFE",
         allowedRoles: ["ADMIN"],
     }
+    ,
+    {
+        path: "/",
+        name: "Pick PFE Teacher",
+        icon: <InboxIcon/>,
+        element: <PickPFETeacher />,
+        layout: "/PickPFETeacher",
+        allowedRoles: ["ADMIN"],
+    },{
+        path: "/",
+        name: "Demnde Expert Contract",
+        icon: <InboxIcon/>,
+        element: <DemandExpertContract />,
+        layout: "/DemandeExpertContract",
+        allowedRoles: ["ADMIN"],
+    }
+    ,
 
 ]
 export default ROUTES

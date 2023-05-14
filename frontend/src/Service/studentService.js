@@ -72,3 +72,8 @@ export function fetchValidatedResponsablePFA(){
 export function tooglePickedPFA(pfa,studentsId){
     return axios.put(`${URI}/student/PFA/togglePFA/${pfa._id}`,{studentsId}).then(r=>r.data)
 }
+
+//update Person with the same pswd
+export function updateClass (Account){
+    return axios.put(`${URI}/student/Persons/${Account._id}`,Account).then((r)=>r.data)
+}

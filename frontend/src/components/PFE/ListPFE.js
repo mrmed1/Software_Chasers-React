@@ -8,11 +8,15 @@ import {
     Popup,
 } from "semantic-ui-react";
 import React from "react";
+import {connectedUser} from "../../Service/auth.service";
+import ValidationAndPick from "../PFA/ValidationAndPick";
+import PickPFE from "./PickPFE";
 
 
 
-export default function ListPFE({ data,role }) {
-
+export default function ListPFE({ data }) {
+    const teacher_id = connectedUser()._id;
+    const ROLE = connectedUser().role;
 
     function getNamesAndLastnames(array) {
         const namesAndLastnames = array.map(
@@ -67,7 +71,7 @@ export default function ListPFE({ data,role }) {
                                             {/* <b style={{color:"black"}}>  isPublished :</b>  {PFE?.isPublished ? "Published" : "Pending..."}*/}
                                             {/*</Card.Meta>*/}
 
-                                            {(PFE?.isPicked && role == "ADMIN") && (
+                                            {(PFE?.isPicked && ROLE == "ADMIN") && (
                                                 <Card.Meta style={{ color: "#1976D2" }}>
                                                     <strong style={{color:"black"}}>  Encadrant :</strong>  {PFE?.teacherId.lastname} {PFE?.teacherId.firstname}
                                                 </Card.Meta>
@@ -96,6 +100,13 @@ export default function ListPFE({ data,role }) {
                                                     justifyContent: "space-evenly",
                                                 }}
                                             >
+                                                {ROLE === "TEACHER" && (
+                                                    <PickPFE
+                                                        data={PFE}
+                                                        iconName={"hand point up"}
+                                                        teacher={teacher_id}
+                                                    />
+                                                )}
                                             </div>
                                         </Card.Content>
                                     </Card>
