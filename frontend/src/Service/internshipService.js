@@ -56,3 +56,7 @@ export function deleteInternship(id){
 export function GetAllPFE(){
     return axios.get(`${URI}/Internship/list/pfe`).then(r=>r.data.data)
 }
+
+export function GetMyPFE(){
+    return axios.get(`${URI}/teacher/PFE`).then(r=>r.data)
+}

@@ -11,7 +11,7 @@ import React from "react";
 
 
 
-export default function ListPFE({ data }) {
+export default function ListPFE({ data,role }) {
 
 
     function getNamesAndLastnames(array) {
@@ -22,7 +22,7 @@ export default function ListPFE({ data }) {
 
         return namesAndLastnamesString;
     }
-
+    console.log(data)
 
     return (
         data && (
@@ -67,12 +67,13 @@ export default function ListPFE({ data }) {
                                             {/* <b style={{color:"black"}}>  isPublished :</b>  {PFE?.isPublished ? "Published" : "Pending..."}*/}
                                             {/*</Card.Meta>*/}
 
-                                            {PFE?.isPicked && (
+                                            {(PFE?.isPicked && role == "ADMIN") && (
                                                 <Card.Meta style={{ color: "#1976D2" }}>
                                                     <strong style={{color:"black"}}>  Encadrant :</strong>  {PFE?.teacherId.lastname} {PFE?.teacherId.firstname}
                                                 </Card.Meta>
                                             )
                                             }
+
                                             <Card.Description>{PFE?.description}</Card.Description>
                                         </Card.Content>
 
@@ -80,7 +81,7 @@ export default function ListPFE({ data }) {
                                             {PFE?.studentsId?.length > 0 && (
                                                 <h5>
                                                     <Icon name="user circle" color="blue" />
-                                                    {getNamesAndLastnames(PFE?.studentsId)}
+                                                    <strong>Student :</strong> {getNamesAndLastnames(PFE?.studentsId)}
                                                 </h5>
                                             )}
                                             <h5>
