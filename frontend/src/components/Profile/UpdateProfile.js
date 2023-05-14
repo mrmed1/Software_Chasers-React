@@ -18,10 +18,12 @@ import {
   toggleStyleCv,
   updateProfile,
   updateVisibility,
+  updateClass
 } from "../../Service/studentService";
 import toast from "react-hot-toast";
 import { connectedUser } from "../../Service/auth.service";
 import CV from "./CV";
+import UpdateClassDialog from "./UpdateClassDialog";
 
 export default function UpdateProfile() {
   const [FirstName, setFirstName] = useState("");
@@ -31,6 +33,7 @@ export default function UpdateProfile() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [login, setLogin] = useState("");
   const [open, setOpen] = useState(false);
+  const [openUpdateClass, setOpenUpdateClass] = useState(false);
   const queryClient = useQueryClient();
 
   const handleClose = () => setOpen(false);
@@ -59,10 +62,24 @@ export default function UpdateProfile() {
   function onClickIdon() {
     visibilityMutation.mutate({ id: id });
   }
-
+  
+  const UpdateClassProfileMutation = useMutation(
+    (student) => {
+      
+      return updateClass(student);
+    },
+    {
+      onSuccess: () => toast.success("Class updated successfully !"),
+      onError: (error) => toast.error(error?.response?.data?.codeName),
+      onSettled: () => queryClient.invalidateQueries("student"),
+    }
+  );
   const UpdateProfileMutation = useMutation(
     (student) => {
-      return updateProfile(student);
+  
+        return updateProfile(student);
+   
+  
     },
     {
       onSuccess: () => toast.success("Profile updated successfully !"),
@@ -155,16 +172,48 @@ export default function UpdateProfile() {
     toggleStyleMutation.mutate();
   }
 
+
+
+  const handleUpdateClass = () => {
+    setOpenUpdateClass(true);
+  };
+  const onSave = (stdnt) => {
+  
+   
+    try {
+      UpdateClassProfileMutation.mutate(stdnt);
+    } catch (error) {
+      console.log(error);
+      toast.error("Bad Requests");
+    }
+ 
+    
+  };
   return (
     <>
+   { openUpdateClass&& (
+      <UpdateClassDialog
+        onSave={onSave}
+        person={data}
+        open={openUpdateClass}
+        onClose={() => {
+          setOpenUpdateClass(false);
+        }}
+      />)}
       {data && (
         <Card centered fluid style={style.card}>
           <Card.Content>
+            {data?.role === "STUDENT" && (
+              <Button color="green" floated="right" onClick={handleUpdateClass}>
+                Update Class
+              </Button>
+            )}
+
             {/* Update Section  */}
             <Modal
               trigger={
                 <Button color="blue" floated="right">
-                  Update
+                  Update Profile
                 </Button>
               }
               header="Update me!"
@@ -309,7 +358,7 @@ export default function UpdateProfile() {
               )}
 
               <Card.Meta>
-                {ROLE === "ALUMNI" && (
+                {data?.role === "ALUMNI" && (
                   <Icon
                     name="bullhorn"
                     style={{
