@@ -48,6 +48,8 @@ import MyPFE from "./views/teacherViews/MyPFE";
 import DemandExpertContract from "./components/Vacations/DemandExpertContract";
 import PickPFETeacher from "./views/teacherViews/PickPFETeacher";
 
+import SearchList from './components/Search/SearchList';
+
 function App() {
   const [open, setOpen] = useState(false);
   const currenUser = { role: "ADMIN" };
@@ -143,7 +145,7 @@ function App() {
               <Route exact path="/SeeMyPFE" element={<MyPFE />} />
               <Route exact path="/PickPFETeacher" element={<PickPFETeacher />} />
               <Route exact path="/DemandeExpertContract" element={< DemandExpertContract/>} />
-
+              <Route exact path="/SearchList" element={<SearchList />} />
             </Routes>
           </Box>
         </Box>

@@ -4,7 +4,26 @@ import {API_URL} from "../Config/config";
 
 const URI =API_URL;
 
-
+// added by me to search task
+export async function getCvByIdOfOwner(id) {
+    console.log('idddddd',id)
+    const cvs = await axios.get(`${URI}/cv/`);
+    const allCvs = cvs.data;
+    let cvFound = {};
+  
+    allCvs.forEach((cv) => {
+      if (cv.Owner === id) {
+        console.log("Test is true");
+        console.log(cv);
+        cvFound = cv;
+        console.log(cvFound);
+      }
+    });
+  
+    console.log(cvFound);
+    return cvFound;
+  }
+  
 
 export function getcV  (){
     return axios.get(`${URI}/student/cv`).then((r)=>r.data)
