@@ -14,7 +14,7 @@ import PickPFE from "./PickPFE";
 
 
 
-export default function ListPFE({ data }) {
+export default function ListPFE({ data,type }) {
     const teacher_id = connectedUser()._id;
     const ROLE = connectedUser().role;
 
@@ -100,7 +100,7 @@ export default function ListPFE({ data }) {
                                                     justifyContent: "space-evenly",
                                                 }}
                                             >
-                                                {ROLE === "TEACHER" && (
+                                                {(ROLE === "TEACHER" && type === "PICK")   && (
                                                     <PickPFE
                                                         data={PFE}
                                                         iconName={"hand point up"}
