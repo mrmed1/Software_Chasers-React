@@ -18,6 +18,12 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useLocation, Link } from "react-router-dom";
 import {Button} from "primereact/button";
+ 
+import SearchBar2 from "../Search/SearchBar2";
+import { connectedUser } from "../../Service/auth.service";
+
+const ROLE = connectedUser()?.role;
+
 const Sidebar = ({
   routes,
   userRole,
@@ -123,6 +129,7 @@ const Sidebar = ({
           <Typography variant="h6" noWrap component="div">
             Software_Chasers-React
           </Typography>
+          {ROLE === 'TEACHER' || ROLE === 'STUDENT' || ROLE === 'ALUMNI' ? <SearchBar2 /> : null}
 
           <Button  onClick={logoutFn} style={{marginLeft:"auto",backgroundColor:"red"}}><strong style={{color: "white"}}>Logout</strong> </Button>
         </Toolbar>
