@@ -17,8 +17,8 @@ export default function SeeListPFE() {
     console.log(data)
     return (
         <div>
-            <h1>SeeListPFE</h1>
-            <ListPFE data={data} />
+            <h1 style={{color: "darkcyan"}}>List PFE</h1>
+            <ListPFE data={data} role={"ADMIN"} />
         </div>
     )
 }

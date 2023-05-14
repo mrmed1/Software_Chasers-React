@@ -27,16 +27,12 @@ export function GetAllDemandeVacation() {
 
 }
 
-export function getOwner (id){
-    return axios
-        .get('/Persons/'+id)
+export function GetAllDemandeEXPERTCONTRACT (id){
+
+    return axios.get('/Demand')
         .then(response => {
-            const user = response.data;
-            console.log(user);
-            return user;
-        })
-        .catch(error => {
-            console.error("Error fetching owner data:", error);
-            throw error;
-        });
+            const allDemande = response.data;
+            const   listFiltred =allDemande.filter(Demande => Demande.type === 'EXPERTCONTRACT');
+            console.log(listFiltred);
+            return  listFiltred;});
 }

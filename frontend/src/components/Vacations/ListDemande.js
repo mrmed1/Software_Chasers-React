@@ -4,13 +4,15 @@ import { Column } from "primereact/column";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import React, { useEffect, useState } from "react";
-import { GetAllDemandeVacation, getOwner } from "../../Service/SouhailaTasksServer";
+import {GetAllDemandeEXPERTCONTRACT, GetAllDemandeVacation} from "../../Service/SouhailaTasksServer";
 import ClassIcon from '@mui/icons-material/Class';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 export default function ListDemande() {
     const [isLoading, setIsLoading] = useState(true);
     const [listDemande, setListDemande] = useState([]);
+
     const [selectedDemande, setSelectedDemande] = useState(null);
     const dob = selectedDemande?.owner?.dob;
     const dateOfBirth = new Date(dob);
@@ -18,6 +20,7 @@ export default function ListDemande() {
     const dog = selectedDemande?.owner?.dog;
     const dateOfGraduation = new Date(dog);
     const formattedDog = `${dateOfGraduation.getDate()}/${dateOfGraduation.getMonth() + 1}/${dateOfGraduation.getFullYear()}`;
+    const [listDemandeExpertContract, setListDemandeExpertContract] = useState([]);
 
 
 
@@ -27,6 +30,11 @@ export default function ListDemande() {
             setListDemande(data);
             setIsLoading(false);
         });
+        GetAllDemandeEXPERTCONTRACT().then(data => {
+            setListDemandeExpertContract(data);
+            setIsLoading(false);
+        }   );
+
     }, []);
 
     const actionBodyTemplate = (rowData) => {
@@ -44,7 +52,7 @@ export default function ListDemande() {
     return (
         <div>
             <Toaster />
-            <h1 className="titre">All Request Vacation & EXPERT CONTRACT</h1>
+            <h1 className="titre">All Request Vacation & Expert Contract</h1>
             <>
                 {isLoading ? (
                     <p>Loading...</p>
@@ -62,6 +70,18 @@ export default function ListDemande() {
                             <Column field="owner.lastname" header="Owner Lastname"></Column>
 
 
+                            <Column body={actionBodyTemplate}></Column>
+                        </DataTable>
+                        <h3 style={{ color: "#039BE5", fontSize: "Blod", marginTop: "50px" }}>
+                            List of Request Expert Contract
+                            <HowToRegIcon />
+                        </h3>
+                        <DataTable value={listDemandeExpertContract} tableStyle={{ minWidth: '50rem', marginTop: '10px' }}>
+                            <Column header="" headerStyle={{ width: '3rem' }}
+                                    body={(data, options) => options.rowIndex + 1}></Column>
+                            <Column field="lesson_name" header="Lesson Name"></Column>
+                            <Column field="owner.firstname" header="Owner Name "></Column>
+                            <Column field="owner.lastname" header="Owner Lastname"></Column>
                             <Column body={actionBodyTemplate}></Column>
                         </DataTable>
                         {/* dialog */}
