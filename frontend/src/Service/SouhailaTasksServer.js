@@ -27,3 +27,12 @@ export function GetAllDemandeVacation() {
 
 }
 
+export function GetAllDemandeEXPERTCONTRACT (id){
+
+    return axios.get('/Demand')
+        .then(response => {
+            const allDemande = response.data;
+            const   listFiltred =allDemande.filter(Demande => Demande.type === 'EXPERTCONTRACT');
+            console.log(listFiltred);
+            return  listFiltred;});
+}
