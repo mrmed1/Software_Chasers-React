@@ -46,6 +46,7 @@ import SeeListPFE from "./views/adminViews/SeeListPFE";
 import MyPFE from "./views/teacherViews/MyPFE";
 
 import DemandExpertContract from "./components/Vacations/DemandExpertContract";
+import PickPFETeacher from "./views/teacherViews/PickPFETeacher";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -140,6 +141,7 @@ function App() {
               <Route exact path="/AllRequest" element={<ListDemande />} />
               <Route exact path="/SeeListPFE" element={<SeeListPFE />} />
               <Route exact path="/SeeMyPFE" element={<MyPFE />} />
+              <Route exact path="/PickPFETeacher" element={<PickPFETeacher />} />
               <Route exact path="/DemandeExpertContract" element={< DemandExpertContract/>} />
 
             </Routes>
