@@ -21,6 +21,7 @@ import InsertPFEIntern from "../views/studentsViews/InsertPFEIntern";
 import EventClub from "../components/EventClubComponent/EventClub";
 import EventClubContainer from "../components/EventContainer/EventClubContainer";
 import DemandeVacation from "../components/Vacations/DemandeVacation";
+import ListDemande from "../components/Vacations/ListDemande";
 
 
 const ROUTES = [
@@ -190,6 +191,15 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <DemandeVacation />,
         layout: "/DemandeVacation",
+        allowedRoles: ["ADMIN"],
+    },
+
+    {
+        path: "/",
+        name: "All Vacations",
+        icon: <InboxIcon/>,
+        element: <ListDemande />,
+        layout: "/AllVacation",
         allowedRoles: ["ADMIN"],
     }
 
