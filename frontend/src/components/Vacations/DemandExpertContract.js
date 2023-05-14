@@ -3,7 +3,7 @@ import toast, {Toaster} from "react-hot-toast";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
@@ -12,15 +12,15 @@ import React, { useRef, useState } from "react";
 import {SendRequestVacations} from "../../Service/SouhailaTasksServer";
 import {connectedUser} from "../../Service/auth.service";
 
-export default function DemandeVacation() {
+export default function DemandExpertContract() {
     const formRef = useRef(null);
     const user_id = connectedUser()._id;
     const [demande, setDemande] = useState({
-        title: "Request for Vacation",
+        title: "Request for Expert Contract",
         description: "",
         lesson_name: "",
         owner: user_id,
-        type: "VACATION",
+        type: "EXPERTCONTRACT",
     });
 
     const handleSubmit = (event) => {
@@ -29,12 +29,12 @@ export default function DemandeVacation() {
         console.log(demande);
         SendRequestVacations(demande).then((res) => {
             console.log(res);
-                toast.success("Request Vacation sent successfully");
-                handleClearInputs();
+            toast.success("Request EXPERT CONTRACT sent successfully");
+            handleClearInputs();
 
         }).catch((error) => {
             console.log(error);
-            toast.error("Request Vacation failed");
+            toast.error("Request EXPERT CONTRACT failed");
         });
 
     };
@@ -56,10 +56,10 @@ export default function DemandeVacation() {
                 }}
             >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                    <WorkHistoryIcon />
+                    <VerifiedUserIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Request Vacations
+                    Request Expert Contract
                 </Typography>
                 <Box component="form" ref={formRef} onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>

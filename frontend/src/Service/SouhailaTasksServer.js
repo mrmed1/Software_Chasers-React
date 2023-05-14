@@ -27,16 +27,3 @@ export function GetAllDemandeVacation() {
 
 }
 
-export function getOwner (id){
-    return axios
-        .get('/Persons/'+id)
-        .then(response => {
-            const user = response.data;
-            console.log(user);
-            return user;
-        })
-        .catch(error => {
-            console.error("Error fetching owner data:", error);
-            throw error;
-        });
-}
