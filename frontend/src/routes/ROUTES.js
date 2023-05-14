@@ -27,7 +27,7 @@ import SeeListPFE from "../views/adminViews/SeeListPFE";
 import MyPFE from "../views/teacherViews/MyPFE";
 import DemandExpertContract from "../components/Vacations/DemandExpertContract";
 import PickPFETeacher from "../views/teacherViews/PickPFETeacher";
-
+import EventContainer from "../components/EventContainer/EventContainer";
 
 const ROUTES = [
 
@@ -243,6 +243,14 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <DemandExpertContract />,
         layout: "/DemandeExpertContract",
+        allowedRoles: ["ADMIN"],
+    },
+     {
+        path: "/",
+        name: "Event Isamm cards",
+        icon: <InboxIcon/>,
+        element: <EventContainer />,
+        layout: "/EventContainer",
         allowedRoles: ["ADMIN"],
     }
     ,
