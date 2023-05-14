@@ -204,10 +204,10 @@ const ROUTES = [
     },
     {
         path: "/",
-        name: "All Vacations",
+        name: "All Request",
         icon: <InboxIcon/>,
         element: <ListDemande />,
-        layout: "/AllVacation",
+        layout: "/AllRequest",
         allowedRoles: ["ADMIN"],
 
     },
