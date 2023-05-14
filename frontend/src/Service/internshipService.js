@@ -52,3 +52,7 @@ export function getInternshipsByStudentIdAndType(type){
 export function deleteInternship(id){
     return axios.delete(`${URI}/Internship/${id}`).then(r=>r.data)
 }
+
+export function GetAllPFE(){
+    return axios.get(`${URI}/Internship/list/pfe`).then(r=>r.data.data)
+}
