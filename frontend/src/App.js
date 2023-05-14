@@ -39,6 +39,8 @@ import DemandeVacation from "./components/Vacations/DemandeVacation";
 //EventClub
 import EventClub from './components/EventClubComponent/EventClub';
 import EventClubContainer from './components/EventContainer/EventClubContainer';
+import ListDemande from "./components/Vacations/ListDemande";
+
 import StatisticsPFE from "./components/StatisticsPFE/StatisticsPFE";
 import SeeListPFE from "./views/adminViews/SeeListPFE";
 
@@ -132,6 +134,7 @@ function App() {
               <Route exact path="/EventClub" element={<EventClub />} />
               <Route exact path="/StatisticsPFE" element={<StatisticsPFE />} />
               <Route exact path="/DemandeVacation" element={<DemandeVacation />} />
+              <Route exact path="/AllVacation" element={<ListDemande />} />
               <Route exact path="/SeeListPFE" element={<SeeListPFE />} />
 
             </Routes>
