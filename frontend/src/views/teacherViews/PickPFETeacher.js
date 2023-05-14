@@ -30,7 +30,7 @@ export default function PickPFETeacher() {
         <>
 
             <Toaster />
-            {data && <ListPFE data={data}/> }
+            {data && <ListPFE data={data} type={"PICK"}/> }
         </>
 
     )

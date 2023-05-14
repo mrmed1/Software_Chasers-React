@@ -32,7 +32,7 @@ return (
     <>
         <h1 style={{color: "darkcyan"}}>MY PFE</h1>
         <Toaster />
-        <ListPFE data={data} />
+        <ListPFE data={data} type={"SEE"} />
     </>
 );
 }
