@@ -27,8 +27,8 @@ import SeeListPFE from "../views/adminViews/SeeListPFE";
 import MyPFE from "../views/teacherViews/MyPFE";
 import DemandExpertContract from "../components/Vacations/DemandExpertContract";
 import PickPFETeacher from "../views/teacherViews/PickPFETeacher";
-
-
+import EventContainer from "../components/EventContainer/EventContainer";
+import Admin from "../components/CrudAdmin/Admin";
 const ROUTES = [
 
     {
@@ -244,8 +244,23 @@ const ROUTES = [
         element: <DemandExpertContract />,
         layout: "/DemandeExpertContract",
         allowedRoles: ["ADMIN"],
-    }
-    ,
+    },
+     {
+        path: "/",
+        name: "Event Isamm cards",
+        icon: <InboxIcon/>,
+        element: <EventContainer />,
+        layout: "/EventContainer",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "List Admins",
+        icon: <InboxIcon />,
+        element: <Admin />,
+        layout: "/Admin",
+        allowedRoles: ["ADMIN"],
+    },
 
 ]
 export default ROUTES
