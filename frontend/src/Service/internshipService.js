@@ -76,3 +76,14 @@ export function GetAllPFE(){
 export function GetMyPFE(){
     return axios.get(`${URI}/teacher/PFE`).then(r=>r.data)
 }
+export function GetPFEforPick() {
+    return axios.get(`${URI}/internship/listpfe/forpick`).then((r) => r.data.data);
+}
+
+export function togglePFE(id){
+    return axios.put(`${URI}/internship/PFE/togglePFE/${id}`).then(r=>r.data)
+}
+
+export function unpickPFE(id){
+    return axios.put(`${URI}/internship/unpick/${id}`).then(r=>r.data)
+}
