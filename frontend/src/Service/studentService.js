@@ -92,6 +92,18 @@ export function tooglePickedPFA(pfa,studentsId){
     return axios.put(`${URI}/student/PFA/togglePFA/${pfa._id}`,{studentsId}).then(r=>r.data)
 }
 
+
+export function fetchMyEvents(id){
+    return axios.get(`${URI}/student/events/${id}`).then(r=>r.data)
+}
+
+//sincrire event 
+export function participateInEvents(idEvent,idPerson){
+    return axios.put(`${URI}/student/participants/${idEvent}/${idPerson}`).then(r=>r.data)
+}
+export function addPrizeToEVENT(idEvent,idPerson,prize){
+    return axios.put(`${URI}/student/participants/prix/${idEvent}/${idPerson}`,prize).then(r=>r.data)}
+    
 //update Person with the same pswd
 export function updateClass (Account){
     return axios.put(`${URI}/student/Persons/${Account._id}`,Account).then((r)=>r.data)

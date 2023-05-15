@@ -50,12 +50,12 @@ function EventClubContainer() {
   }, []);
 
   useEffect(() => {
-    const uniqueDomains = [...new Set(events.map((event) => event.domain))];
+    const uniqueDomains = [...new Set(events?.map((event) => event.domain))];
     setDomainList(uniqueDomains);
   }, [events]);
 
   useEffect(() => {
-    const uniqueClubs = [...new Set(events.map((event) => event.club_id.name))];
+    const uniqueClubs = [...new Set(events?.map((event) => event.club_id?.name))];
     setClubList(uniqueClubs);
   }, [events]);
 
@@ -68,7 +68,7 @@ function EventClubContainer() {
       ]);
     } else {
       setSelectedDomains((prevSelectedDomains) =>
-        prevSelectedDomains.filter((domain) => domain !== value)
+        prevSelectedDomains?.filter((domain) => domain !== value)
       );
     }
   };
@@ -102,7 +102,7 @@ function EventClubContainer() {
 
     return eventDate >= startDate && eventDate <= endDate;
   };
-  const filteredEvents = events.filter((event) => {
+  const filteredEvents = events?.filter((event) => {
     const isDomainSelected =
       selectedDomains.length === 0 || selectedDomains.includes(event.domain);
     const isClubSelected =
@@ -140,7 +140,7 @@ function EventClubContainer() {
     Domain
   </Typography>
   <div style={{ display: 'flex' }}>
-    {domainList.map((domain) => (
+    {domainList?.map((domain) => (
       <FormControlLabel
         key={domain}
         control={
@@ -161,12 +161,12 @@ function EventClubContainer() {
     Club
   </Typography>
   <div style={{ display: 'flex' }}>
-    {clubList.map((club) => (
+    {clubList?.map((club) => (
       <FormControlLabel
         key={club}
         control={
           <Checkbox
-            checked={selectedClubs.includes(club)}
+            checked={selectedClubs?.includes(club)}
             onChange={handleClubChange}
             value={club}
           />
@@ -218,7 +218,7 @@ function EventClubContainer() {
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
-            {filteredEvents.map((event) => (
+            {filteredEvents?.map((event) => (
               <Grid item xs={4} key={event._id}>
                 <EventCard event={event} />
               </Grid>
