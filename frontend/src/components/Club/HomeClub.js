@@ -7,30 +7,46 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 /*import "bootstrap/dist/css/bootstrap.min.css";*/
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import {Button} from "primereact/button";
+
 import { Link } from "react-router-dom";
  
 import SeeClub from "./SeeClub";
 import EditClub from "./EditClub";
-import { Icon } from "semantic-ui-react";
+
 import {Toaster, toast} from "react-hot-toast"
-import {getAllClub} from "../../Service/ClubService";
+import {getAllClub, SignalerClub} from "../../Service/ClubService";
+import moment from "moment/moment";
+import ClassIcon from "@mui/icons-material/Class";
+import {DataTable} from "primereact/datatable";
+import {Column} from "primereact/column";
+import {connectedUser} from "../../Service/auth.service";
+import { Dialog } from 'primereact/dialog';
+import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
 function HomeClub() {
-
+  const Role = connectedUser().role;
+  const user_id = connectedUser()._id;
   const [clubs, setClubs] = useState([]);
-/*
-  const [editDialogOpen, setEditDialogOpen] = useState(false);
-*/
   const [selectedEditEntity, setSelectedEditEntity] = useState({});
+  const [displayReportDialog, setDisplayReportDialog] = useState(false);
+  const [report, setReport] = useState({ description: "", reason: "", ownerId: "" });
+  const [selectedClubId, setSelectedClubId] = useState(null);
 
-  //fonction getby id trajaali persons 
+  const reasonOptions = [
+    { label: 'Discrimination', value: 'discrimination' },
+    { label: 'Harassment', value: 'harassment' },
+    { label: 'Unsafe activities', value: 'unsafe_activities' },
+    { label: 'Misuse of funds', value: 'misuse_of_funds' },
+    { label: 'Violation of university policies', value: 'violation_of_policies' },
+  ];
+
 
   useEffect(() => {
     async function getAllClub() {
       try {
         const res = await api.getAllClub();
         setClubs(res);
-        console.log("clubssssssss",clubs);
       } catch (e) {
         console.log(e);
       }
@@ -38,15 +54,22 @@ function HomeClub() {
     getAllClub();
   }, []);
 
- 
+  const submitReport = async (report) => {
+    try {
+      // Send the report to the server using your API function
+      console.log(selectedClubId);
+      report.ownerId = user_id;
+      await api.SignalerClub(selectedClubId,report);
+      toast.success('Report submitted successfully');
+      setDisplayReportDialog(false);
+    } catch (e) {
+      console.log(e);
+      toast.error('Error submitting report');
+    }
+  };
 
   const handleEdit = (e) => {
-    console.log("eeeeeeeeeeeeeeeeeeeeee",e)
     setSelectedEditEntity(e);
-    console.log(selectedEditEntity)
-/*
-    setEditDialogOpen(true);
-*/
   };
 
 
@@ -62,72 +85,129 @@ function HomeClub() {
 
 
       setClubs([]);
-     
        await getAllClub();
-      
       }
 
-      //setTimeout(()=>history.push('/'),50);
-      //history("/");
       window.location.reload();
     }
   };
 
+  const actionBodyTemplate = (rowData) => {
+    return (<>
+      <Toaster />
+      {(Role === "ADMIN" || Role === "TEACHER"|| Role === "ALUMNI" ) && (
+          <>
+            <SeeClub data={rowData} />
+            <EditClub data={rowData} />
+            <Button
+                icon="pi pi-trash"
+                rounded
+                outlined
+                severity="danger"
+                onClick={() => handleDelete(rowData)}
+            />
+            </>
+      )
+      }
+      {Role === "STUDENT"  && (
+            <>
+              <Button
+                  label="Signaler"
+                  severity="danger"
+                  onClick={() => {
+                    setDisplayReportDialog(true)
+                    setSelectedClubId(rowData._id)
+                  }}
+              />
+            </>
+        )}
+
+      </>);
+
+
+
+  };
+  const header = (<div className="flex flex-wrap align-items-center justify-content-between gap-2" style={{display:"flex", justifyContent:'flex-end'}}>
+    <Link to="/create" style={{ textDecoration: "none" }}>
+      <Button variant="contained" size="large">
+        Create
+      </Button>
+    </Link>
+  </div>);
+  const reportDialogFooter = (
+      <>
+        <Button
+            label="Annuler"
+            icon="pi pi-times"
+            className="p-button-text"
+            onClick={() => setDisplayReportDialog(false)}
+        />
+        <Button
+            label="Signaler"
+            icon="pi pi-check"
+            className="p-button-text"
+            onClick={() => submitReport(report)}
+        />
+      </>
+  );
   return (
-    <Fragment>
-      <Toaster/>
+      <div className="datatable-container">
+        <h2 style={{ color: "#039BE5", fontSize: "Blod", marginTop: "50px" }}>
+          All Club
+          <ClassIcon />
+        </h2>
 
-      <h2 style={{textAlign:"center"}}>List of Club</h2>
+        <DataTable value={clubs} tableStyle={{ minWidth: '50rem', marginTop: '10px' }} header={header}>
+          <Column header="" headerStyle={{ width: '3rem' }}
+                  body={(data, options) => options.rowIndex + 1}></Column>
+          <Column field="name" header="Name"></Column>
+          <Column field="dac" header="Foundation" body={(rowData) => moment(rowData.dac).format("DD-MM-YYYY")}></Column>
+          <Column field="president.firstname" header="President Firstname "></Column>
+          <Column field="president.lastname" header="President Lastname"></Column>
+          <Column field="responsible.firstname" header="Responsible Firstname "></Column>
+          <Column field="responsible.lastname" header="Responsible Lastname"></Column>
 
-      <div style={{ margin: "10rem" }}>
-        <Table striped bordered hover size="sm">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>foundation</TableCell>
-              <TableCell>members</TableCell>
-              <TableCell>President</TableCell>
-              <TableCell>responsible</TableCell>
-              <TableCell>Banned</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {clubs && clubs.length > 0
-              ? clubs.map((item) => {
-                  return (
-                    <TableRow>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell>{new Date(item.dac).toLocaleDateString()}</TableCell>
-                      <TableCell>{item.members.map((member) => { return member.lastname +' '+ member.firstname + ' '})}</TableCell>
-                      <TableCell>{item.president?.lastname} {item.president?.firstname}</TableCell>
-                      <TableCell>{item.responsible?.lastname} {item.responsible?.firstname}</TableCell>
-                      <TableCell><Icon name="check circle" color={item.isBaned? "red":"green"}/></TableCell>
-                      <TableRow style={{display:"flex"}}>
-                         
-                         
-                        
-                        &nbsp;
-                        <Button onClick={() => handleDelete(item._id)}>
-                          Delete
-                        </Button>
-                        &nbsp;
-                        <SeeClub data={item}/>
-                        <EditClub data={item}/>
-                          
-                      </TableRow>
-                    </TableRow>
-                  );
-                })
-              : "no data available"}
-          </TableBody>
-        </Table>
-        <br></br>
-        <Link className="d-grid gap-2 " to="/create">
-          <Button size="lg">create</Button>
-        </Link>
+          <Column body={actionBodyTemplate}></Column>
+
+        </DataTable>
+        <Dialog
+            header="Report Club"
+            visible={displayReportDialog}
+            onHide={() => setDisplayReportDialog(false)}
+            footer={reportDialogFooter}
+        >
+          <div className="p-fluid">
+            <div className="p-field">
+              <label htmlFor="description">Description</label>
+              <InputText
+                  id="description"
+                  value={report.description}
+                  onChange={(e) =>
+                      setReport({ ...report, description: e.target.value })
+                  }
+              />
+            </div>
+            <div className="p-field">
+              <label htmlFor="reason">Reason</label>
+              <Dropdown
+                  id="reason"
+                  value={report.reason}
+                  options={reasonOptions}
+                  onChange={(e) =>
+                      setReport({ ...report, reason: e.value })
+                  }
+                  placeholder="Select a reason"
+              />
+            </div>
+          </div>
+        </Dialog>
       </div>
-    </Fragment>
+
+
+
+
+
+
   );
 }
 
