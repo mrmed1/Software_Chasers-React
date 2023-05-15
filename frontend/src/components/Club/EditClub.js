@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Button,
   Header,
   Image,
   Modal,
@@ -10,7 +9,7 @@ import {
 import { Checkbox, Form } from "semantic-ui-react";
 import * as api2 from "../../Service/PerosnService";
 import "./EditClub.css";
-
+import {Button} from "primereact/button";
 import moment from "moment/moment";
 import axios from "axios";
 import {toast} from "react-hot-toast"
@@ -131,7 +130,11 @@ function EditClub({ data }) {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button color="blue">EDIT</Button>}
+      trigger={   <Button
+          icon="pi pi-pencil"
+          className="p-button-rounded p-button-outlined p-button-info"
+        ></Button>
+        }
     >
       <Modal.Header>edit a club </Modal.Header>
       <Modal.Content>
