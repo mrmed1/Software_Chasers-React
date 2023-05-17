@@ -15,7 +15,7 @@ export const getAllClub = async () => {
     return result.data;
   }
   
-  export const getIdClub = async (id, Club) => {
+  export const getIdClub = async (id) => {
     // await delay(500)
     const result = await axios.get(`https://school.eastus.cloudapp.azure.com/api/Club/` + id  )
     console.log(result.data)
@@ -44,6 +44,15 @@ export const getAllClub = async () => {
   export const SignalerClub = async (id,signal) => {
     try {
       const response = await axios.post(`${API_URL}/club/${id}/addSignal`,signal);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  export const blockClub = async (id) => {
+    try {
+      const response = await axios.post(`${API_URL}/club/${id}/bannir`);
       return response.data;
     } catch (error) {
       console.log(error);
