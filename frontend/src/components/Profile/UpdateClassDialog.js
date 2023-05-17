@@ -17,7 +17,7 @@ export default function UpdateClassDialog({ open, onClose, onSave, person }) {
   };
 
   const handleSave = () => {
-    if(person.level=='3')
+    if(person.level==='3')
     {
       const updatedPerson = {
         ...person,
@@ -61,7 +61,7 @@ export default function UpdateClassDialog({ open, onClose, onSave, person }) {
             margin="dense"
             id="name"
             type="text"
-
+            fullWidth={true}
             value={inputValue}
             onChange={handleInputChange}
             placeholder={`Type your last class "${person.level}${person.class}" to confirm`}
