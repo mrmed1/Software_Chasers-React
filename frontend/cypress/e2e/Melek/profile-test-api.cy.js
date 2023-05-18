@@ -95,5 +95,20 @@ describe("Profile Api Test", () => {
     });
   });
 
+  it("should toggle the style mode", () => {
+    cy.request({
+      method: "PUT",
+      url: `${Url}/student/toggleStyle`,
+      headers: {
+        Authorization: tokenHeader,
+      },
+      failOnStatusCode: false,
+    }).then((resp) => {
+      expect(resp.status).to.eq(200);
+      expect(resp.body).to.be.a("string");
+      expect(resp.body).to.include("Mode is On");
+    });
+  });
+  
 
 });
