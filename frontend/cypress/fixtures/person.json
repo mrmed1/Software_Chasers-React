@@ -1,0 +1,13 @@
+{
+    "updatedStudent": {
+        "_id":"63a6090c1a0834a51ac5246e",
+        "role":"STUDENT",
+        "firstname": "John",
+        "lastname": "Doe",
+        "email": "johndoe@example.com",
+        "login":"Ganikas",
+        "password":"pdnejoh00"
+
+      }
+
+}
