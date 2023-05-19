@@ -9,6 +9,8 @@ import ClassIcon from '@mui/icons-material/Class';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {connectedUser} from "../../Service/auth.service";
 import { RadioButton } from 'primereact/radiobutton';
+import {useQuery, useQueryClient} from "react-query";
+import {getOffreById} from "../../Service/SouhailaTasksServer";
 
 
 
@@ -19,12 +21,13 @@ export default function CrudOffres(){
     const [offerCONSEIL, setOfferCONSEIL] = useState([]);
     const [offerOPPORTUNITE, setOfferOPPORTUNITE] = useState([]);
     const [offerEMPLOI, setOfferEMPLOI] = useState([]);
-
+    const [deleteOfferDialog, setDeleteOfferDialog] = useState(false);
     const [isLoading, setLoading] = useState(false);
     const [selectedOffer, setSelectedOffer] = useState(null);
-
+    const [deletedOffer, setDeletedOffer] = useState(null);
+    const [editedOffer, setEditedOffer] = useState(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-
+    const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
     const[newOffer, setNewOffer] = useState({
         title: '',
         description: '',
@@ -33,6 +36,14 @@ export default function CrudOffres(){
 
     });
 
+    const queryClient = useQueryClient();
+
+    const { data, error } = useQuery('offrebyid', () => getOffreById(selectedOffer._id));
+
+    const openEditDialog = (offer) => {
+        setEditedOffer(offer);
+        setIsEditDialogOpen(true);
+    };
     const fetchData = async () => {
         try {
             setLoading(true);
@@ -62,32 +73,54 @@ export default function CrudOffres(){
     };
     const addOffer = async (offer) => {
         try {
-            const res = await api.addOffre(offer);
-            toast.success("Offer added successfully !");
-            setIsDialogOpen(false);
-            fetchData();
-            return res;
+            if (newOffer.title === '' || newOffer.description === '' || newOffer.type === '') {
+                toast.error('Please fill all fields!');
+                return;
+            }else {
+                const res = await api.addOffre(offer);
+                toast.success("Offer added successfully !");
+                setIsDialogOpen(false);
+                fetchData();
+                return res;
+            }
+
         } catch (e) {
             toast.error('Erreur !');
             console.log(e);
         }
     }
+    const deleteOfferDialogFooter = (<>
+        <Button label="Cancel" icon="pi pi-times" className="p-button-text"
+                onClick={() => setDeleteOfferDialog(false)}/>
+        <Button label="Delete" icon="pi pi-trash" className="p-button-text"
+                onClick={() => deleteOffer(deletedOffer)} autoFocus/>
+    </>);
     const deleteOffer = async (offer) => {
         console.log(offer);
-        console.log(offer.rowData._id);
-        const res = await api.deleteOffre(offer.rowData._id).then(() =>
+
+        const res = await api.deleteOffre(offer._id).then(() =>
             toast.success("Offer deleted successfully !")
         )
             .catch((err) => toast.error('Erreur !')
         );
         fetchData();
+        setDeleteOfferDialog(false);
         return res;
 
+
     };
-    const updatOffer = async (rowData) => {
-
-
-        };
+    const updateOffer = async () => {
+        try {
+            const res = await api.updateOffre(editedOffer);
+            toast.success('Offer updated successfully!');
+            setIsEditDialogOpen(false);
+            fetchData();
+            return res;
+        } catch (e) {
+            toast.error('Error updating offer!');
+            console.log(e);
+        }
+    };
     const actionBodyTemplate = (rowData) => {
             const buttonMargin = { marginRight: '10px' };
 
@@ -95,9 +128,14 @@ export default function CrudOffres(){
                 <div >
                     <Button icon="pi pi-eye" rounded outlined severity="info" style={buttonMargin} onClick={() => showDemandeDetails(rowData)} />
 
-                    <Button icon="pi pi-pencil" rounded outlined severity="success" style={buttonMargin} onClick={() => updatOffer(rowData)} />
+                    <Button icon="pi pi-pencil" rounded outlined severity="success" style={buttonMargin} onClick={() => {
+                        openEditDialog(rowData);
+                    }} />
 
-                    <Button icon="pi pi-trash" rounded outlined severity="danger" style={buttonMargin} onClick={() => deleteOffer({rowData})} />
+                    <Button icon="pi pi-trash" rounded outlined severity="danger" style={buttonMargin} onClick={() => {
+                        setDeleteOfferDialog(true);
+                        setDeletedOffer(rowData);
+                    }} />
                 </div>
             );
         };
@@ -271,7 +309,99 @@ export default function CrudOffres(){
                                 </div>
                             </form>
                         </Dialog>
+                        <Dialog
+                            visible={isEditDialogOpen}
+                            onHide={() => setIsEditDialogOpen(false)}
+                            header={<h2 style={{ textAlign: 'center', color: '#039BE5', marginBottom: '11px' }}>Edit Offer</h2>}
+                            className="dialog"
+                            footer={
+                                <div className="dialog-footer">
+                                    <Button
+                                        label="Update"
+                                        outlined
+                                        severity="success"
+                                        className="dialog-button"
+                                        onClick={() => updateOffer()}
+                                    />
+                                    <Button
+                                        label="Cancel"
+                                        outlined
+                                        severity="danger"
+                                        className="dialog-button"
+                                        onClick={() => setIsEditDialogOpen(false)}
+                                    />
+                                </div>
+                            }
+                        >
+                            <form className="dialog-form">
+                                <div className="form-row">
+                                    <label htmlFor="title">Title:</label>
+                                    <input
+                                        type="text"
+                                        id="title"
+                                        className="input-field"
+                                        value={editedOffer?.title}
+                                        onChange={(e) => setEditedOffer({ ...editedOffer, title: e.target.value })}
+                                    />
+                                </div>
 
+                                <div className="form-row">
+                                    <label htmlFor="description">Description:</label>
+                                    <textarea
+                                        id="description"
+                                        className="textarea-field"
+                                        value={editedOffer?.description}
+                                        onChange={(e) => setEditedOffer({ ...editedOffer, description: e.target.value })}
+                                    />
+                                </div>
+
+                                <div className="form-row">
+                                    <label>Type of Offer:</label>
+                                    <br />
+                                    <div className="radio-group">
+                                        <RadioButton
+                                            inputId="type1"
+                                            name="type"
+                                            value="CONSEIL"
+                                            onChange={(e) => setEditedOffer({ ...editedOffer, type: e.target.value })}
+                                            checked={editedOffer?.type === 'CONSEIL'}
+                                        />
+                                        <label htmlFor="type1" className="radio-label">
+                                            Conseil
+                                        </label>
+
+                                        <RadioButton
+                                            inputId="type2"
+                                            name="type"
+                                            value="OPPORTUNITE"
+                                            onChange={(e) => setEditedOffer({ ...editedOffer, type: e.target.value })}
+                                            checked={editedOffer?.type === 'OPPORTUNITE'}
+                                        />
+                                        <label htmlFor="type2" className="radio-label">
+                                            Opportunity
+                                        </label>
+
+                                        <RadioButton
+                                            inputId="type3"
+                                            name="type"
+                                            value="EMPLOIOFFRE"
+                                            onChange={(e) => setEditedOffer({ ...editedOffer, type: e.target.value })}
+                                            checked={editedOffer?.type === 'EMPLOIOFFRE'}
+                                        />
+                                        <label htmlFor="type3" className="radio-label">
+                                            Job
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </Dialog>
+                        <Dialog visible={deleteOfferDialog} header="Confirmation" modal style={{width: '350px'}}
+                                footer={deleteOfferDialogFooter} onHide={() => setDeleteOfferDialog(false)}>
+                            <div className="p-d-flex p-ai-center">
+                                <i className="pi pi-exclamation-triangle p-mr-3" style={{fontSize: '2rem'}}/>
+                                <span>Are you sure you want to delete this Offer?</span>
+                            </div>
+                        </Dialog>
                         <style jsx>{`
                           .titre{
                             text-align: center;

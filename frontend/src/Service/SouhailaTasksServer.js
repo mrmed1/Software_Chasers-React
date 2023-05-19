@@ -77,9 +77,9 @@ export const getAllOffresEMPLOIOFFRE = async () => {
 }
 
 
-export const updateOffre = async (id,offer) => {
+export const updateOffre = async (offer) => {
     const result = await axios.put(
-        `${API_URL}/Offer/${id}`,offer)
+        `${API_URL}/Offer/${offer._id}`,offer)
     return result.data
 }
 
@@ -92,6 +92,13 @@ export const deleteOffre = async (id) => {
     } catch (error) {
         console.log(error);
     }
+}
+
+export const getOffreById = async (id) => {
+    const result = await axios.get(
+        `${API_URL}/Offer/${id}`
+    );
+    return result.data;
 }
 
 //console.log(connectedUser());
