@@ -36,10 +36,6 @@ export default function CrudOffres(){
 
     });
 
-    const queryClient = useQueryClient();
-
-    const { data, error } = useQuery('offrebyid', () => getOffreById(selectedOffer._id));
-
     const openEditDialog = (offer) => {
         setEditedOffer(offer);
         setIsEditDialogOpen(true);
