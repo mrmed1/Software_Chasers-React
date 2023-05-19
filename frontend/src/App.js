@@ -53,6 +53,7 @@ import EventContainer from './components/EventContainer/EventContainer';
  
 import Admin from './components/CrudAdmin/Admin';
 import CrudOffres from "./components/CRUD Offres/CrudOffres";
+import AlumniStatistics from "./components/StatistiquesAlumni/AlumniStatistics";
 function App() {
   const [open, setOpen] = useState(false);
   const currenUser = { role: "ADMIN" };
@@ -152,6 +153,8 @@ function App() {
               <Route exact path="/EventContainer" element={<EventContainer />} />
               <Route exact path="/Admin/" element={<Admin/>}/>
               <Route exact path="/Offer" element={<CrudOffres/>}/>
+              <Route exact path="/StatAlumni" element={<AlumniStatistics/>}/>
+
             </Routes>
           </Box>
         </Box>
