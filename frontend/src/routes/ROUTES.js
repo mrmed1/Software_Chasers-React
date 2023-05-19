@@ -30,6 +30,7 @@ import PickPFETeacher from "../views/teacherViews/PickPFETeacher";
 import EventContainer from "../components/EventContainer/EventContainer";
 import Admin from "../components/CrudAdmin/Admin";
 import CrudOffres from "../components/CRUD Offres/CrudOffres";
+import AlumniStatistics from "../components/StatistiquesAlumni/AlumniStatistics";
 const ROUTES = [
 
     {
@@ -270,6 +271,15 @@ const ROUTES = [
         layout: "/Offer",
         allowedRoles: ["ADMIN"],
     },
+    ,
+    {
+        path: "/",
+        name: "Statistics Alumni",
+        icon: <InboxIcon />,
+        element: <AlumniStatistics />,
+        layout: "/StatAlumni",
+        allowedRoles: ["ADMIN"],
+    }
 
 ]
 export default ROUTES

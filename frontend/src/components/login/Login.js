@@ -16,6 +16,9 @@ import {auth} from "../../Service/auth.service";
 import {useNavigate} from "react-router-dom";
 import toast, {Toaster} from 'react-hot-toast';
 import {Checkbox, FormControlLabel} from "@mui/material";
+import {useQuery} from "react-query";
+import {GetMyPFE} from "../../Service/internshipService";
+import {getIdClub} from "../../Service/ClubService";
 
 const theme = createTheme();
 export default function Login() {
@@ -37,6 +40,8 @@ export default function Login() {
         setPasswordError(false);
     };
 
+
+    //const { data, isLoading, error } = useQuery("club", (id)=> getIdClub(id));
 
 
     const handleSubmit = () => {
