@@ -2,6 +2,7 @@ import axios from "axios";
 import {API_URL} from "../Config/config";
 
 
+
 export  function SendRequestVacations (data) {
 
     console.log("date réçu to service:",data);
@@ -36,3 +37,62 @@ export function GetAllDemandeEXPERTCONTRACT (id){
             console.log(listFiltred);
             return  listFiltred;});
 }
+
+export const addOffre = async (offre) => {
+
+    const result = await axios.post('/Offer', offre)
+    return result.data;
+}
+
+export const getAllOffresCONSEIL = async () => {
+    return axios.get('/Offer')
+        .then(response => {
+            const allOffer = response.data;
+            const   listFiltred =allOffer.filter(Offer => Offer.type === 'CONSEIL');
+            console.log(listFiltred);
+            return  listFiltred;
+
+        });
+}
+export const getAllOffresOPPORTUNITE = async () => {
+    return axios.get('/Offer')
+        .then(response => {
+            const allOffer = response.data;
+            const   listFiltred =allOffer.filter(Offer => Offer.type === 'OPPORTUNITE');
+            console.log(listFiltred);
+            return  listFiltred;
+
+        });
+
+}
+export const getAllOffresEMPLOIOFFRE = async () => {
+    return axios.get('/Offer')
+        .then(response => {
+            const allOffer = response.data;
+            const   listFiltred =allOffer.filter(Offer => Offer.type === 'EMPLOIOFFRE');
+            console.log(listFiltred);
+            return  listFiltred;
+
+        });
+}
+
+
+export const updateOffre = async (id,offer) => {
+    const result = await axios.put(
+        `${API_URL}/Offer/${id}`,offer)
+    return result.data
+}
+
+export const deleteOffre = async (id) => {
+    try {
+        //const response = await axios.delete('/Offer/}'+id);
+        const response = await axios.delete(`${API_URL}/Offer/${id}`);
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+//console.log(connectedUser());
+
