@@ -9,7 +9,8 @@ export const auth = async (login, password,type) => {
         return token;
     } catch (error) {
         console.log(error);
-        throw new Error(error.response.data.message);
+        throw new Error(error.response.data);
+
     }
 };
 

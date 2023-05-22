@@ -1,0 +1,37 @@
+
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.form-label {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.form-submit-button {
+    margin-top: 1.5rem;
+    width: 100%;
+    background-color: #007ad9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.b_title {
+    font-size: 18px;
+    color: dodgerblue;
+}
