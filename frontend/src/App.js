@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Route, Routes, redirect } from "react-router-dom";
 import "./App.css";
 import Hello from "./components/Hello";
@@ -52,14 +52,67 @@ import SearchList from './components/Search/SearchList';
 import EventContainer from './components/EventContainer/EventContainer';
  
 import Admin from './components/CrudAdmin/Admin';
+
+
+//univ
+import UnivYear from "./views/adminViews/UnivYear";
+//
+
+import { messaging } from "./index.js";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import axios from "axios";
+import { API_URL } from "./Config/config";
 function App() {
   const [open, setOpen] = useState(false);
   const currenUser = { role: "ADMIN" };
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [notifBody, setNotifBody] = useState("");
+  const [notifTitle, setNotifTitle] = useState("");
+  const [showNotif, setShowNotif] = useState(false);
 
   function handleLogin(isLoggedIn) {
     setIsLoggedIn(isLoggedIn);
   }
+  
+  const activate = () => {
+    getToken(messaging, {
+      vapidKey:
+        "BIDaC4h8eIKcIOby3l5IvTvdi_kq71-T5gX4s6blIVUSNbnTMt_6bq3l4i5UQ2DHx9TAABuAWW6izbRl1TXplvA",
+    }).then((currentToken) => {
+      if (currentToken) {
+        localStorage.setItem("notifToken", currentToken);
+        let userId = localStorage.getItem("userId");
+        if (userId)
+          axios.post(`${API_URL}/notification/subscribeToTopic`, {
+            registrationToken: currentToken,
+            topic: "test",
+          });
+      }
+    });
+  };
+
+  useEffect(() => {
+    activate();
+    const messaging = getMessaging();
+    onMessage(messaging, (payload) => {
+      setNotifBody(payload.notification.body);
+      setNotifTitle(payload.notification.title);
+      setShowNotif(true);
+      const channel2 = new BroadcastChannel("sw-messages-fr");
+      channel2.postMessage(payload);
+      // setTimeout(() => {
+      //   setShowNotif(false);
+      // }, 5000);
+    });
+    const channel = new window.BroadcastChannel("sw-messages");
+    channel.addEventListener("message", (event) => {
+      setTimeout(() => {
+        setShowNotif(false);
+      }, 5000);
+    });
+  }, []);
+
+
 
   const drawerWidth = 240;
   const handleDrawerOpen = () => {
@@ -95,6 +148,28 @@ function App() {
   }));
   return (
     <>
+     {showNotif && (
+        <div className="notification">
+          <span className="title">{notifTitle}</span>
+          <span>{notifBody}</span>
+
+          <span
+            onClick={() => {
+              setShowNotif(false);
+            }}
+            className="svg"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="48"
+              viewBox="0 96 960 960"
+              width="48"
+            >
+              <path d="m330 768 150-150 150 150 42-42-150-150 150-150-42-42-150 150-150-150-42 42 150 150-150 150 42 42Zm150 208q-82 0-155-31.5t-127.5-86Q143 804 111.5 731T80 576q0-83 31.5-156t86-127Q252 239 325 207.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 82-31.5 155T763 858.5q-54 54.5-127 86T480 976Zm0-60q142 0 241-99.5T820 576q0-142-99-241t-241-99q-141 0-240.5 99T140 576q0 141 99.5 240.5T480 916Zm0-340Z" />
+            </svg>
+          </span>
+        </div>
+      )}
       {connectedUser() ? (
         <Box sx={{ display: "flex" }}>
           <Sidebar
@@ -134,6 +209,11 @@ function App() {
               <Route exact path="/teacher/PFA" element={<CrudPFA />} />
               <Route exact path="/teacher/myPFA" element={<MyPFA />} />
               <Route exact path="/admin/PFA" element={<PublishedPFa />} />
+              <Route
+                exact
+                path="/admin/university-year"
+                element={<UnivYear />}
+              />
               <Route exact path="/students/PFA" element={<PickPFAstudent />} />
               <Route exact path="/ValiderAlumni" element={<ValiderAlumni />} />
               <Route exact path="/SummerIntern" element={<InsertSummerIntern />} />

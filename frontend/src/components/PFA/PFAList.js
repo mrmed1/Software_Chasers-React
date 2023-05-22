@@ -66,6 +66,14 @@ export default function PFAList({ data }) {
 
     setSearchTitle("");
   };
+
+  const returnYear = (PFA) => {
+    let year =
+      PFA?.univId?.start?.toString().slice(0, 4) +
+      "/" +
+      PFA?.univId?.end?.toString().slice(0, 4);
+    return year;
+  };
   return (
     data && (
       <>
@@ -170,29 +178,25 @@ export default function PFAList({ data }) {
                         }
                         position="top center"
                         content="Picked By Student"
-                        
                       />
-                       <Popup
+                      <Popup
                         trigger={
                           <Icon
-                          name="check circle"
-                          color={PFA.isValidResponsable ? "green" : "red"}
-                          style={{ float: "right" }}
+                            name="check circle"
+                            color={PFA.isValidResponsable ? "green" : "red"}
+                            style={{ float: "right" }}
                           />
                         }
-                      
                         position="top center"
                         content="Validated By An Admin"
-                        
                       />
 
-                   
                       <Card.Header>{PFA?.title}</Card.Header>
                       <Card.Meta>
                         Created By{" "}
                         {` ${PFA?.createdBy?.firstname}  ${PFA?.createdBy?.lastname}`}
                       </Card.Meta>
-                      <Card.Meta> {PFA?.univId?.name}</Card.Meta>
+                      <Card.Meta> {returnYear(PFA)}</Card.Meta>
 
                       <Card.Meta style={{ color: "#1976D2" }}>
                         {PFA?.isPublished ? "Published" : "Pending..."}

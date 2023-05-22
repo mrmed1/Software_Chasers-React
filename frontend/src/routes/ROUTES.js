@@ -29,6 +29,8 @@ import DemandExpertContract from "../components/Vacations/DemandExpertContract";
 import PickPFETeacher from "../views/teacherViews/PickPFETeacher";
 import EventContainer from "../components/EventContainer/EventContainer";
 import Admin from "../components/CrudAdmin/Admin";
+import UnivYear from "../views/adminViews/UnivYear";
+
 const ROUTES = [
 
     {
@@ -138,6 +140,21 @@ const ROUTES = [
         layout: "/students",
         allowedRoles: ["ADMIN"],
       },
+
+
+      {
+        path: "/university-year",
+        name: "University Year",
+        icon: <InboxIcon/>,
+        element: <UnivYear/>,
+        layout: "/admin",
+        allowedRoles: ["ADMIN"]
+    },
+
+
+
+
+
       {
         path: "/PFA",
         name: "Validate PFA",
