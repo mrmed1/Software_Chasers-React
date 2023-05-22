@@ -29,6 +29,7 @@ import DemandExpertContract from "../components/Vacations/DemandExpertContract";
 import PickPFETeacher from "../views/teacherViews/PickPFETeacher";
 import EventContainer from "../components/EventContainer/EventContainer";
 import Admin from "../components/CrudAdmin/Admin";
+import Excel from "../components/Excel";
 const ROUTES = [
 
     {
@@ -259,6 +260,15 @@ const ROUTES = [
         icon: <InboxIcon />,
         element: <Admin />,
         layout: "/Admin",
+        allowedRoles: ["ADMIN"],
+        
+    },
+    {
+        path: "/",
+        name: "Import Excel",
+        icon: <InboxIcon/>,
+        element: <Excel/>,
+        layout: "/Excel",
         allowedRoles: ["ADMIN"],
     },
 

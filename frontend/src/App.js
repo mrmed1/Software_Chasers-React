@@ -52,6 +52,7 @@ import SearchList from './components/Search/SearchList';
 import EventContainer from './components/EventContainer/EventContainer';
  
 import Admin from './components/CrudAdmin/Admin';
+import Excel from "./components/Excel";
 function App() {
   const [open, setOpen] = useState(false);
   const currenUser = { role: "ADMIN" };
@@ -150,6 +151,7 @@ function App() {
               <Route exact path="/SearchList" element={<SearchList />} />
               <Route exact path="/EventContainer" element={<EventContainer />} />
               <Route exact path="/Admin/" element={<Admin/>}/>
+              <Route exact path="/Excel" element={<Excel />} />
             </Routes>
           </Box>
         </Box>
