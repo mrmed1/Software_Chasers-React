@@ -10,7 +10,7 @@ function StatChomage() {
 
     useEffect(() => {
         axios
-            .get("http://school.eastus.cloudapp.azure.com/api/student/statistics")
+            .get("https://school.eastus.cloudapp.azure.com/api/student/statistics")
                 .then((response) => {
                     console.log(response);
                     setData(response.data);
