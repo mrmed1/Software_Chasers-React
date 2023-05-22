@@ -31,6 +31,7 @@ import EventContainer from "../components/EventContainer/EventContainer";
 import Admin from "../components/CrudAdmin/Admin";
 import CrudOffres from "../components/CRUD Offres/CrudOffres";
 import AlumniStatistics from "../components/StatistiquesAlumni/AlumniStatistics";
+import StatChomage from "../components/StatistiquesChomage/StatChomage";
 const ROUTES = [
 
     {
@@ -278,6 +279,14 @@ const ROUTES = [
         icon: <InboxIcon />,
         element: <AlumniStatistics />,
         layout: "/StatAlumni",
+        allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/",
+        name: "Statistics Chomage",
+        icon: <InboxIcon />,
+        element: <StatChomage/>,
+        layout: "/StatChomage",
         allowedRoles: ["ADMIN"],
     }
 
