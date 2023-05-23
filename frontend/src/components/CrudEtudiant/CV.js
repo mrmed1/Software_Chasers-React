@@ -125,12 +125,6 @@ export default function CV({Mode, open, onClose, name,id }) {
     <>
 {InternshipsList && <Internships data={InternshipsList} style={Mode} />}
 {data?.Skills && <Skills data={data.Skills} _id={data._id} style={Mode} />}
-{myEvent?.map((EV,index)=>{
-        return(<div key={index}>
-            <EventClubDetails style={Mode} event={EV} id={id}/> <br/>
-        </div>
-        )
-      })}  
 </>
   ):(<></>)}
   
