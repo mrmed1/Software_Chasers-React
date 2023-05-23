@@ -81,15 +81,20 @@ setSelectedId(data._id);
           primary={item.name}
           secondary={
             <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2" 
-                color="text.primary"
-              >
-                classe
-              </Typography>
-               {` : ${item.level}  ${item.class}`}
+            {item.role === 'STUDENT' ?(<>
+  <Typography
+  sx={{ display: 'inline' }}
+  component="span"
+  variant="body2" 
+  color="text.primary"
+>
+  classe
+</Typography>
+ {` : ${item.level}  ${item.class}`}</>
+              ):(<>{item.role} </>)}
+            
+               
+              
             </React.Fragment>
           }
         /><Button  variant="outlined"     onClick={() => handleShowAccount(item)} >Show account</Button>
