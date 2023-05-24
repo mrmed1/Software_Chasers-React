@@ -15,7 +15,7 @@ const DetailsDialog = ({ open, onClose, selectedData, attributes }) => {
   };
 
   return (
-    <Dialog maxWidth="xs" fullWidth open={open} onClose={onClose}>
+    <Dialog id="DetailsDialog" maxWidth="xs" fullWidth open={open} onClose={onClose}>
       <DialogTitle>Details</DialogTitle>
       <DialogContent>
         {selectedData &&
@@ -51,7 +51,7 @@ const DetailsDialog = ({ open, onClose, selectedData, attributes }) => {
           )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCancel}>Close</Button>
+        <Button  data-test="cancel-button" onClick={handleCancel}>Close</Button>
       </DialogActions>
     </Dialog>
   );

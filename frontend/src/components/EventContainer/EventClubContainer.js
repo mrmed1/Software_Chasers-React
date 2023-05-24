@@ -135,7 +135,7 @@ function EventClubContainer() {
           </AccordionSummary>
           <AccordionDetails >
     
-          <FormControl sx={{ marginBottom: 1 }}>
+          <FormControl sx={{ display: 'grid', marginBottom: 1 }}>
   <Typography variant="subtitle1" gutterBottom>
     Domain
   </Typography>
@@ -148,6 +148,7 @@ function EventClubContainer() {
             checked={selectedDomains.includes(domain)}
             onChange={handleDomainChange}
             value={domain}
+            name={domain}
           />
         }
         label={domain}
@@ -156,7 +157,7 @@ function EventClubContainer() {
   </div>
 </FormControl>
 
-<FormControl sx={{ marginBottom: 1 }}>
+<FormControl sx={{ display: 'grid', marginBottom: 1 }}>
   <Typography variant="subtitle1" gutterBottom>
     Club
   </Typography>
@@ -169,6 +170,7 @@ function EventClubContainer() {
             checked={selectedClubs?.includes(club)}
             onChange={handleClubChange}
             value={club}
+            name={club}
           />
         }
         label={club}
@@ -176,13 +178,14 @@ function EventClubContainer() {
     ))}
   </div>
 </FormControl>
-<FormControl sx={{ marginBottom: 1 }}>
+<FormControl sx={{ display: 'grid', marginBottom: 1 }}>
   <Typography variant="subtitle1" gutterBottom>
     Date Range
   </Typography>
   <div style={{ display: 'flex' }}>
     <TextField
-      label="Start Date"
+      label="Start Date" 
+       data-test="startdate-input"
       type="date"
       value={selectedDateRange.start || ""}
       onChange={(e) => handleDateChange(e, "start")}
@@ -192,6 +195,7 @@ function EventClubContainer() {
       sx={{ marginRight: 2 }}
     />
     <TextField
+      data-test="enddate-input"
       label="End Date"
       type="date"
       value={selectedDateRange.end || ""}
@@ -201,7 +205,7 @@ function EventClubContainer() {
       }}
       sx={{ marginRight: 2 }}
     />
-    <Button variant="outlined" sx={{width:"20%"}} onClick={clearDateRange}>
+    <Button data-test='clear-button' variant="outlined" sx={{width:"10%"}} onClick={clearDateRange}>
       Clear
     </Button>
   </div>

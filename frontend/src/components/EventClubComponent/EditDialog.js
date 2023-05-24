@@ -134,12 +134,12 @@ const EditDialog = ({ open, onClose, entity, onSave, attributes, title }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog id="EditDialog" open={open} onClose={onClose}>
       <DialogTitle>Edit {title}</DialogTitle>
       <DialogContent>{renderFields()}</DialogContent>
       <DialogActions>
-        <Button onClick={handleCancel}>Cancel</Button>
-        <Button onClick={handleSave}>Save</Button>
+        <Button  data-test="cancel-button" onClick={handleCancel}>Cancel</Button>
+        <Button data-test="save-button" onClick={handleSave}>Save</Button>
       </DialogActions>
     </Dialog>
   );

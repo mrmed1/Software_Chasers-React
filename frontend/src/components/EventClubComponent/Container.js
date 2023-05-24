@@ -128,7 +128,7 @@ function Container({
                                 <CloseIcon />
                               )
                             ) : attribute.type == "button" ? (
-                              <Button variant="outlined"   onClick={() => handleShowParticipantsDialog(row['participant'])}>
+                              <Button   data-test="ShowParticipants-button" variant="outlined"   onClick={() => handleShowParticipantsDialog(row['participant'])}>
                                 Show Participants
                               </Button>
                             )  : attribute.type == "date" ? (
@@ -144,6 +144,7 @@ function Container({
                         edge="end"
                         aria-label="delete"
                         onClick={() => handleDelete(row)}
+                        data-test="FirstDelete-button"
                       >
                         <DeleteIcon />
                       </IconButton>
@@ -152,6 +153,7 @@ function Container({
                         edge="end"
                         aria-label="edit"
                         onClick={() => handleEdit(row)}
+                        data-test="FirstEdit-button"
                       >
                         <EditIcon />
                       </IconButton>

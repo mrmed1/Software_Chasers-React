@@ -19,7 +19,7 @@ const DeleteDialog = ({ open, onClose, selectedEntity, deleteEntity,title }) => 
   };
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog id="DeleteDialog" open={open} onClose={onClose}>
       <DialogTitle>Confirm Deletion</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -27,8 +27,12 @@ const DeleteDialog = ({ open, onClose, selectedEntity, deleteEntity,title }) => 
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCancel}>Cancel</Button>
-        <Button onClick={handleConfirmDelete} color="secondary">
+        <Button
+            data-test="cancel-button"
+        onClick={handleCancel}>Cancel</Button>
+        <Button
+          data-test="delete-button"
+        onClick={handleConfirmDelete} color="secondary">
           Delete
         </Button>
       </DialogActions>
