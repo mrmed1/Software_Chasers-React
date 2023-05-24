@@ -66,11 +66,12 @@ aria-describedby="scroll-dialog-description"
 >
 <DialogTitle id="scroll-dialog-title">Event Details</DialogTitle>
 <DialogContent>
-  <Card centered sx={{minWidth:400}}>
+  <Card centered sx={{width:400}}>
     <CardHeader
       title={<div>Event :{event?.name}</div>}
+      
       subheader={
-        <div>
+        event.endDate? (<div>
           From {convertDate(event?.startDate)} to{" "}
           {convertDate(event?.endDate)}
           <br />
@@ -79,21 +80,23 @@ aria-describedby="scroll-dialog-description"
           {event?.numberOfPlaces} place availables
           <br />
           📌 At {event?.location}
-        </div>
+        </div>):(<div> Date :  {convertDate(event?.eventDate)}</div>)
       }
     />
 
     <CardContent>
       <Typography variant="body2">
         {event?.description}
+        {event.endDate &&   <>
         <br />
         <br />
         🔗 <a href={event?.link}> Event URL :</a>
+        </>}
       </Typography>
-      <Typography>
+      {event.endDate &&  <Typography>
         © Organized by Club {event?.club_id?.name}
         <br />
-      </Typography>
+      </Typography>}
     </CardContent>
     
 

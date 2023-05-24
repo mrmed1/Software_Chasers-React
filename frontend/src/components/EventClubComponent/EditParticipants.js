@@ -45,7 +45,7 @@ const EditParticipants = ({ open, onClose, entity, onSave }) => {
   };
 
   return (
-    <Dialog maxWidth="xs" fullWidth open={open} onClose={onClose}>
+    <Dialog id="EditParticipantsDialog" maxWidth="xs" fullWidth open={open} onClose={onClose}>
       <DialogTitle>Participants List</DialogTitle>
       <DialogContent>
         <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
@@ -101,8 +101,8 @@ const EditParticipants = ({ open, onClose, entity, onSave }) => {
         </TableContainer>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleSave}>Save</Button>
+        <Button data-test="cancel-button" onClick={onClose}>Cancel</Button>
+        <Button data-test="saveParticipants-button" onClick={handleSave}>Save</Button>
       </DialogActions>
     </Dialog>
   );

@@ -24,7 +24,7 @@ const ParticipantsDialog = ({ open, onClose ,data}) => {
 
 
   return (
-    <Dialog maxWidth="xs" fullWidth open={open} onClose={onClose}>
+    <Dialog  id='ParticipantsDialog' maxWidth="xs" fullWidth open={open} onClose={onClose}>
       <DialogTitle>Participants List</DialogTitle>      
       <DialogContent>
       <TableContainer component={Paper} sx={{ maxHeight: 440 }}>
