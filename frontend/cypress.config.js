@@ -1,13 +1,6 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  component: {
-    devServer: {
-      framework: "create-react-app",
-      bundler: "webpack",
-    },
-  },
-
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
@@ -19,4 +12,9 @@ module.exports = defineConfig({
   env: {
     urlBackend: "https://school.eastus.cloudapp.azure.com/api"
 }
+ 
+  env: { 
+    baseUrl: "http://localhost:3000/api"
+  },
+ 
 });
