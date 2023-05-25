@@ -4,7 +4,7 @@ describe("--PFA test api --", () => {
   let tokenHeader;
  let  idPFA;
  let InternshipsPFA 
-  let Url = Cypress.env("baseUrl");
+  let Url = Cypress.env("urlBackend") 
   const idTeacher = "63c84996605ab186472e4871"
   const idUniv = "64387bd44b6c2e5b55e8cb9e"
   const   studentId ="63a6090c1a0834a51ac5246e"

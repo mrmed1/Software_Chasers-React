@@ -4,7 +4,7 @@ describe("Profile Page ", () => {
     let Ganikas;
 
     let idGanikas = "63a6090c1a0834a51ac5246e";
-    const API_URL = Cypress.env("baseUrl") + "/Persons";
+    const API_URL = Cypress.env("urlBackend")  + "/Persons";
 
     beforeEach(() => {
       //  cy.clearToken();

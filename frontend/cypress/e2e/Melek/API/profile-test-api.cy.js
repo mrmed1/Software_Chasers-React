@@ -2,10 +2,10 @@ describe("Profile Api Test", () => {
   let token;
   let tokenHeader;
   let idGanikas = "63a6090c1a0834a51ac5246e";
-  const API_URL = Cypress.env("baseUrl") + "/Persons";
+  const API_URL = Cypress.env("urlBackend")  + "/Persons";
   let updatedGnikas;
   let accound;
-  let Url = Cypress.env("baseUrl");
+  let Url = Cypress.env("urlBackend") 
   before(() => {
     // get the login function from commands
     cy.wait(1000);

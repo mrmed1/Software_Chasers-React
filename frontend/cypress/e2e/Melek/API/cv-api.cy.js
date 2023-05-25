@@ -2,7 +2,7 @@ describe("CV Api Test", () => {
   let token;
   let tokenHeader;
   let idGanikas = "63a6090c1a0834a51ac5246e";
-  const API_URL = Cypress.env("baseUrl") 
+  const API_URL = Cypress.env("urlBackend") 
   let updatedExperience ={};
   let cv;
   let newSkills;
