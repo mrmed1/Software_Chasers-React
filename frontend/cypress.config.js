@@ -5,16 +5,15 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl : "http://localhost:3000",
+    frontBaseUrl : "http://localhost:3000",
   },
 
 
   env: {
-    urlBackend: "https://school.eastus.cloudapp.azure.com/api"
+    urlBackend: "https://school.eastus.cloudapp.azure.com/api",
+    baseUrl: "http://localhost:3000/api"
 }
  
-  env: { 
-    baseUrl: "http://localhost:3000/api"
-  },
+ 
  
 });
