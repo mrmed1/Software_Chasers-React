@@ -161,7 +161,10 @@ function App() {
           </Box>
         </Box>
       ) : (
-        <Login onLogin={handleLogin} />
+        <Routes>
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/*" element={<Navigate to="/login" />} />
+        </Routes>
       )}
     </>
   );

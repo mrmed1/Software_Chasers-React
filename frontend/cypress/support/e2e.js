@@ -15,7 +15,6 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-
 import "./eventClubCommands";
 import './eventCommands'
 // Alternatively you can use CommonJS syntax:
