@@ -82,9 +82,9 @@ export default function UpdateProfile() {
   
     },
     {
-      onSuccess: () => toast.success("Profile updated successfully !"),
+      onSuccess: () => {toast.success("Profile updated successfully !")},
       onError: (error) => toast.error(error?.response?.data?.codeName),
-      onSettled: () => queryClient.invalidateQueries("student"),
+      onSettled: () => {queryClient.invalidateQueries("student");}
     }
   );
   const toggleStyleMutation = useMutation(() => toggleStyleCv(), {
@@ -141,6 +141,7 @@ export default function UpdateProfile() {
       console.log("student State Updated", stdnt);
       try {
         UpdateProfileMutation.mutate(stdnt);
+        setOpen(false)
       } catch (error) {
         console.log(error);
         toast.error("Bad Requests");
@@ -322,7 +323,7 @@ export default function UpdateProfile() {
             {/* Render Profile */}
             <Card.Description>
               <Card.Header>
-                <h2 style={{ color: "#1976D2" }}>
+                <h2 style={{ color: "#1976D2" }} data-test="fullnameText" >
                   {data?.firstname} {data?.lastname}
                 </h2>
               </Card.Header>
@@ -330,7 +331,7 @@ export default function UpdateProfile() {
                 <h4 style={style.text}>
                   {" "}
                   Logged as{" "}
-                  <strong style={{ color: "#1976D2" }}>{data?.login}</strong>
+                  <strong  style={{ color: "#1976D2" }} id="logintext" >{data?.login}</strong>
                 </h4>
               </Card.Meta>
               <Card.Meta>
