@@ -21,6 +21,7 @@ import {Button} from "primereact/button";
  
 import SearchBar2 from "../Search/SearchBar2";
 import { connectedUser } from "../../Service/auth.service";
+import { useNavigate } from 'react-router-dom';
 
 const ROLE = connectedUser()?.role;
 
@@ -31,9 +32,12 @@ const Sidebar = ({
   handleDrawerOpen,
   open,
 }) => {
-  function logoutFn(){
-    localStorage.removeItem("jwtToken")
+  const navigate = useNavigate();
+  function logoutFn() {
+    localStorage.removeItem('jwtToken');
+    navigate('/login');
     window.location.reload();
+
   }
   const drawerWidth = 240;
   const location = useLocation();

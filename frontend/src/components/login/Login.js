@@ -34,7 +34,6 @@ export default function Login() {
         setLogin(event.target.value);
         setLoginError(false);
     };
-
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
         setPasswordError(false);
@@ -102,8 +101,9 @@ export default function Login() {
                         Sign in
                     </Typography>
                     <Box component="form" noValidate sx={{mt: 1}}>
-                        <Toaster/>
+                        <Toaster containerClassName='uniquetest' />
                         <TextField
+                            data-test="login"
                             margin="normal"
                             required
                             fullWidth
@@ -124,6 +124,7 @@ export default function Login() {
 
                         />
                         <TextField
+                            data-test="password"
                             margin="normal"
                             required
                             fullWidth
@@ -142,11 +143,13 @@ export default function Login() {
                             }}
                         />
                         <FormControlLabel
+                            data-test="isclub"
                             control={<Checkbox value={isclub} onChange={handleChange} color="primary" />}
                             label="Sign in as Club"
                         />
 
                         <Button
+                            data-test="connect"
                             type="button"
                             onClick={handleSubmit}
                             fullWidth
