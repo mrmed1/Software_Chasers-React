@@ -36,7 +36,6 @@ describe('Login Page', () => {
 
         })
     })
-
     it('Login succefully with club', () => {
 
         window.localStorage.removeItem("token")
@@ -72,4 +71,5 @@ describe('Login Page', () => {
         })
 
     })
+
 })

@@ -101,7 +101,7 @@ export default function Login() {
                         Sign in
                     </Typography>
                     <Box component="form" noValidate sx={{mt: 1}}>
-                        <Toaster/>
+                        <Toaster containerClassName='uniquetest' />
                         <TextField
                             data-test="login"
                             margin="normal"
