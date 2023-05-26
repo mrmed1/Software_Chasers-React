@@ -103,6 +103,7 @@ function Container({
 
                 return (
                   <TableRow
+                  data-test="event-row"
                     hover
                     role="checkbox"
                     tabIndex={-1}

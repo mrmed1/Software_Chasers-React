@@ -65,6 +65,7 @@ const AddDialog = ({ open, onClose, onSubmit, title, attributes }) => {
                   </FormControl>
                 ) : (
                   <TextField
+                  data-test={attr.name}
                     required={attr.required}
                     key={attr.id}
                     margin="dense"
