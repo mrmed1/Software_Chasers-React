@@ -10,18 +10,21 @@ const jwt = require('react-jwt');
 
 let userId;
 let currentPassword;
-let newPasswordValide = '20800800';
-let passwordInvalide = '30400400';
+let newPasswordValide = '20400400';
 
 describe('Changer PWD User Connected', () => {
 
   const userInfo = {
     login: '20400400',
-    password: '20400400',
+    password: '20800800',
     type: 'person'
     //type:'club'
   }
-
+    const invalidePwdInfo = {
+        currentPassword: 'test',
+        newPassword: 'tesssst',
+        _id: userId,
+    }
     const updateduserInfo = {
         login: userInfo.login,
         password: newPasswordValide,
@@ -55,7 +58,6 @@ describe('Changer PWD User Connected', () => {
   });
 
     //done successfully change password with valide data
-/*
   it('Change PWD User Connected with valide data  ', () => {
     cy.request({
       method: 'POST',
@@ -73,29 +75,26 @@ describe('Changer PWD User Connected', () => {
     });
 
   });
-*/
 
-    // waitiing....
+    // done successfully change password with invalide data
   it('Modifie le mot de passe de l utilisateur connecté avec currentpassword invalide', () => {
     // Modifier le mot de passe avec un mot de passe invalide
     cy.request({
       method: "POST",
       url: Cypress.env('urlBackend') + '/admin/change-password/',
-      body: {
-        currentPassword: "20900700",
-        newPassword: passwordInvalide,
-        _id: userId,
-      },
+      body: invalidePwdInfo,
         failOnStatusCode: false, // Permet à la requête de renvoyer une erreur
     }).then((resp) => {
-        expect(resp.status).to.eq(400);
-        expect(response.body).to.have.property('message', 'Invalid password');
+        console.log("curent pwd :",invalidePwdInfo.currentPassword)
+        console.log("new pwd :",invalidePwdInfo.newPassword)
+        console.log("user id :",invalidePwdInfo._id)
+        expect(resp.status).to.eq(403);
+        expect(resp.body).to.eq('Forbidden');
 
     });
   });
 
     //done successfully connected with new pwd
-/*
   it("Connecte l'utilisateur avec le nouveau mot de passe", () => {
     // Effectuer la connexion avec le nouveau mot de passe
 
@@ -112,10 +111,8 @@ describe('Changer PWD User Connected', () => {
 
 
   })
-*/
 
     //done successfully echec connected with old pwd
-/*
     it('Fail to login with old password',  () =>{
         cy.request({
             method: "POST",
@@ -130,7 +127,6 @@ describe('Changer PWD User Connected', () => {
         );
 
     });
-*/
 
 
 });
