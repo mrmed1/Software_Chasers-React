@@ -1,0 +1,28 @@
+{
+    "newExperience": {
+
+        "jobTitle": "Software Engineer",
+        "jobType": "Full-time",
+        "companyName": "ABC Technologies",
+        "place": "New York",
+        "startDate": "2022-01-01",
+        "endDate": "2022-12-31",
+        "description": "Worked on developing web applications using modern technologies.",
+        "competences": ["JavaScript", "React", "Node.js"],
+        "role": "STUDENT"
+
+      },
+      "UpdatedExperience": {
+        "jobTitle": "Marketing Coordinator",
+        "jobType": "Part-time",
+        "companyName": "XYZ Marketing Agency",
+        "place": "Los Angeles",
+        "startDate": "2022-06-01",
+        "endDate": "2022-12-31",
+        "description": "Managed social media campaigns and conducted market research.",
+        "competences": ["Marketing Strategy", "Social Media Management", "Market Research"],
+        "role": "STUDENT"
+      }
+
+
+}
