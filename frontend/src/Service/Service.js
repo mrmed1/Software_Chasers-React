@@ -7,9 +7,7 @@ const API_URL = 'https://school.eastus.cloudapp.azure.com/api/admin/change-passw
 
 export function getUserIdFromToken(token){
     const decodedToken =jwt.decodeToken(token);
-    console.log('token decoded :',decodedToken._id);
     const userId = decodedToken._id;
-    console.log(userId)
     return userId;
 };
 
