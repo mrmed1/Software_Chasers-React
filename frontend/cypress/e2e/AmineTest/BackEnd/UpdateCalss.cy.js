@@ -6,7 +6,7 @@ describe("Student Api Test", () => {
   let StudentId;
   
  
-  let Url=Cypress.env('baseUrl')
+  let Url=Cypress.env('baseUrlBack')
 
   before(() => {
     // get the login function from commands
