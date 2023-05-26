@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 
 import MuiDrawer from "@mui/material/Drawer";
@@ -17,10 +18,12 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useLocation, Link } from "react-router-dom";
-import {Button} from "primereact/button";
- 
+import { Button } from "primereact/button";
+
 import SearchBar2 from "../Search/SearchBar2";
 import { connectedUser } from "../../Service/auth.service";
+import { API_URL } from "../../Config/config";
+import axios from "axios";
 
 const ROLE = connectedUser()?.role;
 
@@ -31,13 +34,26 @@ const Sidebar = ({
   handleDrawerOpen,
   open,
 }) => {
-  function logoutFn(){
-    localStorage.removeItem("jwtToken")
+  const [notifCounter, setNotifCounter] = useState(0);
+  const [notifications, setNotifications] = useState([]);
+  const [toggleNotificationMenu, setToggleNotificationMenu] = useState(false);
+  function logoutFn() {
+    axios.post(
+      `${API_URL}/notification/unsubscribeFromTopic`,
+      {
+        registrationToken: localStorage.getItem("notifToken"),
+      },
+      {
+        headers: { Authorization: localStorage.getItem("jwtToken") },
+      }
+    );
+    localStorage.removeItem("jwtToken");
+    localStorage.removeItem("userId");
     window.location.reload();
   }
   const drawerWidth = 240;
   const location = useLocation();
-  
+
   const filteredRoutes = routes.filter((route) =>
     route.allowedRoles.includes(userRole)
   );
@@ -107,7 +123,63 @@ const Sidebar = ({
     }),
   }));
 
-  
+  const getNotifications = () => {
+    axios
+      .get(`${API_URL}/notification/getNotifications`, {
+        headers: { Authorization: localStorage.getItem("jwtToken") },
+      })
+      .then((res) => {
+        setNotifications(res.data.notifications);
+        let i = 0;
+        res.data.notifications.map((notif) => {
+          if (!notif.seen) i++;
+        });
+        console.log("notifs", res.data.notifications);
+        console.log("notificaitons", res.data);
+        setNotifCounter(i);
+      });
+  };
+
+  useEffect(() => {
+    getNotifications();
+    const channel = new window.BroadcastChannel("sw-messages");
+    channel.addEventListener("message", (event) => {
+      getNotifications();
+    });
+    const channel2 = new window.BroadcastChannel("sw-messages-fr");
+    channel2.addEventListener("message", (event) => {
+      getNotifications();
+    });
+  }, []);
+
+  const updateNotificationsSeen = () => {
+    const notificationsIds = [];
+    notifications?.map((notification) => {
+      if (!notification.seen) notificationsIds.push(notification._id);
+    });
+    if (notificationsIds.length > 0)
+      axios
+        .put(
+          `${API_URL}/notification/updateNotificationsSeen`,
+          { notificationsIds },
+          {
+            headers: { Authorization: localStorage.getItem("jwtToken") },
+          }
+        )
+        .then((res) => {
+          setNotifications(res.data.updatedNotifications);
+          let i = 0;
+          res.data.updatedNotifications.map((notif) => {
+            if (!notif.seen) i++;
+          });
+          setNotifCounter(i);
+        });
+  };
+
+  const toggleNotifications = () => {
+    setToggleNotificationMenu(!toggleNotificationMenu);
+    if (toggleNotificationMenu === false) updateNotificationsSeen();
+  };
 
   return (
     <>
@@ -129,11 +201,96 @@ const Sidebar = ({
           <Typography variant="h6" noWrap component="div">
             Software_Chasers-React
           </Typography>
-          {ROLE === 'TEACHER' || ROLE === 'STUDENT' || ROLE === 'ALUMNI' ? <SearchBar2 /> : null}
+          {ROLE === "TEACHER" || ROLE === "STUDENT" || ROLE === "ALUMNI" ? (
+            <SearchBar2 />
+          ) : null}
 
-          <Button  onClick={logoutFn} style={{marginLeft:"auto",backgroundColor:"red"}}><strong style={{color: "white"}}>Logout</strong> </Button>
+          <div
+            onClick={() => toggleNotifications()}
+            style={{
+              marginLeft: "auto",
+              backgroundColor: "white",
+              borderRadius: "50%",
+              display: "flex",
+              padding: "5px",
+              cursor: "pointer",
+              position: "relative",
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="25"
+              viewBox="0 96 960 960"
+              width="25"
+            >
+              <path d="M160 856v-60h84V490q0-84 49.5-149.5T424 258v-29q0-23 16.5-38t39.5-15q23 0 39.5 15t16.5 38v29q81 17 131 82.5T717 490v306h83v60H160Zm320-295Zm0 415q-32 0-56-23.5T400 896h160q0 33-23.5 56.5T480 976ZM304 796h353V490q0-74-51-126t-125-52q-74 0-125.5 52T304 490v306Z" />
+            </svg>
+            <div
+              style={{
+                color: "white",
+                backgroundColor: "red",
+                borderRadius: "50%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "20px",
+                width: "20px",
+                cursor: "pointer",
+                position: "absolute",
+                top: "-10px",
+                right: "-8px",
+                zIndex: 99,
+              }}
+            >
+              {notifCounter}
+            </div>{" "}
+            {toggleNotificationMenu && (
+              <div
+                style={{
+                  color: "white",
+                  backgroundColor: "white",
+                  borderRadius: "10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "start",
+                  alignItems: "start",
+                  padding: "20px",
+                  gap: "20px",
+                  height: "200px",
+                  width: "250px",
+                  overflowX: "hidden",
+                  cursor: "pointer",
+                  position: "absolute",
+                  boxShadow: "0px 0px 1px 2px black",
+                  border: "5px",
+                  borderColor: "black",
+                  top: "110%",
+                  right: "0",
+                  zIndex: 99,
+                }}
+              >
+                {notifications?.map((notif) => (
+                  <div style={{ color: "black" }} key={notif._id}>
+                    {notif.title}
+                    <br></br>
+                    {notif.body}
+                    <br></br>
+                    {notif.createdAt?.slice(0, 10)}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <Button
+            onClick={logoutFn}
+            style={{ marginLeft: "auto", backgroundColor: "red" }}
+          >
+            <strong style={{ color: "white" }}>Logout</strong>{" "}
+          </Button>
         </Toolbar>
-      </AppBar>²
+      </AppBar>
+      ²
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -146,53 +303,49 @@ const Sidebar = ({
         </DrawerHeader>
         <Divider />
         <List>
-          {filteredRoutes.map((route,key) => {
-            return(
-<ListItem key={key} disablePadding sx={{ display: "block" }}>
-               
-               <Link
-                 style={{ textDecoration: "none" }}
-                 to={route.layout + route.path}
-                 // tag={NavLinkRRD}
-                 // onClick={closeCollapse}
-                 className={
-                   location.pathname === route.layout + route.path ? "active" : ""
-                 }
-               >
-                 <ListItemButton
-                   sx={{
-                     minHeight: 48,
-                     justifyContent: open ? "initial" : "center",
-                     px: 2.5,
-                   }}
-                 
-                 >
-                   <ListItemIcon
-                     sx={{
-                       minWidth: 0,
-                       mr: open ? 3 : "auto",
-                       justifyContent: "center",
-                     }}
-                   >
-                     {route.icon}
-                   </ListItemIcon>
-                   <ListItemText
-                     primary={route.name}
-                     sx={{ opacity: open ? 1 : 0 }}
-                   />
-                 </ListItemButton>
-               </Link>
-             </ListItem>
-            )
-            
+          {filteredRoutes.map((route, key) => {
+            return (
+              <ListItem key={key} disablePadding sx={{ display: "block" }}>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to={route.layout + route.path}
+                  // tag={NavLinkRRD}
+                  // onClick={closeCollapse}
+                  className={
+                    location.pathname === route.layout + route.path
+                      ? "active"
+                      : ""
+                  }
+                >
+                  <ListItemButton
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {route.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={route.name}
+                      sx={{ opacity: open ? 1 : 0 }}
+                    />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+            );
           })}
         </List>
         <Divider />
       </Drawer>
-      
-
     </>
- 
   );
 };
 Sidebar.defaultProps = {

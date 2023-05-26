@@ -1,6 +1,12 @@
 import DataTable from "../Table/DataTable";
 import { useState, useEffect } from "react";
 import * as api from "../../Service/EventServices";
+import * as AdminService from "../../Service/AdminService";
+
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 import { Backdrop } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 export default function Event() {
@@ -8,6 +14,11 @@ export default function Event() {
   const [univ, setUniv] = useState({});
   const [loading, setLoading] = useState(false);
   const [reload, setReload] = useState(false);
+  const [dataFiltered, setDataFiltered] = useState([]);
+  const [univYears, setUnivYears] = useState([]);
+  const [selectedUnivYears, setSelectedUnivYears] = useState("0");
+  
+
 
   useEffect(() => {
     async function fetchData() {
@@ -17,8 +28,15 @@ export default function Event() {
         const univ = await api.getUniv();
         setUniv(univ);
         setEvents(res);
+        setDataFiltered(res);
+
         setLoading(false);
         console.log(events);
+        res = await AdminService.fetchUnivYear();
+        res.map((univyear) => {
+          univyear.start = univyear.start?.toString().slice(0, 4);
+          univyear.end = univyear.end?.toString().slice(0, 4);
+        });
       } catch (e) {
         setLoading(false);
         console.log(e);
@@ -153,9 +171,51 @@ export default function Event() {
 
   };
 
+  const handleChangeUnivYear = (e) => {
+    setSelectedUnivYears(e.target?.value);
+
+    if (e.target?.value === "0") {
+      setDataFiltered(events);
+      return;
+    }
+
+    let startTemp = e.target?.value.toString().slice(0, 4);
+    let endTemp = e.target?.value?.toString().slice(5, 9);
+    let filtered = events.filter(
+      (event) =>
+        event.startDate?.toString().slice(0, 4) === startTemp &&
+        event.endDate?.toString().slice(0, 4) === endTemp
+    );
+    setDataFiltered(filtered);
+    return;
+  };
+
   return (
     <>
-     
+      <FormControl fullWidth style={{ width: "250px" }}>
+          <InputLabel id="demo-simple-select-label">
+            Annee Universitaire
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={selectedUnivYears}
+            label="Age"
+            onChange={(e) => {
+              handleChangeUnivYear(e);
+            }}
+          >
+            <MenuItem value={"0"}>Tous</MenuItem>
+            {univYears.map((univYear) => {
+              return (
+                <MenuItem value={univYear.start + "/" + univYear.end}>
+                  {univYear.start}/{univYear.end}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+
      <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}

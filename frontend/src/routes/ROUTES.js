@@ -31,7 +31,9 @@ import EventContainer from "../components/EventContainer/EventContainer";
 import Admin from "../components/CrudAdmin/Admin";
 import CrudOffres from "../components/CRUD Offres/CrudOffres";
 import AlumniStatistics from "../components/StatistiquesAlumni/AlumniStatistics";
+import UnivYear from "../views/adminViews/UnivYear";
 import StatChomage from "../components/StatistiquesChomage/StatChomage";
+import ExcelImport from "../components/ExcelImport";
 const ROUTES = [
 
     {
@@ -42,6 +44,7 @@ const ROUTES = [
         layout: "/students",
         allowedRoles: ["ADMIN"]
     },
+   
     {
         path: "/",
         name: "List Enseignant",
@@ -282,13 +285,30 @@ const ROUTES = [
         allowedRoles: ["ADMIN"],
     },
     {
+        path: "/university-year",
+        name: "University Year",
+        icon: <InboxIcon/>,
+        element: <UnivYear/>,
+        layout: "/admin",
+        allowedRoles: ["ADMIN"]
+    },
+    {
         path: "/",
         name: "Statistics Chomage",
         icon: <InboxIcon />,
         element: <StatChomage/>,
         layout: "/StatChomage",
         allowedRoles: ["ADMIN"],
+    },
+    {
+        path: "/ExcelImport",
+        name: "ExcelImport",
+        icon: <InboxIcon/>,
+        element: <ExcelImport />,
+        layout: "/ExcelImport",
+        allowedRoles: ["ADMIN"],
     }
+
 
 ]
 export default ROUTES

@@ -2,6 +2,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import * as api from "../../Service/EventService/EventService";
 import { getAllEventClub } from "../../Service/EventService/EventService";
+import * as AdminService from "../../Service/AdminService";
 
 import { Button } from "primereact/button";
 
@@ -18,11 +19,17 @@ import TableBody from "@mui/material/TableBody";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
 import EventClubDetailsC from '../EventContainer/EventClubDetailsC'
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 function HomeEvent() {
   let history = useNavigate();
   const [data, setData] = useState([]);
-
+  const [dataFiltered, setDataFiltered] = useState([]);
+  const [univYears, setUnivYears] = useState([]);
+  const [selectedUnivYears, setSelectedUnivYears] = useState("0");
   
 
 
@@ -30,11 +37,18 @@ function HomeEvent() {
   useEffect(() => {
     async function getAllEventClub() {
       try {
-        const res = await api.getAllEventClub();
+        let res = await api.getAllEventClub();
         console.log("res",res)
         setData(res);
+        setDataFiltered(res);
         /*  console.log(post);
                   console.log(data);*/
+                res = await AdminService.fetchUnivYear();
+                    res.map((univyear) => {
+                      univyear.start = univyear.start?.toString().slice(0, 4);
+                      univyear.end = univyear.end?.toString().slice(0, 4);
+                    });
+                    setUnivYears(res);
       } catch (e) {
         console.log(e);
       }
@@ -65,12 +79,55 @@ function HomeEvent() {
       history("/HomeEvent");
     }
   };
+  const handleChangeUnivYear = (e) => {
+    setSelectedUnivYears(e.target?.value);
+
+    if (e.target?.value === "0") {
+      setDataFiltered(data);
+      return;
+    }
+
+    let startTemp = e.target?.value.toString().slice(0, 4);
+    let endTemp = e.target?.value?.toString().slice(5, 9);
+    let filtered = data.filter(
+      (event) =>
+        event.startDate?.toString().slice(0, 4) === startTemp &&
+        event.endDate?.toString().slice(0, 4) === endTemp
+    );
+    setDataFiltered(filtered);
+    return;
+  };
 
   return (
     <Fragment>
       <Toaster />
       <h2 style={{ textAlign: "center" }}>List of Event Club</h2>
       <div style={{ margin: "10rem" }}>
+
+
+        <FormControl fullWidth style={{ width: "250px" }}>
+          <InputLabel id="demo-simple-select-label">
+            Annee Universitaire
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={selectedUnivYears}
+            label="Age"
+            onChange={(e) => {
+              handleChangeUnivYear(e);
+            }}
+          >
+            <MenuItem value={"0"}>Tous</MenuItem>
+            {univYears.map((univYear) => {
+              return (
+                <MenuItem value={univYear.start + "/" + univYear.end}>
+                  {univYear.start}/{univYear.end}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
         <Table striped bordered hover size="sm">
           <TableHead>
             <TableRow>
@@ -84,8 +141,8 @@ function HomeEvent() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data && data.length > 0
-              ? data.map((item) => {
+            {data && dataFiltered.length > 0
+              ? dataFiltered.map((item) => {
                   return (
                     <TableRow>
                       <TableCell>{item.name}</TableCell>
