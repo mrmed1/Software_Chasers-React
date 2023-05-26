@@ -5,7 +5,7 @@ describe("Event Api Test", () => {
   let saveEvent;
   let EventUpdated;
   let currentUniv;
-  let Url=Cypress.env('baseUrl')
+  let Url=Cypress.env('baseUrlBack')
 
   before(() => {
     // get the login function from commands
