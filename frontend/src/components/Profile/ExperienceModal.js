@@ -91,7 +91,8 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
                 size="big"
                 style={{ float: "right", cursor: "pointer", marginLeft: "8px" }}
                 disabled={aUthorization}
-              />
+                data-test="experienceModal"
+              /> 
            
        
        
@@ -107,6 +108,7 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
               onChange={(e) => setJobTitle(e.target.value)}
               required
               value={jobTitle}
+              data-test="jobTitle"
             />
             <Form.Input
               fluid
@@ -114,6 +116,7 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
               placeholder="company Name"
               onChange={(e) => setCompanyName(e.target.value)}
               required
+              data-test="companyName"
               value={companyName}
             />
             <Form.Select
@@ -124,6 +127,7 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
               onChange={handleJobTypeChange}
               required
               value={jobType}
+              data-test="jobType"
             />
           </Form.Group>
 
@@ -136,6 +140,7 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
               required
               value={startDate}
               type="date"
+              data-test="startDate"
             />
             <Form.Input
               fluid
@@ -144,6 +149,7 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
               onChange={(e) => setEndDate(e.target.value)}
               required
               value={endDate}
+              data-test="endDate"
               type="date"
             />
             <Dropdown
@@ -155,6 +161,7 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
               options={competenceList}
               onChange={handleDropdownChange}
               value={competences}
+              data-test="competences"
             />
           </Form.Group>
           <Form.Group inline>
@@ -167,6 +174,7 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
               required
               checked={place === "Hybride"}
               style={{ marginRight: "15px" }}
+              data-test="placeHybride"
             />
             <Radio
               name="place"
@@ -175,6 +183,7 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
               onChange={(e, value) => setPlace(value.value)}
               required
               checked={place === "Online"}
+            
             />
           </Form.Group>
 
@@ -184,9 +193,11 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
             onChange={(e) => setDesciption(e.target.value)}
             required
             value={description}
+            data-test="experienceDesctiption"
           />
           <Form.Checkbox label="I agree to the Terms and Conditions" />
           <Form.Button
+           data-test="experiencebtn"
             color="blue"
             disabled={createExperienceMutation.isLoading}
             loading={createExperienceMutation.isLoading}

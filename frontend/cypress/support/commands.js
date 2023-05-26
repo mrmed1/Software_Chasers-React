@@ -32,6 +32,7 @@ Cypress.Commands.add('getToast', () => {
     return cy.get('.uniquetest .toast');
 });
 
+
 Cypress.Commands.add("login", () => {
     cy.request({
         method: 'POST', url: Cypress.env('urlBackend') + '/auth', body: {
@@ -40,7 +41,14 @@ Cypress.Commands.add("login", () => {
             type: "person"
         }
     }).then((response) => {
-        console.log(response.body)
         window.localStorage.setItem(TOKEN_KEY, response.body)
     })
 })
+
+Cypress.Commands.add("getByName", (selector) => {
+  return cy.get(`[name=${selector}]`);
+});
+Cypress.Commands.add("getById", (selector) => {
+  return cy.get(`[id=${selector}]`);
+});
+
