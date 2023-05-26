@@ -395,7 +395,9 @@ export default function UpdateProfile() {
                   }
                   trigger={
                     <Icon
-                      onClick={onClickIdon}
+                    id = "toggleVisibility"
+                    data-test="toggleVisibility"
+                    onClick={onClickIdon}
                       name={data?.isPublic ? "world" : "privacy"}
                       style={{
                         cursor: "pointer",

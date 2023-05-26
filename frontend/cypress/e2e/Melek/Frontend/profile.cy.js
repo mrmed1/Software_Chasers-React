@@ -61,8 +61,8 @@ const reactUrl = "http://localhost:3000";
     cy.getByData("fullnameText").should("have.text", `Melek SAADI`);
   });
 
-  it("Toggle The account visibility ", () => {
-    cy.get(":nth-child(9) > .green").click(); // Click on the button
+  it.only("Toggle The account visibility ", () => {
+    cy.getByData("toggleVisibility").click(); // Click on the button
     cy.wait(1000);
     if (Ganikas?.isPublic) {
       cy.get(":nth-child(9) > .red").should("exist"); // Assert that the button with class '.green' exists
