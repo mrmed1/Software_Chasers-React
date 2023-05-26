@@ -149,20 +149,20 @@ export default function UpdateProfile() {
     }
   }
   let style;
-  const darkMode = {
-    card: { backgroundColor: "#23283e" },
-    header: { color: "#cdcdff" },
-    btn: { color: "#5bc0de " },
-    text: { color: "#bdbddd" },
-    text2: { color: "#f2f2f2" },
-  };
-  const lightMode = {
-    card: { backgroundColor: "" },
-    header: { color: "" },
-    btn: { color: "" },
-    text: { color: "black" },
-    text2: { color: "" },
-  };
+    const darkMode = {
+      card: { backgroundColor: "#23283e" },
+      header: { color: "#cdcdff" },
+      btn: { color: "#5bc0de " },
+      text: { color: "#bdbddd" },
+      text2: { color: "#f2f2f2" },
+    };
+    const lightMode = {
+      card: { backgroundColor: "" },
+      header: { color: "" },
+      btn: { color: "" },
+      text: { color: "black" },
+      text2: { color: "" },
+    };
 
   if (data?.style === "dark") {
     style = darkMode;
@@ -202,7 +202,7 @@ export default function UpdateProfile() {
         }}
       />)}
       {data && (
-        <Card centered fluid style={style.card}>
+        <Card centered fluid style={style.card} data-test="card">
           <Card.Content>
             {data?.role === "STUDENT" && (
               <Button color="green" floated="right" onClick={handleUpdateClass}>
@@ -300,7 +300,7 @@ export default function UpdateProfile() {
             </Modal>
 
             <Card.Header>
-              <h1 style={style.header}>Personal Informations </h1>
+              <h1 style={style.header} data-test="header">Personal Informations </h1>
 
               <Portal onClose={handleClose} open={open}>
                 <Segment
@@ -376,11 +376,14 @@ export default function UpdateProfile() {
                   onClick={toggleStyleIcon}
                   color={data?.style === "dark" ? "teal" : "grey"}
                   size={"big"}
+                  data-test="toggleStyleBtn"
                   name={data?.style === "dark" ? "sun" : "moon"}
                   style={{
                     cursor: "pointer",
                     float: "right",
+                
                     marginRight: "25px",
+                    
                   }}
                 />
                 <Popup

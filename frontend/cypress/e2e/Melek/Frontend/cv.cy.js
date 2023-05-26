@@ -13,89 +13,205 @@ beforeEach(() => {
   cy.visit(`${reactUrl}/students/profile`);
 });
 describe("CV Page ", () => {
-  it("it can Create new Experience ", () => {
-    cy.wait(1000);
-    cy.get(":nth-child(1) > .content > .pencil").click();
-    cy.getByData("jobTitle").type("Software Developer");
-    cy.getByData("companyName").type("ABC Company");
 
-    cy.getByData("jobType").click(); // Open the dropdown
-    cy.contains("div[role='option']", "Engineering").click(); // Select the option by its text
+  describe("Experience ! ", () => {
 
-    cy.getByData("startDate").type("2022-01-01");
+    it("it can Create new Experience ", () => {
 
-    cy.getByData("endDate").type("2022-12-31");
-    cy.getByData("competences").click(); // Open the dropdown
+      cy.wait(1000);
+     cy.get(':nth-child(1) > .content > .pencil').click();
 
-    const competences = ["HTML", "CSS", "Angular"];
+      cy.getByData("jobTitle").type("Software Developer");
+      cy.getByData("companyName").type("ABC Company");
 
-    competences.forEach((competence) => {
-      cy.contains("div[role='option']", competence).click(); // Select each option by its text
-    });
-    cy.getByData("placeHybride").click();
+      cy.getByData("jobType").click();
+      cy.contains("div[role='option']", "Engineering").click();
 
-    cy.getByData("experienceDesctiption").type(
-      "Worked on frontend development projects."
-    );
+      cy.getByData("startDate").type("2022-01-01");
 
-    // Select "Hybride" radio button
-    cy.getByData("experiencebtn").click();
-    cy.wait(1000);
-    cy.get("body").click();
-    cy.get("body").type("{esc}");
+      cy.getByData("endDate").type("2022-12-31");
+      cy.getByData("competences").click(); // Open the dropdown
 
-    cy.contains("h2", "Software Developer");
-    cy.contains("strong", "ABC Company");
-    cy.contains("h4", "Worked on frontend development projects.");
+      const competences = ["HTML", "CSS", "Angular"];
 
-    cy.contains("strong", "html, css, angular");
-  });
+      competences.forEach((competence) => {
+        cy.contains("div[role='option']", competence).click(); // Select each option by its text
+      });
+      cy.getByData("placeHybride").click();
 
-  it("can update the added Experience", () => {
-    cy.wait(1000);
-    cy.get(':nth-child(6) > .header > [data-test="experienceModal"]')
-      .last()
-      .click();
-    cy.wait(1000);
-    // Update the fields with new values
-    cy.getByData("jobTitle").type(" Updated");
-    cy.getByData("companyName").clear().type("Updated ABC Company");
-    cy.getByData("jobType").click(); // Open the dropdown
-    cy.contains("div[role='option']", "Sales").click();
-    // Update job type
-    cy.getByData("startDate").clear().type("2023-01-01"); // Update start date
-    cy.getByData("endDate").clear().type("2023-12-31"); // Update end date
-    cy.getByData("competences").click(); // Open the dropdown
+      cy.getByData("experienceDesctiption").type(
+        "Worked on frontend development projects."
+      );
 
-    // Clear existing competences and select new ones
+      // Select "Hybride" radio button
+      cy.getByData("experiencebtn").click();
+      cy.wait(1000);
+      cy.get("body").click();
+      cy.get("body").type("{esc}");
 
-    const updatedCompetences = ["React", "MySQL", "Java"];
-    updatedCompetences.forEach((competence) => {
-      cy.contains("div[role='option']", competence).click();
+      cy.contains("h2", "Software Developer");
+      cy.contains("strong", "ABC Company");
+      cy.contains("h4", "Worked on frontend development projects.");
+
+      cy.contains("strong", "html, css, angular");
     });
 
-    cy.getByData("placeHybride").click(); // Select "Hybride" radio button
-    cy.getByData("experienceDesctiption").clear().type("Updated description"); // Update description
+    it("can update the added Experience", () => {
+      cy.wait(1000);
+      cy.get(`[data-test="experienceModal-Software Developer"]`).click();
+      cy.wait(1000);
+      // Update the fields with new values
+      cy.getByData("jobTitle").type(" Updated");
+      cy.getByData("companyName").clear().type("Updated ABC Company");
+      cy.getByData("jobType").click(); // Open the dropdown
+      cy.contains("div[role='option']", "Sales").click();
+      // Update job type
+      cy.getByData("startDate").clear().type("2023-01-01"); // Update start date
+      cy.getByData("endDate").clear().type("2023-12-31"); // Update end date
+      cy.getByData("competences").click(); // Open the dropdown
 
-    cy.getByData("experiencebtn").click(); // Click the update button
-    cy.wait(1000);
-    cy.get("body").type("{esc}");
+      // Clear existing competences and select new ones
 
-    // Assert the updated information
-    cy.contains("h2", "Software Developer Updated");
-    cy.contains("strong", "Updated ABC Company");
-    cy.contains("h4", "Updated description");
-    cy.contains("strong", "html, css, angular, react, mysql, javascript");
-  });
+      const updatedCompetences = ["React", "MySQL", "Java"];
+      updatedCompetences.forEach((competence) => {
+        cy.contains("div[role='option']", competence).click();
+      });
+
+      cy.getByData("placeHybride").click(); // Select "Hybride" radio button
+      cy.getByData("experienceDesctiption").clear().type("Updated description"); // Update description
+
+      cy.getByData("experiencebtn").click(); // Click the update button
+      cy.wait(1000);
+      cy.get("body").type("{esc}");
+
+      // Assert the updated information
+      cy.contains("h2", "Software Developer Updated");
+      cy.contains("strong", "Updated ABC Company");
+      cy.contains("h4", "Updated description");
+      cy.contains("strong", "html, css, angular, react, mysql, javascript");
+    });
+
+    it("can delete the last Added Experience", () => {
+      cy.get(`[data-test="deleteExperienceModal-Software Developer Updated"]`).click();
+    
+      cy.get(".primary").click();
+      cy.get("body").type("{esc}");
+
+      // Assert that the experience is no longer present in the UI
+      cy.contains("h2", "Software Developer Updated").should("not.exist"); 
+    });
+  })
+  describe("Education ! ", () => {
+    it("it can Create new Experience ", () => {
+      cy.get(':nth-child(2) > .content > .pencil').click();
+      cy.wait(1000)
+      cy.getByData("diploma").type("Bachelor's Degree");
+      cy.getByData("university").type("ABC University");
+      cy.getByData("startDate").type("2022-01-01");
+      cy.getByData("endDate").type("2022-12-31");
+
+      const selectedClubs = ["Orenda", "IGA"];
+      selectedClubs.forEach((club) => {
+        cy.getByData("clubs").click();
+        cy.contains("div[role='option']", club).click();
+      });
+
+      cy.getByData("savingEducation").click()
+      cy.wait(1000)
+      cy.get("body").type("{esc}");
+
+      cy.contains("h2", "Bachelor's Degree");
+      cy.contains("strong", "ABC University");
+      cy.contains("from 2022-01-01 to 2022-12-31");
+
+    });
+
+    it("it can update Education", () => {
+      // Click on the pencil icon of the second education item
+      cy.get(`[data-test="educationModal-Bachelor's Degree"]`).click();
+      cy.wait(1000);
+      cy.getByData("diploma").type(" Updated");
+      cy.getByData("university").clear().type("Updated ABC University");
+      cy.getByData("startDate").clear().type("2023-01-01");
+      cy.getByData("endDate").clear().type("2023-12-31");
+      cy.getByData("clubs").click();
+      cy.contains("div[role='option']", "J2I").click();
+    
+   
   
-  it("can delete the last Added Experience", () => {
-    cy.get(
-      ':nth-last-child(1) > .header > div > [data-test="deleteExperienceModal"]'
-    ).click();
-    cy.get(".primary").click();
+    
+      // Click the submit button to save the updates
+     
+      cy.getByData("savingEducation").click();
+      cy.wait(1000);
+      cy.get("body").type("{esc}");
+    
+     
+      cy.contains("h2", "Bachelor's Degree Updated");
+      cy.contains("strong", "Updated ABC University");
+      cy.contains("from 2023-01-01 to 2023-12-31");
+    });
+    
+it("it can delete that  Education", () => {
+ 
+
+  cy.get(`[data-test="deleteEducationModal-Bachelor's Degree Updated"]`).click();
+       cy.get(".primary").click();
+        cy.get("body").type("{esc}");
+
+        cy.contains("h2", "Bachelor's Degree Updated").should("not.exist");
+        cy.contains("strong", "Updated ABC University").should("not.exist");
+        cy.contains("from 2023-01-01 to 2023-12-31").should("not.exist");
+})
+
+
+  });
+
+  describe("Skills ! ",()=>{
+
+    it("Should add skills !",()=>{
+
+      cy.getById('SkillsModal').click()
+      cy.getById('SKILLSlIST').click()
+      const selectedSkills = ["Vue.js", "Docker"];
+     selectedSkills.forEach((skill) => {
+    cy.contains("div[role='option']", skill).click();
+  })
+
+  
+  cy.get('button[data-test="addSkills"]').click({ force: true });
+  cy.wait(1000);
+  cy.get("body").type("{esc}");
+
+
+        cy.contains(".skills__list-item", "vue").should("be.visible");
+        cy.contains(".skills__list-item", "docker").should("be.visible");
+    })
+
+    it("Should delete the  skills added  !",()=>{
+      cy.wait(1000); // Adjust the wait time as needed
+      cy.getByData(`Deleteskill-vue`).click();
+      cy.get('.primary').click()
+     cy.wait(1000);
     cy.get("body").type("{esc}");
 
-    // Assert that the experience is no longer present in the UI
-    cy.contains("h2", "Software Developer Updated").should("not.exist");
-  });
+    //-----------
+    cy.getByData(`Deleteskill-docker`).click();
+    cy.get('.primary').click()
+   cy.wait(1000);
+   cy.get("body").type("{esc}");
+
+   cy.contains(".skills__list-item", "vue").should("not.exist");
+   cy.contains(".skills__list-item", "docker").should("not.exist");
+
+
+
+        
+    })
+
+
+
+  })
+
+
 });
