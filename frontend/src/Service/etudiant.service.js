@@ -15,7 +15,7 @@ export function GetAllStudents() {
 }
 
 
-
+ 
 export function CreateStudent(student) {
     return axios.post(`${API_URL}/Persons`, student)
         .then(response => {
@@ -30,6 +30,7 @@ export function UpdateStudent(student) {
             return response.data;
         });
 }
+
 
 export function DeleteStudent(id) {
     return axios.delete(`${API_URL}/Persons/${id}`)

@@ -7,7 +7,7 @@ import {Button} from "primereact/button";
 
 // import { Button } from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-
+import { connectedUser } from "../../Service/auth.service";
 import './HomeEvent.css';
 import toast, {Toaster} from "react-hot-toast";
 import Table from '@mui/material/Table';
@@ -19,6 +19,9 @@ import TableBody from "@mui/material/TableBody";
 function HomeEvent() {
     let history = useNavigate();
     const [data, setData] = useState([]);
+    
+    const user = connectedUser();
+ 
 
 
     useEffect(() => {
@@ -107,6 +110,10 @@ function HomeEvent() {
                 </Table>
                 <br></br>
                 <div style={{display:"flex",justifyContent:"center"}}>
+                     {user?.role === 'student' ? (
+        <p>Vous ne pouvez pas ajouter d'événement en tant qu'étudiant.</p>
+     
+      ) : (
                     <Button
                         style={{
                             backgroundColor: "#088dd5",
@@ -123,6 +130,8 @@ function HomeEvent() {
                         }}>
                         Add Event
                     </Button>
+                    
+                    )}
                 </div>
 
 

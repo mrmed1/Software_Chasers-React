@@ -20,9 +20,16 @@ import SignUp from "./components/SignUp/SignUp";
 import Home from "./components/Accueil/Home";
 import StudentAccount from "./views/studentsViews/StudentAccount";
 import CreateEventClub from "./components/EventClub/CreateEventClub/CreateEventClub";
+
+import SubscribeEvent from "./components/EventClub/SubscribeEvent/SubscribeEvent";
+ 
+import EventDetails from "./components/EventClub/EventDetails";
 import HomeEvent from "./components/EventClub/HomeEvent";
 import HomeClub from "./components/Club/HomeClub";
  import AddClub from "./components/Club/Add";
+import ExcelImport from './components/ExcelImport'; 
+
+
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -82,9 +89,15 @@ function App() {
                         <Route exact path="/AddEvent" element={<CreateEventClub />} />
                         <Route exact path="/HomeEvent" element={<HomeEvent />} />
 
+                        
+
                         <Route exact path="/HomeClub" element={<HomeClub />} />
+                        <Route exact path="/SubscribeEvent" element={<SubscribeEvent />} />
+                        <Route exact path="/EventDetails" element={<EventDetails/>} />
+                        <Route exact path="/ExcelImport" element={<ExcelImport />} />
 
                         <Route exact path="/create" element={<AddClub />} />
+
                     </Routes>
                 </Box>
 

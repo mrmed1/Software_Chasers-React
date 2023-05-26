@@ -9,7 +9,7 @@ export const addEventClub = async (EventClub) => {
   const result = await axios.post("https://school.eastus.cloudapp.azure.com/api/EventClub", EventClub)
   console.log(result.data)
   return result.data;
-}
+} 
 
 export const getAllEventClub = async () => {
     // await delay(500)
@@ -17,14 +17,15 @@ export const getAllEventClub = async () => {
     console.log(result.data)
     return result.data;
   }
-/* 
+ 
   export const updateEventClub = async (id, EventClub) => {
-    const result = await Axios.put(
+    const result = await axios.put(
       "https://school.eastus.cloudapp.azure.com/api/EventClub/" + id,
-      Club,header()
+      EventClub
     )
     return result.data
-  }*/
+  }
+ 
  
   export const deleteEventClub = async (id) => {
     try {

@@ -9,6 +9,9 @@ import UpdatePwd from "../components/PwdUpdate/PwdUpdate";
 import StudentAccount from "../views/studentsViews/StudentAccount";
 import CreateEventClub from "../components/EventClub/CreateEventClub/CreateEventClub";
 import HomeEvent from "../components/EventClub/HomeEvent";
+import EventDetails from "../components/EventClub/EventDetails";
+
+import SubscribeEvent from "../components/EventClub/SubscribeEvent/SubscribeEvent";
 
 import HomeClub from "../components/Club/HomeClub";
 
@@ -84,13 +87,30 @@ const ROUTES = [
         element: <HomeEvent />,
         layout: "/HomeEvent",
         allowedRoles: ["ADMIN"],
-    },
+    },   
     {
         path: "/",
         name: "All Club",
         icon: <InboxIcon/>,
         element: <HomeClub />,
         layout: "/HomeClub",
+        allowedRoles: ["ADMIN"],
+    },   
+    {
+        path: "/",
+        name: "Subscribe Club ",
+        icon: <InboxIcon/>,
+        element: <SubscribeEvent />,
+        layout: "/SubscribeEvent",
+        allowedRoles: ["ADMIN"],
+    }
+    ,   
+    {
+        path: "/",
+        name: "Event Details Club ",
+        icon: <InboxIcon/>,
+        element: <EventDetails />,
+        layout: "/EventDetails",
         allowedRoles: ["ADMIN"],
     }
 ]

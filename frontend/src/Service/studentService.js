@@ -3,7 +3,7 @@ import axios from "../Config/interceptors";
 import {API_URL} from "../Config/config";
 
 const URI =API_URL;
-
+ 
 
 
 export function getcV  (){
@@ -29,7 +29,7 @@ export function addSkills(Skills,id){
 }
 export function addExperience (Experience,id){
     return axios.post(`${URI}/student/Experience/${id}`,Experience).then((r)=>r.data.data)
-}
+} 
 
 export function addEducation(Education,id){
     return axios.post(`${URI}/student/Education/${id}`,Education).then((r)=>r.data.data)

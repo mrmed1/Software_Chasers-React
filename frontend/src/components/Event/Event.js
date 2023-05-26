@@ -90,13 +90,13 @@ export default function Event() {
       maxRows: 6,
       detailsAttribute: true,
       addAttribute:true,
-      editAttribute: true,
+      editAttribute: true, 
       displayed:true,
       object: false,
       required: true
     },
     {
-      name: "univId.name",
+      name: "univId.name", 
       label: "Univ",
       id: "Univ",
       multiline: false,

@@ -3,7 +3,7 @@ import axios from "../Config/interceptors";
 import {API_URL} from "../Config/config";
 
 const URI =API_URL;
-
+ 
 export const addEvent = async (event) => {
 
   console.log('before add'+event)

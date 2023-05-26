@@ -106,6 +106,8 @@ export default function SignUp() {
                                     name="nom"
                                     autoComplete="family-name"
                                     onChange={(event) => setAllumni({ ...allumni, firstname: event.target.value })}
+                                  
+
                                 />
                             </Grid>
                             {/*prenom*/}

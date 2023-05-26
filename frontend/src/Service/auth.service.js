@@ -11,7 +11,7 @@ export const auth = async (login, password,type) => {
         console.log(error);
         throw new Error(error.response.data);
 
-    }
+    } 
 };
 
 export const logout = () => {

@@ -8,7 +8,7 @@ export const addEnseignant = async (enseignant) => {
     console.log(enseignant);
   const result = await axios.post(`${API_URL}/Persons`, enseignant)
   return result.data;
-}
+} 
 
 export const fetchEnseignants = async () => {
     // await delay(500)

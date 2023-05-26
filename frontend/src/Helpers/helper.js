@@ -22,6 +22,36 @@ export const jobTypesList = jobTypes.map((type) => ({
     value: type,
 }));
 
+
+export const UniversityList = [
+    { key: "isg", text: "ISG", value: "isg" },
+    { key: "isamm", text: "ISAMM", value: "isamm" },
+    { key: "ihec", text: "IHEC", value: "ihec" },
+    { key: "fseg", text: "FSEG", value: "fseg" },
+    { key: "enit", text: "ENIT", value: "enit" },
+    { key: "insat", text: "INSAT", value: "insat" },
+    { key: "esprit", text: "ESPRIT", value: "esprit" },
+    { key: "emi", text: "EMI", value: "emi" },
+    { key: "iutm", text: "IUTM", value: "iutm" },
+    { key: "supcom", text: "SUP'COM", value: "supcom" },
+    { key: "facmed", text: "Faculté de Médecine de Tunis", value: "facmed" },
+    { key: "isie", text: "ISIE", value: "isie" },
+    { key: "ensi", text: "ENSI", value: "ensi" },
+    { key: "enim", text: "ENIM", value: "enim" },
+    { key: "isitcom", text: "ISITCOM", value: "isitcom" },
+    { key: "ihet", text: "IHET", value: "ihet" },
+    { key: "esae", text: "ESAE", value: "esae" },
+    { key: "esi", text: "ESI", value: "esi" },
+    { key: "ismt", text: "ISMT", value: "ismt" },
+    { key: "fst", text: "Faculté des Sciences de Tunis", value: "fst" },
+];
+
+
+
+
+
+
+
 export const competenceList = [
     { key: "angular", text: "Angular", value: "angular" },
     { key: "css", text: "CSS", value: "css" },

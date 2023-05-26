@@ -69,7 +69,7 @@ export default function ListEtudiant() {
     });
     const createStudentMutation = useMutation((newStudent) => {
         return CreateStudent(newStudent);
-    }, {
+    }, { 
         onSuccess: () => {
             // Invalidate the 'students' query to refetch the latest data
             queryClient.invalidateQueries('students');
@@ -106,7 +106,19 @@ export default function ListEtudiant() {
         <Button label="Add Student" onClick={() => {
             setAddStudentDialogVisible(true)
         }}/>
-    </div>);
+          
+        
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    );
+
     /**this Section for add Student**/
 
     const handleSubmit = (event) => {
@@ -224,7 +236,12 @@ export default function ListEtudiant() {
 
     };
 
-    return (<div className="card">
+    return (
+        
+    
+    
+    <div className="card">
+        
         <Toaster/>
         <h2>List of students</h2>
         <div className="datatable-container">

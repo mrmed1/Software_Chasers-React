@@ -37,7 +37,7 @@ export  function signUp(data) {
     return axios.post('/Persons', allumni)
             .then(response => {
                 return response.data;
-            });
+            }); 
 };
 
 export  function suiviCompteAllumni(email) {

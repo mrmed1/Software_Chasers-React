@@ -32,6 +32,7 @@ export default function UpdateProfile() {
   const { isLoading, data } = useQuery(["student"], () => getAcount(id), {
     retry: false,
   });
+   
 
   const visibilityMutation = useMutation(({ id }) => updateVisibility(id), {
     onSuccess: () =>
