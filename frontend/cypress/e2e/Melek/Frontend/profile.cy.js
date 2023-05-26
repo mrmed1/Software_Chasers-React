@@ -101,12 +101,12 @@ describe("Profile Page ", () => {
       // Select "Hybride" radio button
       cy.getByData("experiencebtn").click();
       cy.wait(1000);
+      cy.get('.page').click();
 
 
-
-      cy.contains("h2", "Software Developer");
-cy.contains("strong", "ABC Company");
-cy.contains("h4", "Worked on frontend development projects.");
+        cy.contains("h2", "Software Developer");
+        cy.contains("strong", "ABC Company");
+        cy.contains("h4", "Worked on frontend development projects.");
 
 //cy.contains("strong", "HTML, CSS, Angular");
 // Assert other relevant elements if needed
