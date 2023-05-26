@@ -23,24 +23,3 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-import {TOKEN_KEY} from "../../src/Config/config";
-
-Cypress.Commands.add("getByData", (selector) => {
-    return cy.get(`[data-test=${selector}]`)
-})
-Cypress.Commands.add('getToast', () => {
-    return cy.get('.uniquetest .toast');
-});
-
-Cypress.Commands.add("login", () => {
-    cy.request({
-        method: 'POST', url: Cypress.env('urlBackend') + '/auth', body: {
-            login: "23232323",
-            password: "23232323",
-            type: "person"
-        }
-    }).then((response) => {
-        console.log(response.body)
-        window.localStorage.setItem(TOKEN_KEY, response.body)
-    })
-})
