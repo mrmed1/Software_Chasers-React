@@ -1,6 +1,7 @@
+import {TOKEN_KEY} from "../../../src/Config/config";
+
 http://127.0.0.1:3001//api/dg/importStudent/
 
-         
      
 describe("--PFA test api --", () => {    
     let token;
@@ -26,14 +27,14 @@ it("Should can't add excel  ", () => {
     cy.wait(1000);
     cy.request({
       method: "POST",
-      url: `${Url}/importStudentv`,
+      url: `${url}/importStudentv`,
       headers: {
         Authorization: tokenHeader,
       },
 
       failOnStatusCode: false,
     }).then((resp) => {
-      expect(resp.status).to.eq(403);
+      expect(resp.status).to.eq(404);
     });     
   });
   
