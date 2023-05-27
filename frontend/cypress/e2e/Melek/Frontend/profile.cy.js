@@ -37,7 +37,7 @@ const reactUrl = "http://localhost:3000";
     );
   });
 
-  it.only("show errors on password unmatch ", () => {
+  it("show errors on password unmatch ", () => {
     cy.get(":nth-child(3) > .content > .blue").click();
     cy.get(":nth-child(1) > :nth-child(1) > .ui > input").clear().type("Melek");
     cy.get(":nth-child(1) > :nth-child(2) > .ui > input").clear().type("SAADI");
