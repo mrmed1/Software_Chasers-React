@@ -32,7 +32,7 @@ describe('CRUD Front', () => {
         }).then((response) => {
             expect(response.body).to.have.property('lastname', 'test');
             expect(response.body).to.have.property('firstname', 'test');
-            expect(response.body).to.have.property('email', 'test@gmail.com');
+            expect(response.body).to.have.property('email', 'testcypress@gmail.com');
             expect(response.body).to.have.property('phone', '12345678');
             expect(response.body).to.have.property('login', 'test');
             expect(response.body).to.have.property('level', '1');
