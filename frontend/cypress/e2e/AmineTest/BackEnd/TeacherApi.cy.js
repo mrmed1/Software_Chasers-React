@@ -5,7 +5,7 @@ describe("Teacher Api Test", () => {
   let savedTeacher;
   let TeacherUpdated;
  
-  let Url=Cypress.env('baseUrlBack')
+  let Url=Cypress.env('urlBackend')
 
   before(() => {
     // get the login function from commands

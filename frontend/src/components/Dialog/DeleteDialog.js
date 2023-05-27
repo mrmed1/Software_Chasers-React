@@ -28,7 +28,7 @@ const DeleteDialog = ({ open, onClose, selectedEntity, deleteEntity,title }) => 
       </DialogContent>
       <DialogActions>
         <Button
-            data-test="cancel-button"
+            data-test="deleteCancel-button"
         onClick={handleCancel}>Cancel</Button>
         <Button
           data-test="delete-button"

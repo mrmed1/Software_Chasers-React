@@ -58,6 +58,7 @@ const AddDialog = ({ open, onClose, onSubmit, title, attributes }) => {
                           name={attr.name}
                           color="primary"
                           value={values[attr.name]}
+                          data-test={attr.name}
                         />
                       }
                       label={attr.label}
