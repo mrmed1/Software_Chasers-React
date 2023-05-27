@@ -93,6 +93,7 @@ export default function UpdatePwd() {
 
                         <TextField
                             margin="normal"
+                            data-test="currentPwd"
                             required
                             fullWidth
                             //value={currentPassword}
@@ -106,6 +107,7 @@ export default function UpdatePwd() {
 
                         <TextField
                             margin="normal"
+                            data-test="newPwd"
                             required
                             fullWidth
                             name="password"
@@ -120,6 +122,7 @@ export default function UpdatePwd() {
                         <TextField
                             margin="normal"
                             required
+                            data-test="confirmedPwd"
                             fullWidth
                             name="confirmPassword"
                             label="Confirmer le mot de passe"
@@ -134,6 +137,7 @@ export default function UpdatePwd() {
                             type="submit"
                             fullWidth
                             variant="contained"
+                            data-test="save"
                             sx={{ mt: 3, mb: 2 }}
                         >
                             Enregistrer
@@ -143,7 +147,9 @@ export default function UpdatePwd() {
 
                             </Grid>
                             <Grid item>
-                                <Link onClick={handleReturnHome} variant="body2" underline="hover">
+                                <Link onClick={handleReturnHome} variant="body2" underline="hover"                             data-test="login"
+                                      data-test="cancel"
+                                >
                                     {"Retour"}
                                 </Link>
                             </Grid>

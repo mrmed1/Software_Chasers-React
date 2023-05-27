@@ -51,3 +51,17 @@ Cypress.Commands.add("getById", (selector) => {
   return cy.get(`[id=${selector}]`);
 });
 
+
+
+Cypress.Commands.add("loginGeneral", () => {
+    cy.request({
+        method: 'POST', url: Cypress.env('urlBackend') + '/auth', body: {
+            login: "20400400",
+            password: "20400400",
+            type: "person"
+        }
+    }).then((response) => {
+        window.localStorage.setItem(TOKEN_KEY, response.body)
+    })
+})
+
