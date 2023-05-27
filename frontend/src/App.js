@@ -123,7 +123,7 @@ function App() {
               <Route exact path="/Enseignant/" element={<Enseignant />} />
               <Route element={<Home />} path="/" />
               <Route element={<PwdUpdate />} path="/PwdUpdate" />
-              <Route element={<SignUp />} path="/SignUp" />
+              
               <Route
                 element={<SuiviEtatCompteAllumni />}
                 path="/SuiviEtatCompteAllumni"
@@ -163,6 +163,7 @@ function App() {
         </Box>
       ) : (
         <Routes>
+          <Route element={<SignUp />} path="/SignUp" />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/*" element={<Navigate to="/login" />} />
         </Routes>
