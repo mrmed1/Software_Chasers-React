@@ -10,8 +10,8 @@ describe('Modification du mot de passe côté Frontend', () => {
         cy.visit('http://localhost:3000/PwdUpdate/');
         cy.wait(1000);
         cy.getByData('currentPwd').type('20400400');
-        cy.getByData('newPwd').type('20800800');
-        cy.getByData('confirmedPwd').type('20800800');
+        cy.getByData('newPwd').type('20400400');
+        cy.getByData('confirmedPwd').type('20400400');
         cy.getByData('save').click();
     });
     it('Succes login after changing pwd  ',()=>{
@@ -20,11 +20,23 @@ describe('Modification du mot de passe côté Frontend', () => {
         cy.visit('/login');
         cy.wait(1000);
         cy.getByData('login').type('20400400');
-        cy.getByData('password').type('20800800');
+        cy.getByData('password').type('20400400');
         cy.get('[data-test="connect"]').click();
         cy.visit('/students');
         cy.location('pathname').should("eq", "/students");
 
+        cy.wait(2000);
+    })
+
+    it('echec login after changing pwd  ',()=>{
+        window.localStorage.removeItem(TOKEN_KEY);
+        cy.wait(1000);
+        cy.visit('/login');
+        cy.wait(1000);
+        cy.getByData('login').type('20400400');
+        cy.getByData('password').type('20800800');
+        cy.get('[data-test="connect"]').click();
+        cy.location('pathname').should("eq", "/login");
         cy.wait(2000);
     })
 });

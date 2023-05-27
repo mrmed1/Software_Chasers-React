@@ -99,6 +99,7 @@ export default function SignUp() {
                             {/*nom*/}
                             <Grid item xs={12} sm={6}>
                                 <TextField
+                                    data-test="nom"
                                     required
                                     fullWidth
                                     id="nom"
@@ -113,6 +114,7 @@ export default function SignUp() {
                                 <TextField
                                     autoComplete="given-name"
                                     name="prenom"
+                                    data-test="prenom"
                                     required
                                     fullWidth
                                     id="prenom"
@@ -125,6 +127,7 @@ export default function SignUp() {
                             <Grid item xs={12}>
                                 <TextField
                                     required
+                                    data-test="email"
                                     fullWidth
                                     id="email"
                                     label="Email Address"
@@ -136,7 +139,7 @@ export default function SignUp() {
                             {/*phone*/}
                             <Grid item xs={12} >
                                 <TextField
-
+                                    data-test="phone"
                                     name="phone"
                                     required
                                     fullWidth
@@ -150,6 +153,7 @@ export default function SignUp() {
                             {/*date of birth*/}
                             <Grid item xs={12} >
                                 <Calendar
+                                    data-test="dob"
                                     style={{width :'100%'}}
                                     required
                                     placeholder="Date de naissance"
@@ -163,6 +167,7 @@ export default function SignUp() {
                             {/*login*/}
                             <Grid item xs={12}>
                                 <TextField
+                                    data-test="login"
                                     required
                                     fullWidth
                                     id="login"
@@ -176,6 +181,7 @@ export default function SignUp() {
                             {/*pwd*/}
                             <Grid item xs={12} sm={6} >
                                 <TextField
+                                    data-test="pwd"
                                     required
                                     fullWidth
                                     name="password"
@@ -203,6 +209,7 @@ export default function SignUp() {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     name="level"
+                                    data-test="level"
                                     required
                                     fullWidth
                                     type="text"
@@ -217,6 +224,7 @@ export default function SignUp() {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     name="class"
+                                    data-test="class"
                                     id="class"
                                     required
                                     fullWidth
@@ -231,6 +239,7 @@ export default function SignUp() {
                             {/*promotion*/}
                             <Grid item xs={12} >
                                 <TextField
+                                    data-test="promotion"
                                     name="promotion"
                                     required
                                     fullWidth
@@ -246,6 +255,7 @@ export default function SignUp() {
                             <Grid item xs={12} >
                                 <Calendar
                                     name="dog"
+                                    data-test="dog"
                                     id="doh"
                                     style={{width :'100%'}}
                                     required
@@ -260,6 +270,7 @@ export default function SignUp() {
                             <Grid item xs={12} >
                                 <Calendar
                                     name="doh"
+                                    data-test="doh"
                                     id="doh"
                                     style={{width :'100%'}}
                                     required={false}
@@ -274,13 +285,16 @@ export default function SignUp() {
                             type="submit"
                             fullWidth
                             variant="contained"
+                            data-test="send"
                             sx={{ mt: 3, mb: 2 }}
                         >
                             Envoyer
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link onClick={handleReturnHome} underline="hover" variant="body2">
+                                <Link
+                                    data-test="cancel"
+                                    onClick={handleReturnHome} underline="hover" variant="body2">
                                     Vous avez déjà un compte? S'identifier
                                 </Link>
                             </Grid>
