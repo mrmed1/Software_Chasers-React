@@ -60,7 +60,7 @@ const deleteIntern = useMutation((id) => deleteInternship(id), {
                     student_id={student_id}
                 />    </div>
                 {intern.map((intern) => (
-                    <Card title={intern?.title} subTitle={intern?.company} className="p-mb-3" style={{marginTop:"15px"}}>
+                    <Card  title={intern?.title} subTitle={intern?.company} className="p-mb-3" style={{marginTop:"15px"}}>
                         <div className="p-grid p-fluid">
                             <div className="p-col-12 p-md-4" style={{marginTop:"10px"}}>
                                 <b className="b_title">Description:</b> {intern?.description}
@@ -82,6 +82,7 @@ const deleteIntern = useMutation((id) => deleteInternship(id), {
                             <br/>
                             <div className="p-col-6 p-md-4" style={{display:"flex" , gap:"20px", justifyContent:"center"}}>
                                 <InternModal
+
                                     type={"SUMMER"}
                                     iconName={"pencil"}
                                     add={"updatesummer"}
@@ -90,6 +91,7 @@ const deleteIntern = useMutation((id) => deleteInternship(id), {
                                 />
 
                                 <Icon
+                                    data-test="delete-summerintern"
                                     onClick={() => deletehandle(intern._id)}
                                     name={"delete"}
                                     color="red"

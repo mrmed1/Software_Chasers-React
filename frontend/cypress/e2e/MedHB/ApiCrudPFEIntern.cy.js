@@ -9,7 +9,7 @@ function getUserIdFromToken(token) {
 };
 
 
-describe('Test API Crud Summer Intern', () => {
+describe('Test API Crud PFE Intern', () => {
 
     let currentUniv;
     let token;
@@ -34,37 +34,37 @@ describe('Test API Crud Summer Intern', () => {
             userId = getUserIdFromToken(token);
         });
     })
-    it('should Add Summer Intern', function () {
+    it('should Add PFE Intern', function () {
         console.log(userId)
         cy.request({
             method: 'POST',
             url: Cypress.env('urlBackend') + '/Internship',
             body: {
-                "title": "Summer Intern",
-                "description": "Summer Intern",
+                "title": "PFE Intern",
+                "description": "PFE Intern",
                 "createdBy": userId,
                 studentsId: userId,
                 technologyId: ['Angular', 'React', 'Spring'],
                 "country": "France",
                 "company": "Medtech",
-                "type": "SUMMER",
+                "type": "PFE",
                 univId: currentUniv._id,
             },
             headers: {'Authorization': `Bearer ${token}`},
         }).then((resp) => {
             expect(resp.status).to.eq(201);
             expect(resp.body).to.exist;
-            expect(resp.body).to.have.property('title', 'Summer Intern');
-            expect(resp.body).to.have.property('description', 'Summer Intern');
+            expect(resp.body).to.have.property('title', 'PFE Intern');
+            expect(resp.body).to.have.property('description', 'PFE Intern');
             expect(resp.body).to.have.property('createdBy', userId);
             expect(resp.body).to.have.property('country', 'France');
             expect(resp.body).to.have.property('company', 'Medtech');
-            expect(resp.body).to.have.property('type', 'SUMMER');
+            expect(resp.body).to.have.property('type', 'PFE');
             expect(resp.body).to.have.property('univId', currentUniv._id);
             saveInternship = resp.body;
         });
-        })
-    it('should Get Summer Intern by Id', function () {
+    })
+    it('should Get PFE Intern by Id', function () {
         cy.request({
             method: 'GET',
             url: Cypress.env('urlBackend') + '/Internship/' + saveInternship._id,
@@ -72,44 +72,44 @@ describe('Test API Crud Summer Intern', () => {
         }).then((resp) => {
             expect(resp.status).to.eq(200);
             expect(resp.body).to.exist;
-            expect(resp.body).to.have.property('title', 'Summer Intern');
-            expect(resp.body).to.have.property('description', 'Summer Intern');
+            expect(resp.body).to.have.property('title', 'PFE Intern');
+            expect(resp.body).to.have.property('description', 'PFE Intern');
             expect(resp.body).to.have.property('createdBy', userId);
             expect(resp.body).to.have.property('country', 'France');
             expect(resp.body).to.have.property('company', 'Medtech');
-            expect(resp.body).to.have.property('type', 'SUMMER');
+            expect(resp.body).to.have.property('type', 'PFE');
         })
     })
 
-    it('should Update Summer Intern', function () {
+    it('should Update PFE Intern', function () {
         cy.request({
             method: 'PUT',
             url: Cypress.env('urlBackend') + '/Internship/' + saveInternship._id,
             body: {
-                "title": "Updated Summer Intern",
-                "description": "Updated Summer Intern",
+                "title": "Updated PFE Intern",
+                "description": "Updated PFE Intern",
                 "createdBy": userId,
                 studentsId: userId,
                 technologyId: ['Vue', 'Node JS', 'Python'],
                 "country": "Germany",
                 "company": "Sopra",
-                "type": "SUMMER",
+                "type": "PFE",
                 univId: currentUniv._id,
             },
             headers: {'Authorization': `Bearer ${token}`},
         }).then((resp) => {
             expect(resp.status).to.eq(200);
             expect(resp.body).to.exist;
-            expect(resp.body).to.have.property('title', 'Updated Summer Intern');
-            expect(resp.body).to.have.property('description', 'Updated Summer Intern');
+            expect(resp.body).to.have.property('title', 'Updated PFE Intern');
+            expect(resp.body).to.have.property('description', 'Updated PFE Intern');
             expect(resp.body).to.have.property('createdBy', userId);
             expect(resp.body).to.have.property('country', 'Germany');
             expect(resp.body).to.have.property('company', 'Sopra');
-            expect(resp.body).to.have.property('type', 'SUMMER');
+            expect(resp.body).to.have.property('type', 'PFE');
             expect(resp.body).to.have.property('univId', currentUniv._id);
         })
     })
-    it('should Delete Summer Intern', function () {
+    it('should Delete PFE Intern', function () {
         cy.request({
             method: 'DELETE',
             url: Cypress.env('urlBackend') + '/Internship/' + saveInternship._id,
@@ -119,18 +119,18 @@ describe('Test API Crud Summer Intern', () => {
             expect(resp.body).to.exist;
         })
     })
-    it('should Get All Summer Intern', function () {
+    it('should Get All PFE Intern', function () {
         cy.request({
             method: 'GET',
             url: Cypress.env('urlBackend') + '/Internship',
             headers: {'Authorization': `Bearer ${token}`},
         }).then((resp) => {
-            expect(resp.status).to.eq(200);
-            expect(resp.body).to.exist;
-            expect(resp.body).to.be.an('array');
-         
+                expect(resp.status).to.eq(200);
+                expect(resp.body).to.exist;
+                expect(resp.body).to.be.an('array');
 
-        }
+
+            }
         )
     })
 })
