@@ -42,9 +42,16 @@ const Sidebar = ({
   const drawerWidth = 240;
   const location = useLocation();
   
-  const filteredRoutes = routes.filter((route) =>
-    route.allowedRoles.includes(userRole)
-  );
+  const filteredRoutes = routes.filter((route) => {
+    if (route.allowedRoles.includes("ALL")) {
+     
+      return true;
+    } else {
+      
+      return route.allowedRoles.includes(userRole);
+    }
+  });
+  
   const theme = useTheme();
   const openedMixin = (theme) => ({
     width: drawerWidth,

@@ -18,10 +18,10 @@ const emptyObject = {
 
  
   return (
-    <Card centered fluid style={style.card}>
+    <Card centered fluid style={style.card} data-test="card">
     <Card.Content>
       <EducationModal  data={emptyObject} add={true}_id={_id}iconName="pencil"  role={role}/>
-        <Card.Header><h1 style={style.header}>Educations</h1></Card.Header>
+        <Card.Header><h1 style={style.header} data-test="header">Educations</h1></Card.Header>
         
         {data &&
           data.map((edu) => {

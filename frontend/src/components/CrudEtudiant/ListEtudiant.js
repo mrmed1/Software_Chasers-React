@@ -105,7 +105,7 @@ export default function ListEtudiant() {
     }
 
     const header = (<div className="flex flex-wrap align-items-center justify-content-between gap-2" style={{display:"flex", justifyContent:'flex-end'}}>
-        <Button label="Add Student" onClick={() => {
+        <Button label="Add Student" data-test="add-btn" onClick={() => {
             setAddStudentDialogVisible(true)
         }}/>
     </div>);
@@ -166,14 +166,14 @@ export default function ListEtudiant() {
 
     const deleteStudentDialogFooter = (<>
         <Button label="Cancel" icon="pi pi-times" className="p-button-text"
-                onClick={() => setDeleteStudentDialog(false)}/>
-        <Button label="Delete" icon="pi pi-trash" className="p-button-text"
+                onClick={() => setDeleteStudentDialog(false)} id="delete-btn" />
+        <Button label="Delete" icon="pi pi-trash" className="p-button-text" data-test="delete-confirm-btn"
                 onClick={() => deleteStudentMutation.mutate(selectedStudent._id)} autoFocus/>
     </>);
 
     const actionBodyTemplate = (rowData) => {
         return (<>
-            <Button icon="pi pi-trash" rounded outlined severity="danger"
+            <Button icon="pi pi-trash" rounded outlined severity="danger" data-test={`delete-btn-${rowData._id}`}
                     onClick={() => confirmDeleteStudent(rowData)}/>
         </>);
     };
@@ -195,21 +195,25 @@ export default function ListEtudiant() {
         delete newData.__v;
         // Call the updateStudentMutation function to update the student
         updateStudentMutation.mutate(newData);
-   
-       
+
      
     };
 
     function rowEditorTemplate(rowData, props) {
         const rowEditor = props.rowEditor;
         if (rowEditor.editing) {
-           
-            return rowEditor.element; // default element
+
+            return (
+                <React.Fragment>
+                    <Button icon="pi pi-check" rounded outlined  onClick={rowEditor.onSaveClick}  data-test={`save-edit-btn-${rowData._id}`}/>
+                    <Button icon="pi pi-times" rounded outlined className="p-ml-2" onClick={rowEditor.onCancelClick} />
+                </React.Fragment>
+            );
         } else {
          
             // custom init element
             return (<React.Fragment>
-                    <Button icon="pi pi-pencil" rounded outlined onClick={rowEditor.onInitClick}/>
+                    <Button icon="pi pi-pencil" rounded outlined data-test={`edit-btn-${rowData._id}`} onClick={rowEditor.onInitClick}/>
                 </React.Fragment>
 
             )
@@ -217,15 +221,16 @@ export default function ListEtudiant() {
     }
 
     const textEditor = (options) => {
+        console.log(options)
         if (options.field === 'dob') {
 
-            return <Calendar
-                value={new Date(options.value)}
+            return <Calendar data-test={`edit-${options.field}-${options.rowData._id}`}
+                             value={new Date(options.value)}
                 onChange={(e) => options.editorCallback(e.target.value)}
             />
         } else {
 
-            return <InputText type="text" value={options.value}
+            return <InputText data-test={`edit-${options.field}-${options.rowData._id}`} type="text" value={options.value}
                               onChange={(e) => options.editorCallback(e.target.value)}/>;
         }
 
@@ -252,8 +257,8 @@ export default function ListEtudiant() {
            
           />)}
         <h2>List of students</h2>
-        <div className="datatable-container">
-            <DataTable value={students} editMode="row" selectionMode="single" header={header}
+        <div className="datatable-container" >
+            <DataTable value={students} style={{ width: '100%', overflowX: 'scroll' }} editMode="row" selectionMode="single" header={header}
                        onRowEditComplete={onRowEditComplete} dataKey="_id" selection={selectedStudent}
                        responsive={true}
                        onRowClick={(e) => handleRowClick(e.value)}
@@ -263,19 +268,19 @@ export default function ListEtudiant() {
                 <Column header="#" headerStyle={{width: '3rem'}}
                         body={(data, options) => options.rowIndex + 1}></Column>
                 <Column field="lastname" header="Last Name" editor={(options) => textEditor(options)}
-                        style={{width: '20%'}}></Column>
+                        style={{width: '20%'}} data-test='lastname'></Column>
                 <Column field="firstname" header="First Name" editor={(options) => textEditor(options)}
-                        style={{width: '20%'}}></Column>
+                        style={{width: '20%'}} ></Column>
                 <Column field="email" header="Email" editor={(options) => textEditor(options)}
-                        style={{width: '20%'}}></Column>
+                        style={{width: '20%'}} ></Column>
                 <Column field="level" header="Level" editor={(options) => textEditor(options)}
-                        style={{width: '20%'}}></Column>
+                        style={{width: '20%'}} ></Column>
                 <Column field="class" header="Class" editor={(options) => textEditor(options)}
-                        style={{width: '20%'}}></Column>
+                        style={{width: '20%'}} ></Column>
                 <Column field="phone" header="Phone" editor={(options) => textEditor(options)}
-                        style={{width: '20%'}}></Column>
+                        style={{width: '20%'}} ></Column>
                 <Column field="dob" header="Date of Birth" body={dateTemplate} editor={(options) => textEditor(options)}
-                        style={{width: '20%'}}></Column>
+                        style={{width: '20%'}} ></Column>
                 <Column className="mr-2" rowEditor body={rowEditorTemplate}></Column>
                 <Column body={actionBodyTemplate}></Column>
             </DataTable>
@@ -298,6 +303,7 @@ export default function ListEtudiant() {
                             <label htmlFor="lastname">Last Name</label>
                             <InputText
                                 id="lastname"
+                                data-test="add-lastname"
                                 type="text"
                                 value={newStudent.lastname}
                                 className={lastnameError && !newStudent.lastname ? 'p-invalid' : ''}
@@ -322,6 +328,7 @@ export default function ListEtudiant() {
                             <label htmlFor="firstname">First Name</label>
                             <InputText
                                 id="firstname"
+                                data-test="add-firstname"
                                 type="text"
                                 value={newStudent.firstname}
                                 className={firstnameError && !newStudent.firstname ? 'p-invalid' : ''}
@@ -349,6 +356,7 @@ export default function ListEtudiant() {
                             <InputText
                                 id="email"
                                 type="email"
+                                data-test="add-email"
                                 value={newStudent.email}
                                 className={emailError && !newStudent.email ? 'p-invalid' : ''}
                                 error={emailError}
@@ -372,6 +380,7 @@ export default function ListEtudiant() {
                             <label htmlFor="login">Login</label>
                             <InputText id="login"
                                        type="text"
+                                       data-test="add-login"
                                        value={newStudent.login}
                                        className={loginError && !newStudent.login ? 'p-invalid' : ''}
                                        error={loginError}
@@ -396,6 +405,7 @@ export default function ListEtudiant() {
                             <label htmlFor="password">Password</label>
                             <InputText id="password"
                                        type="password"
+                                       data-test="add-password"
                                        value={newStudent.password}
                                        className={passwordError && !newStudent.password ? 'p-invalid' : ''}
                                        error={passwordError}
@@ -418,6 +428,7 @@ export default function ListEtudiant() {
                             <label htmlFor="level">Level</label>
                             <InputText id="level"
                                        type="text"
+                                        data-test="add-level"
                                        value={newStudent.level}
                                        className={levelError && !newStudent.level ? 'p-invalid' : ''}
                                        error={levelError}
@@ -442,6 +453,7 @@ export default function ListEtudiant() {
                             <label htmlFor="class">Class</label>
                             <InputText id="class"
                                        type="text"
+                                        data-test="add-class"
                                        value={newStudent.class}
                                        className={classError && !newStudent.class ? 'p-invalid' : ''}
                                        error={classError}
@@ -464,6 +476,7 @@ export default function ListEtudiant() {
                             <label htmlFor="phone">Phone</label>
                             <InputText id="phone"
                                        type="text"
+                                        data-test="add-phone"
                                        value={newStudent.phone}
                                        className={phoneError && !newStudent.phone ? 'p-invalid' : ''}
                                        error={phoneError}
@@ -488,6 +501,7 @@ export default function ListEtudiant() {
                         <div className="p-field">
                             <label htmlFor="dob">Date of Birth</label>
                             <Calendar id="dob"
+                                      data-test="add-dob"
                                       value={newStudent.dob}
                                       className={dobError && !newStudent.dob ? 'p-invalid' : ''}
                                       error={dobError}
@@ -509,6 +523,7 @@ export default function ListEtudiant() {
 
                             <div className="p-field-checkbox " style={{marginTop: 20 + 'px'}}>
                                 <FormControlLabel
+                                    data-test="add-ispublic"
                                     control={<Checkbox value={isPublicChecked}  checked={newStudent.isPublic} onChange={() => {
                                         setIsPublicChecked(!isPublicChecked);
                                         setNewStudent({...newStudent, isPublic: !isPublicChecked});
@@ -521,7 +536,7 @@ export default function ListEtudiant() {
                 </div>
                 <div className="p-d-flex p-jc-end buttons ">
                     <Button label="Cancel" className="p-mr-2" onClick={() => setAddStudentDialogVisible(false)}/>
-                    <Button label="Add" type="submit"/>
+                    <Button label="Add" data-test='add-submit' type="submit"/>
                 </div>
             </form>
         </Dialog>

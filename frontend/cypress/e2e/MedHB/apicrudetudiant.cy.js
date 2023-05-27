@@ -6,7 +6,7 @@ describe('Crud Etudiant page', () => {
     before(() => {
         // get the login function from commands
 
-        cy.login();
+        cy.loginMed();
         cy.wait(1500);
         cy.window().then((win) => {
             token = win.localStorage.getItem(TOKEN_KEY);
