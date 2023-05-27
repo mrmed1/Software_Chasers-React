@@ -35,8 +35,8 @@ Cypress.Commands.add('getToast', () => {
 Cypress.Commands.add("loginMed", () => {
     cy.request({
         method: 'POST', url: Cypress.env('urlBackend') + '/auth', body: {
-            login: "23232323",
-            password: "23232323",
+            login: "Ganikas",
+            password: "pdnejoh00",
             type: "person"
         }
     }).then((response) => {

@@ -114,6 +114,7 @@ import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} fr
                                         // disabled={add? false : (teacher_id === data?.createdBy._id ? false : true)}
                                         size={"big"}
                                         circular
+                                        data-test="delete-intern"
                                         style={{  cursor: "pointer"}}
                                     />
                                 </div>
@@ -135,7 +136,7 @@ import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} fr
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={() => setShowConfirmDialog(false)}>Cancel</Button>
-                        <Button onClick={() => confirmDelete(internToDelete)} color="error" autoFocus>
+                        <Button data-test='deletepfebtn' onClick={() => confirmDelete(internToDelete)} color="error" autoFocus>
                             Delete
                         </Button>
                     </DialogActions>

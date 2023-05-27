@@ -114,6 +114,7 @@ export default function InternModal({data, student_id, add, type, iconName}) {
                     studentsId: student_id,
                 };
                 updateSummerIntern.mutate({summerintern: updatedPFEIntern});
+
                 break;
 
             default:
