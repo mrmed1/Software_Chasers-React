@@ -40,7 +40,7 @@ describe("Crud Event Test", () => {
       cy.getByData("add-button").should("exist").and("be.disabled");
     });
 
-    it.only("Should add Event Successfully", () => {
+    it("Should add Event Successfully", () => {
       cy.getByData("FirstAdd-button").click();
       const name = faker.lorem.word();
 
@@ -156,7 +156,7 @@ describe("Crud Event Test", () => {
   })
 
   context("Edit Event Section", () => {
-    it.only("Should show edit Event Dialog", () => {
+    it("Should edit an Event and show the new details", () => {
       clickUntilDisabled();
   
       cy.getByData("event-row")
@@ -223,22 +223,12 @@ describe("Crud Event Test", () => {
 
   
   context("Delete Event  section", () => {
-    it("Should show delete Event Dialog", () => {
-      clickUntilDisabled();
-
-      cy.getByData("event-row").contains(eventName)
-        .parent()
-        .find("[data-test='FirstDelete-button']")
-        .click();
-
-      cy.getById("DeleteDialog").should("exist");
-    });
-
+   
     it("Should not  delete the  Event  after canceling", () => {
       clickUntilDisabled();
 
       cy.getByData("event-row")
-        .contains(eventName)
+        .contains(EventUpdated.eventName)
         .parent()
         .find("[data-test='FirstDelete-button']")
         .click();
@@ -249,15 +239,15 @@ describe("Crud Event Test", () => {
       cy.getById("DeleteDialog").should("not.exist");
 
       cy.getByData("event-row").each(($row) => {
-        cy.wrap($row).should("not.have.text", eventName); // Verify that the event name is not present in any event row
+        cy.wrap($row).should("not.have.text", EventUpdated.eventName); // Verify that the event name is not present in any event row
          });
     });
 
-    it.only("Should delete Event Successfully", () => {
+    it("Should delete Event Successfully", () => {
       clickUntilDisabled();
 
       cy.getByData("event-row")
-        .contains(eventName, { timeout: 100000 })
+        .contains(EventUpdated.eventName, { timeout: 100000 })
         .parent()
         .find("[data-test='FirstDelete-button']")
         .click();
@@ -267,7 +257,7 @@ describe("Crud Event Test", () => {
 
       clickUntilDisabled();
       cy.getByData("event-row").each(($row) => {
-        cy.wrap($row).should("not.have.text", eventName); // Verify that the event name is not present in any event row
+        cy.wrap($row).should("not.have.text", EventUpdated.eventName); // Verify that the event name is not present in any event row
          });
     });
   });
