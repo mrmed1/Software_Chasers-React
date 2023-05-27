@@ -4,10 +4,10 @@
 Cypress.Commands.add('login',()=>{
     cy.request({
         method: 'POST',
-        url:'http://127.0.0.1:3000/api/auth/',
+        url:Cypress.env('urlBackend') + '/auth',
         body:{
-            login:'medmed',
-            password:'10101010',
+            login:'23232323',
+            password:'23232323',
             type:'person',
         },
     }).then((resp=>{
@@ -44,7 +44,7 @@ Cypress.Commands.add('login',()=>{
   Cypress.Commands.add('getUniv',()=>{
     cy.request({
       method: 'GET',
-      url:'http://127.0.0.1:3000/api/univ/',
+      url:Cypress.env('urlBackend')+'/univ',
       headers:{
 
         'Authorization': 'Bearer '+window.localStorage.getItem('token')
@@ -56,6 +56,8 @@ Cypress.Commands.add('login',()=>{
         
           const univ=Univs.find((univ)=>univ.isCurrent);  
           window.localStorage.setItem('UnivId',univ._id) 
+          window.localStorage.setItem('UnivName',univ.name) 
+
           }))
 
 
