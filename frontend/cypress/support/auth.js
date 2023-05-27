@@ -31,3 +31,19 @@ Cypress.Commands.add('login_as_Teacher',()=>{
     }))
 })
  
+
+Cypress.Commands.add('login_as_adminclub',()=>{
+    cy.request({
+        method: 'POST',
+        url:`${Cypress.env('urlBackend')}/auth/`,
+        body:{
+            login:'23232323',
+            password:'23232323',
+            type:'person',
+        },
+    }).then((resp=>{
+        
+       window.localStorage.setItem('token',resp.body)
+       return resp.body
+    }))
+})
