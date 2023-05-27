@@ -9,15 +9,13 @@ describe('Sign Up alumni coté FrontEnd', () => {
     cy.get('[data-test="login"]').type("frontttt");
     cy.get('[data-test="nom"]').type("front");
     cy.get('[data-test="prenom"]').type("front");
-  //  cy.getByData("dob").type("05/17/1993");
+  //  cy.getByData("dob").type("05/17/1993").click({ force: true });
     // Ouvrir le calendrier de la date de naissance
-
     cy.get('[data-test="dob"]').click();
+    cy.get(':nth-child(3) > :nth-child(5) > span').click({ force: true });
     // Sélectionner la date de naissance
-    cy.get('.p-datepicker-year').select('2023');
-    cy.get('.p-datepicker-month').select('4');
-    cy.get('.p-datepicker-calendar td').contains('17').click();
-    cy.contains('.p-datepicker-day', '17').click();
+
+
 
 
     cy.get('[data-test="phone"]').type("55478632");
@@ -29,18 +27,13 @@ describe('Sign Up alumni coté FrontEnd', () => {
     // Ouvrir le calendrier de la date de naissance
     cy.get('[data-test="doh"]').click();
     // Sélectionner la date de naissance
-    cy.get('.p-datepicker-year').select('2023');
-    cy.get('.p-datepicker-month').select('4');
-    cy.get('.p-datepicker-calendar td').contains('19').click();
 
+    cy.get(':nth-child(3) > :nth-child(5) > span').click({ force: true });
 
     //cy.getByData("dog").type("04/17/2023");
     // Ouvrir le calendrier de la date de naissance
     cy.get('[data-test="dog"]').click();
-    // Sélectionner la date de naissance
-    cy.get('.p-datepicker-year').contains('1993').click();
-    cy.get('.p-datepicker-month').contains('May').click();
-    cy.get('.p-datepicker-calendar td').contains('07').click();
+    cy.get(':nth-child(3) > :nth-child(5) > span').click({ force: true });
 
 
     cy.get('[data-test="send"]').click();

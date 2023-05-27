@@ -269,6 +269,7 @@ export default function SignUp() {
                             {/*do hire*/}
                             <Grid item xs={12} >
                                 <Calendar
+
                                     name="doh"
                                     data-test="doh"
                                     id="doh"
@@ -276,8 +277,7 @@ export default function SignUp() {
                                     required={false}
                                     placeholder="Date de 1ère embauche"
                                     showIcon
-                                    autoFocus
-                                    onChange={(event) => setAllumni({ ...allumni, doh: event.value })}
+                                    onChange={(event) => setAllumni({ ...allumni, doh: event.target })}
                                 />
                             </Grid>
                         </Grid>
