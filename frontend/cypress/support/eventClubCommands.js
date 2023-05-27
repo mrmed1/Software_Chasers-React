@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 Cypress.Commands.add("loginAsClub", (login,password) => {
   cy.request({
     method: "POST",
-    url: "http://127.0.0.1:3000/api/auth/",
+    url: Cypress.env('urlBackend')+"/auth/",
     body: {
       login: login,    
       password:password,
@@ -17,7 +17,7 @@ Cypress.Commands.add("addStudent", () => {
   
   cy.request({
     method: "POST",
-    url: "http://127.0.0.1:3000/api/Persons/",
+    url: Cypress.env('urlBackend')+"/Persons/",
     body: {
       firstname: faker.name.firstName(),
       lastname: faker.name.lastName(),
@@ -56,7 +56,7 @@ Cypress.Commands.add("addTeacher", () => {
   };
   cy.request({
     method: "POST",
-    url: "http://127.0.0.1:3000/api/Persons/",
+    url: Cypress.env('urlBackend')+"/Persons/",
     body: data,
     headers: {
       Authorization: "Bearer " + window.localStorage.getItem("token"),
@@ -71,7 +71,7 @@ Cypress.Commands.add("addTeacher", () => {
 Cypress.Commands.add("addClub", () => {
   cy.request({
     method: "POST",
-    url: "http://127.0.0.1:3000/api/club/",
+    url: Cypress.env('urlBackend')+"/club/",
     body: {
       name: "test",
       dac: "2021-10-10",
@@ -96,7 +96,7 @@ Cypress.Commands.add("deletePerson", () => {
   cy.request({
     method: "DELETE",
     url:
-      "http://127.0.0.1:3000/api/Persons/" +
+    Cypress.env('urlBackend')+"/Persons/"+
       window.localStorage.getItem("StudentId"),
     headers: {
       Authorization: "Bearer " + window.localStorage.getItem("token"),
@@ -122,7 +122,7 @@ Cypress.Commands.add("deleteClubs", () => {
   cy.request({
     method: "DELETE",
     url:
-      "http://127.0.0.1:3000/api/Club/" +
+    Cypress.env('urlBackend')+"/club/" +
       window.localStorage.getItem("ClubId"),
     headers: {
       Authorization: "Bearer " + window.localStorage.getItem("token"),

@@ -4,7 +4,7 @@ describe("Admin Api Test", () => {
   let savedAdmin;
   let AdminUpdated;
 
-  let Url = Cypress.env("baseUrlBack");
+  let Url = Cypress.env("urlBackend");
 
   before(() => {
     // get the login function from commands
