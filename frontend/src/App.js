@@ -124,10 +124,7 @@ function App() {
               <Route element={<Home />} path="/" />
               <Route element={<PwdUpdate />} path="/PwdUpdate" />
               <Route element={<SignUp />} path="/SignUp" />
-              <Route
-                element={<SuiviEtatCompteAllumni />}
-                path="/SuiviEtatCompteAllumni"
-              />
+
               <Route exact path="/AddEvent" element={<CreateEventClub />} />
               <Route exact path="/HomeEvent" element={<HomeEvent />} />
 
@@ -163,6 +160,8 @@ function App() {
         </Box>
       ) : (
         <Routes>
+          <Route element={<SuiviEtatCompteAllumni />} path="/SuiviEtatCompteAllumni"/>
+          <Route element={<SignUp />} path="/SignUp" />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/*" element={<Navigate to="/login" />} />
         </Routes>

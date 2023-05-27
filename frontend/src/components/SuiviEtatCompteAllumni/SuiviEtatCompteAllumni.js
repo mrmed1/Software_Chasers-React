@@ -89,6 +89,7 @@ export default function SuiviEtatCompteAllumni() {
                         </Typography>
                     <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 }}>
                         <TextField
+                            data-test="email"
                             margin="normal"
                             required
                             fullWidth
@@ -106,6 +107,7 @@ export default function SuiviEtatCompteAllumni() {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                                 onClick={handleSubmit}
+                                data-test="send"
                             >
                                 Suivre
                             </Button>
@@ -113,6 +115,7 @@ export default function SuiviEtatCompteAllumni() {
                         {buttonColor && (
                             <Button
                                 type="submit"
+                                data-test="resultat"
                                 fullWidth
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
@@ -128,7 +131,9 @@ export default function SuiviEtatCompteAllumni() {
 
                             </Grid>
                             <Grid item>
-                                <Link underline="hover" onClick={handleReturnHome} variant="body2" >
+                                <Link
+                                    data-test="cancel"
+                                    underline="hover" onClick={handleReturnHome} variant="body2" >
                                     {"Retour"}
                                 </Link>
                             </Grid>
