@@ -12,8 +12,9 @@ export function getUserIdFromToken(token){
 };
 
 export async function changeUserPassword(token, currentPassword, newPassword) {
-    const userId = getUserIdFromToken(token);
-    const data = { currentPassword, newPassword, userId };
+    const _id = getUserIdFromToken(token);
+    const data = { currentPassword, newPassword, _id };
+    console.log(data)
     try {
         const response = await axios.post('/admin/change-password', data);
         if (response.status === 200) {

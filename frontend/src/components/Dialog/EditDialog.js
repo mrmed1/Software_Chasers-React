@@ -59,6 +59,7 @@ const EditDialog = ({ open, onClose, entity, onSave, attributes, title }) => {
                       onChange={handleFieldChange}
                       name={attr.name}
                       color="primary"
+                      data-test={attr.name}
                       
                     />
                   }
@@ -68,6 +69,7 @@ const EditDialog = ({ open, onClose, entity, onSave, attributes, title }) => {
             ) : (
               
               <TextField
+              data-test={attr.name}
                 key={attr.name}
                 margin="dense"
                 id={attr.name}

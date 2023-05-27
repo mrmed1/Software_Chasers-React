@@ -6,12 +6,12 @@ describe("Event Api Test", () => {
   let currentUniv;
   let participants = [];
   let StudentId;
-  let Url = Cypress.env("baseUrlBack");
+  let Url = Cypress.env("urlBackend");
 
   before(() => {
     // get the login function from commands
 
-    cy.loginAsClub("ClubTest", "10101010");
+    cy.loginAsClub("Kay", "7nv1vw9d0");
 
     cy.window().then((win) => {
       token = win.localStorage.getItem("token");
@@ -92,7 +92,7 @@ describe("Event Api Test", () => {
       }).then((resp) => {
         expect(resp.status).to.equal(200);
         console.log("Event Update", resp.body);
-        expect(resp.body.club_id.login).to.eq("ClubTest");
+        expect(resp.body.club_id.login).to.eq("Kay");
       });
     });
 
@@ -155,7 +155,7 @@ describe("Event Api Test", () => {
         expect(resp.body.link).to.eq(EventClubUpdated.link);
         expect(resp.body.location).to.eq(EventClubUpdated.location);
         expect(resp.body.univId).to.eq(EventClubUpdated.univId);
-        expect(resp.body.club_id.login).to.eq("ClubTest");
+        expect(resp.body.club_id.login).to.eq("Kay");
 
         const eventDate = EventClubUpdated.eventDate;
         expect(resp.body.eventDate).to.eq(eventDate);

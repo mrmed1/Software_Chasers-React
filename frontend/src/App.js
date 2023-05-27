@@ -57,7 +57,7 @@ import AlumniStatistics from "./components/StatistiquesAlumni/AlumniStatistics";
 import StatChomage from "./components/StatistiquesChomage/StatChomage";
 function App() {
   const [open, setOpen] = useState(false);
-  const currenUser = { role: "ADMIN" };
+ // const currenUser = connectedUser().role;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   function handleLogin(isLoggedIn) {
@@ -96,13 +96,14 @@ function App() {
     padding: theme.spacing(0, 1), // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   }));
+  
   return (
     <>
       {connectedUser() ? (
         <Box sx={{ display: "flex" }}>
           <Sidebar
             routes={ROUTES}
-            userRole={currenUser.role}
+            userRole={connectedUser().role}
             open={open}
             handleDrawerClose={handleDrawerClose}
             handleDrawerOpen={handleDrawerOpen}
@@ -120,9 +121,9 @@ function App() {
                 element={<StudentAccount />}
               />
               <Route exact path="/Enseignant/" element={<Enseignant />} />
-              <Route element={<Home />} path="/" />
+              {/* <Route element={<Home />} path="/" /> */}
               <Route element={<PwdUpdate />} path="/PwdUpdate" />
-              <Route element={<SignUp />} path="/SignUp" />
+              
               <Route
                 element={<SuiviEtatCompteAllumni />}
                 path="/SuiviEtatCompteAllumni"
@@ -162,6 +163,7 @@ function App() {
         </Box>
       ) : (
         <Routes>
+          <Route element={<SignUp />} path="/SignUp" />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/*" element={<Navigate to="/login" />} />
         </Routes>
