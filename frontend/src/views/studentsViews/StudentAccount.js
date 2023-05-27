@@ -6,7 +6,7 @@ import { Toaster } from "react-hot-toast";
 export default function StudentAccount() {
   return (
     <>
-      <Toaster />
+      <Toaster/>
       <UpdateProfile />
     
     </>

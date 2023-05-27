@@ -19,7 +19,7 @@ const reactUrl = "http://localhost:3000";
 
       failOnStatusCode: false,
     }).then((resp) => {
-      Ganikas = resp.body;
+      Ganikas = resp.body;  
 
       expect(resp.status).to.eq(200);
     });
@@ -35,6 +35,33 @@ const reactUrl = "http://localhost:3000";
       "have.text",
       `${Ganikas?.firstname} ${Ganikas?.lastname}`
     );
+  });
+
+  it.only("show errors on password unmatch ", () => {
+    cy.get(":nth-child(3) > .content > .blue").click();
+    cy.get(":nth-child(1) > :nth-child(1) > .ui > input").clear().type("Melek");
+    cy.get(":nth-child(1) > :nth-child(2) > .ui > input").clear().type("SAADI");
+    cy.get(".form > :nth-child(1) > :nth-child(3) > .ui > input")
+      .clear()
+      .type("saadimelek@gmail.com");
+    cy.get(":nth-child(2) > :nth-child(1) > .ui > input")
+      .clear()
+      .type("Ganikas");
+    cy.get(":nth-child(2) > :nth-child(2) > .ui > input")
+      .clear()
+      .type("pdnejoh00");
+    cy.get(":nth-child(2) > :nth-child(3) > .ui > input")
+      .clear()
+      .type("pdnejoh0ss0");
+    cy.get(".form > :nth-child(4) > .ui").click();
+    
+    cy.get('.go3958317564').should("contain", "Oups Password Unmatched  !")
+    cy.get("body").type("{esc}");
+
+
+    
+    
+    
   });
 
   it("Update Ganikas information", () => {
@@ -61,7 +88,7 @@ const reactUrl = "http://localhost:3000";
     cy.getByData("fullnameText").should("have.text", `Melek SAADI`);
   });
 
-  it.only("Toggle The account visibility ", () => {
+  it("Toggle The account visibility ", () => {
     cy.getByData("toggleVisibility").click(); // Click on the button
     cy.wait(1000);
     if (Ganikas?.isPublic) {
@@ -71,6 +98,7 @@ const reactUrl = "http://localhost:3000";
     }
     cy.wait(1000);
   });
+
 
 
 });
