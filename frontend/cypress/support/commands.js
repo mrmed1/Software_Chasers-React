@@ -32,7 +32,7 @@ Cypress.Commands.add('getToast', () => {
     return cy.get('.uniquetest .toast');
 });
 
-Cypress.Commands.add("login", () => {
+Cypress.Commands.add("loginMed", () => {
     cy.request({
         method: 'POST', url: Cypress.env('urlBackend') + '/auth', body: {
             login: "23232323",
