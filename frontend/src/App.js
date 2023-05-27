@@ -121,7 +121,7 @@ function App() {
                 element={<StudentAccount />}
               />
               <Route exact path="/Enseignant/" element={<Enseignant />} />
-              <Route element={<Home />} path="/" />
+              {/* <Route element={<Home />} path="/" /> */}
               <Route element={<PwdUpdate />} path="/PwdUpdate" />
               
               <Route
