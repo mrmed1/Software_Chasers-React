@@ -10,13 +10,13 @@ const jwt = require('react-jwt');
 
 let userId;
 let currentPassword;
-let newPasswordValide = '20400400';
+let newPasswordValide = '20800800';
 
 describe('Changer PWD User Connected', () => {
 
   const userInfo = {
     login: '20400400',
-    password: '20800800',
+    password: '20400400',
     type: 'person'
     //type:'club'
   }
