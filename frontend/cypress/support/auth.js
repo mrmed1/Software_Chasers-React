@@ -2,7 +2,7 @@
 Cypress.Commands.add('login_as_student',()=>{
     cy.request({
         method: 'POST',
-        url:`${Cypress.env('baseUrl')}/auth/`,
+        url:`${Cypress.env('urlBackend')}/auth/`,
         body:{
             login:'Ganikas',
             password:'pdnejoh00',
@@ -18,7 +18,7 @@ Cypress.Commands.add('login_as_student',()=>{
 Cypress.Commands.add('login_as_Teacher',()=>{
     cy.request({
         method: 'POST',
-        url:`${Cypress.env('baseUrl')}/auth/`,
+        url:`${Cypress.env('urlBackend')}/auth/`,
         body:{
             login:'GanikasS',
             password:'pdnejoh00',

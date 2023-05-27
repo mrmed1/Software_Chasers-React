@@ -16,6 +16,30 @@ Cypress.Commands.add('login',()=>{
     }))
 
   })
+  Cypress.Commands.add('loginAsAdmin',()=>{
+    cy.visit('/');
+ 
+
+    cy.get('[data-test="login"]').type("23232323");
+    cy.get('[data-test="password"]').type("23232323");
+
+    cy.get('[data-test="connect"]').click();
+  
+
+  })
+
+  Cypress.Commands.add('loginAsGanikas',()=>{
+    cy.visit('/');
+ 
+
+    cy.get('[data-test="login"]').type("Ganikas");
+    cy.get('[data-test="password"]').type("pdnejoh00");
+
+    cy.get('[data-test="connect"]').click();
+  
+
+  })
+
   //add Commands to get all Univ and find the Univ isCurrent == true
   Cypress.Commands.add('getUniv',()=>{
     cy.request({

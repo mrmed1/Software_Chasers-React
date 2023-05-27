@@ -91,7 +91,7 @@ export default function ExperienceModal({ data, add, _id, iconName, role }) {
                 size="big"
                 style={{ float: "right", cursor: "pointer", marginLeft: "8px" }}
                 disabled={aUthorization}
-                data-test="experienceModal"
+                data-test={`experienceModal-${data?.jobTitle}`}
               /> 
            
        

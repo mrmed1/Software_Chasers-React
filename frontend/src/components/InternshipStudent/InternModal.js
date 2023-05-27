@@ -126,12 +126,13 @@ export default function InternModal({data, student_id, add, type, iconName}) {
         <Modal
             trigger={
                 <Icon
+                    data-test="add_summerintern"
                     name={iconName}
                     color="blue"
-                    // disabled={add? false : (teacher_id === data?.createdBy._id ? false : true)}
-                    size={"big"}
+                    // disabled={add ? false : (teacher_id === data?.createdBy._id ? false : true)}
+                    size="big"
                     circular
-                    style={{cursor: "pointer"}}
+                    style={{ cursor: "pointer" }}
                 />
             }
         >
@@ -152,33 +153,47 @@ export default function InternModal({data, student_id, add, type, iconName}) {
                 })()}
             </Modal.Header>
             <Modal.Content>
-
                 <form onSubmit={handleSubmit} ref={formRef}>
                     <div className="form-field">
                         <label htmlFor="title">Title</label>
-                        <InputText id="title" defaultValue={data?.title} value={title}
-                                   onChange={(e) => setTitle(e.target.value)}/>
+                        <InputText
+                            data-test="intern_title"
+                            id="title"
+                            defaultValue={data?.title}
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
                     </div>
 
                     <div className="form-field">
                         <label htmlFor="description">Description</label>
-                        <InputText id="description" defaultValue={data?.description} value={description}
-                                   onChange={(e) => setDescription(e.target.value)}/>
+                        <InputText
+                            id="description"
+                            data-test="intern_description"
+                            defaultValue={data?.description}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
                     </div>
-
 
                     <div className="form-field">
                         <label htmlFor="company">Company</label>
-                        <InputText id="company" defaultValue={data?.company} value={company}
-                                   onChange={(e) => setCompany(e.target.value)}/>
+                        <InputText
+                            id="company"
+                            data-test="intern_company"
+                            defaultValue={data?.company}
+                            value={company}
+                            onChange={(e) => setCompany(e.target.value)}
+                        />
                     </div>
+
                     <div className="form-field">
                         <label htmlFor="country" className="form-label">
                             Country
                         </label>
-
                         <Dropdown
                             id="country"
+                            data-test="intern_country"
                             defaultValue={data?.country}
                             value={country}
                             options={helper.countryOptions}
@@ -193,6 +208,7 @@ export default function InternModal({data, student_id, add, type, iconName}) {
                     <div className="form-field">
                         <label htmlFor="technologies">Technologies</label>
                         <MultiSelect
+                            data-test="intern_technologies"
                             defaultValue={data?.technologyId}
                             value={selectedTechnologies}
                             options={competenceList}
@@ -202,11 +218,10 @@ export default function InternModal({data, student_id, add, type, iconName}) {
                         />
                     </div>
 
-                    <Button type="submit" label="Submit" className="form-submit-button"/>
+                    <Button type="submit" data-test="submit-add-btn" label="Submit" className="form-submit-button" />
                 </form>
-
-
             </Modal.Content>
         </Modal>
+
     );
 }

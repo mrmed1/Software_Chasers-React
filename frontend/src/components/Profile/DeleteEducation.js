@@ -45,6 +45,8 @@ export default function DeleteEducation({ _id, data, role }) {
             onClick={show}
             style={{ float: "right", cursor: "pointer" }}
             disabled={aUthorization}
+            data-test={`deleteEducationModal-${data?.diploma}`}
+            id="deleteEducationModal"
           />
         }
         content={
