@@ -11,6 +11,7 @@ import {Checkbox, FormControlLabel, Switch} from "@mui/material";
 import './ListEtudiant.css';
 import toast, {Toaster} from "react-hot-toast";
 import DetailsDialog from './DetailsDialog';
+import {TOKEN_KEY} from "../../Config/config";
 
 export default function ListEtudiant() {
     const [selectedStudent, setSelectedStudent] = useState(null);
@@ -27,7 +28,8 @@ export default function ListEtudiant() {
     const [dobError, setDobError] = useState(false);
     const [touched, setTouched] = useState(false);
     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
- 
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [token, setToken] = useState(localStorage.getItem(TOKEN_KEY));
     const [newStudent, setNewStudent] = useState({
         lastname: '',
         firstname: '',
@@ -241,10 +243,33 @@ export default function ListEtudiant() {
     console.log(data)
    
         setOpenDetailsDialog(true);
- 
-       
-    
       };
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+    };
+
+    const handleUpload = () => {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        fetch('https://school.eastus.cloudapp.azure.com/api/dg/importStudent', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((response) => {
+
+                toast.success('Students imported successfully');
+
+            })
+
+            .catch((error) => {
+                // Handle error
+                toast.error('Error importing students');
+            });
+    }
     return (<div >
         <Toaster/>
         {selectedStudent && (
@@ -256,7 +281,21 @@ export default function ListEtudiant() {
             selectedData={selectedStudent}
            
           />)}
-        <h2>List of students</h2>
+        <div style={{display: "flex", justifyContent: "space-between"}}>
+            <h2>List of students</h2>
+            <div>
+                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                    <input type="file" onChange={handleFileChange} style={{
+                        marginRight: '1rem',
+                        padding: '0.5rem',
+                        border: '1px solid #ccc',
+                        borderRadius: '4px'
+                    }}/>
+                    <Button onClick={handleUpload}>Upload</Button>
+                </div>
+            </div>
+        </div>
+
         <div className="datatable-container" >
             <DataTable value={students} style={{ width: '100%', overflowX: 'scroll' }} editMode="row" selectionMode="single" header={header}
                        onRowEditComplete={onRowEditComplete} dataKey="_id" selection={selectedStudent}
