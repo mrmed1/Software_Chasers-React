@@ -104,9 +104,6 @@ function HomeEvent() {
                           <DeleteIcon color="error" />
                         </IconButton>
                       </TableCell>
-                      <TableCell>&nbsp;
-                      <EventClubDetailsC event={item}/>
-                      </TableCell>
                     </TableRow>
                   );
                 })

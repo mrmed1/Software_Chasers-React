@@ -94,7 +94,7 @@ export default function CreateEventClub() {
         const ids = uuid();
         let uniqueId = ids.slice(0, 100);
 
-        history("/HomeEvent");
+        history("/EventClub");
     };
 
     return (

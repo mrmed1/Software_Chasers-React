@@ -14,6 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import DoneIcon from "@mui/icons-material/Done";
 import { useState } from "react";
 import EnhancedTableHead from "./EnhancedTableHead";
+import EventClubDetailsC from "../EventContainer/EventClubDetailsC";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -110,7 +111,7 @@ function Container({
                     tabIndex={-1}
                     key={row.name}
                     sx={{ cursor: "pointer" }}
-                    onClick={() => handleRowClick(row)}
+                   // onClick={() => handleRowClick(row)}
                   >
                     {attributes.map(
                       (attribute) =>
@@ -139,7 +140,8 @@ function Container({
                           </TableCell>
                         )
                     )}
-                    <TableCell>
+                    <TableCell style={{display:"flex"}}>
+                      <EventClubDetailsC event={row}/>
                       <IconButton
                         edge="end"
                         aria-label="delete"
