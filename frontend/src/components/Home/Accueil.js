@@ -10,7 +10,6 @@ function Accueil() {
         </div>
     )
 
-
 }
 
 export default Accueil

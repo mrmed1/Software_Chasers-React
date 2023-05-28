@@ -65,7 +65,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        if(connectedUser()._id){
+        if(connectedUser()._id && connectedUser().role === "ADMIN"){
           axios.get(`https://school.eastus.cloudapp.azure.com/api/Persons/${connectedUser()._id}`).then((response) => {
             console.log("rrrr",response.data.access)
 
