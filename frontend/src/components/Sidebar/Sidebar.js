@@ -30,7 +30,7 @@ const Sidebar = ({
   userRole,
   handleDrawerClose,
   handleDrawerOpen,
-  open,
+  open,access
 }) => {
   const navigate = useNavigate();
   function logoutFn() {
@@ -41,13 +41,18 @@ const Sidebar = ({
   }
   const drawerWidth = 240;
   const location = useLocation();
-  
-  const filteredRoutes = routes.filter((route) => {
+
+  const filteredRoutes = routes.filter( (route) => {
     if (route.allowedRoles.includes("ALL")) {
-     
       return true;
+    } else if (userRole === "ADMIN") {
+
+      const hasAccess = access.some((permission) => route.allowedRoles.includes(permission));
+
+      console.log(hasAccess);
+      return hasAccess
+
     } else {
-      
       return route.allowedRoles.includes(userRole);
     }
   });

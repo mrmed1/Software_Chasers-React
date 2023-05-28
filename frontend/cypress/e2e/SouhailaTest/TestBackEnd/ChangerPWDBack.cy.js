@@ -13,7 +13,6 @@ let currentPassword;
 let newPasswordValide = '20800800';
 
 describe('Changer PWD User Connected', () => {
-
   const userInfo = {
     login: '20400400',
     password: '20400400',
@@ -31,7 +30,8 @@ describe('Changer PWD User Connected', () => {
         type: userInfo.type,
     };
 
-  before(() => {
+    // eslint-disable-next-line no-undef
+        before(() => {
     // Effectuer la connexion
     cy.request({
       method: 'POST',
@@ -50,14 +50,11 @@ describe('Changer PWD User Connected', () => {
     });
   });
 
-  //done successfully save data of user connected
   it("Stocke les données de l'utilisateur connecté", () => {
     // Vérifier que les informations nécessaires sont stockées
     expect(userId).to.exist;
     expect(currentPassword).to.exist;
   });
-
-    //done successfully change password with valide data
   it('Change PWD User Connected with valide data  ', () => {
     cy.request({
       method: 'POST',
@@ -75,8 +72,6 @@ describe('Changer PWD User Connected', () => {
     });
 
   });
-
-    // done successfully change password with invalide data
   it('Modifie le mot de passe de l utilisateur connecté avec currentpassword invalide', () => {
     // Modifier le mot de passe avec un mot de passe invalide
     cy.request({
@@ -93,8 +88,6 @@ describe('Changer PWD User Connected', () => {
 
     });
   });
-
-    //done successfully connected with new pwd
   it("Connecte l'utilisateur avec le nouveau mot de passe", () => {
     // Effectuer la connexion avec le nouveau mot de passe
 
@@ -111,9 +104,7 @@ describe('Changer PWD User Connected', () => {
 
 
   })
-
-    //done successfully echec connected with old pwd
-    it('Fail to login with old password',  () =>{
+  it('Fail to login with old password',  () =>{
         cy.request({
             method: "POST",
             url: Cypress.env('urlBackend') + '/auth',

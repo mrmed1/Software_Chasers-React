@@ -39,7 +39,7 @@ export default function DeletePFA({ data, teacher_id, isPublished, iconName }) {
         <Icon
           name={iconName}
           color={PublishTestIcon}
-          disabled={teacher_id === data?.createdBy._id ? false : true}
+          disabled={teacher_id === data?.createdBy?._id ? false : true}
           onClick={show}
           style={{ float: "right", cursor: "pointer" }}
           circular

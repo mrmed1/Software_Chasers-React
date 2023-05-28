@@ -12,7 +12,7 @@ describe('login Front page', () => {
 
 
 
-        cy.location('pathname').should("eq", "/students");
+        cy.location('pathname').should("eq", "/accueil");
     });
 
     it('sign in with invalid alumni ', function () {
@@ -33,7 +33,7 @@ describe('login Front page', () => {
         cy.get('[data-test="password"]').type("7nv1vw9d0");
         cy.get('[data-test="isclub"]').click();
         cy.get('[data-test="connect"]').click();
-        cy.location('pathname').should("eq", "/students");
+        cy.location('pathname').should("eq", "/accueil");
     });
 
     it('should sign in with banned club', function () {

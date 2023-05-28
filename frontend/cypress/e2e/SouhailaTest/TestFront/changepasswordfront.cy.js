@@ -1,4 +1,4 @@
-import {TOKEN_KEY} from "../../../src/Config/config";
+import {TOKEN_KEY} from "../../../../src/Config/config";
 
 describe('changepassword', () => {
 
@@ -18,7 +18,7 @@ describe('changepassword', () => {
         cy.getByData('login').type('20400400');
         cy.getByData('password').type('20400400');
         cy.get('[data-test="connect"]').click();
-        cy.visit('/students');
+        cy.visit('/accueil');
         cy.location('pathname').should("eq", "/login");
     });
 
@@ -27,8 +27,8 @@ describe('changepassword', () => {
         cy.getByData('login').type('20400400');
         cy.getByData('password').type('20800800');
         cy.get('[data-test="connect"]').click();
-        cy.visit('/students');
-        cy.location('pathname').should("eq", "/students");
+        cy.visit('/accueil');
+        cy.location('pathname').should("eq", "/accueil");
     });
 });
 

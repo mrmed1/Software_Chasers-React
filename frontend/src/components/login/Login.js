@@ -16,9 +16,7 @@ import {auth} from "../../Service/auth.service";
 import {useNavigate} from "react-router-dom";
 import toast, {Toaster} from 'react-hot-toast';
 import {Checkbox, FormControlLabel} from "@mui/material";
-import {useQuery} from "react-query";
-import {GetMyPFE} from "../../Service/internshipService";
-import {getIdClub} from "../../Service/ClubService";
+
 
 const theme = createTheme();
 export default function Login() {
@@ -68,8 +66,8 @@ export default function Login() {
                 .then((response) => {
                     toast.success('Login Successful');
                     setTimeout(() => {
-                        navigate('/students');
-                        window.location.reload()
+                        window.location.href = '/accueil';
+                       // window.location.reload();
                     },1000)
                 })
                 .catch((error) => {

@@ -40,9 +40,6 @@ describe('Sign Up alumni coté FrontEnd', () => {
     cy.visit('/login');
   })
 
-
-
-/*
   it('Sign Up with invalide data ', () => {
     cy.visit('/signup/');
     cy.get('[data-test="email"]').type("front@gmail.com");
@@ -60,7 +57,7 @@ describe('Sign Up alumni coté FrontEnd', () => {
     cy.get('[data-test="send"]').click();
     cy.location('pathname').should("eq", "/signup/");
   })
-*/
+
 
 /*
   it('Cancel / Back ',()=>{

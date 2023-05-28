@@ -42,7 +42,7 @@ export default function StatisticsPFE() {
             },
             title: {
                 display: true,
-                text: 'Chart.js Pie Chart'
+
             },
             tooltips: {
                 callbacks: {

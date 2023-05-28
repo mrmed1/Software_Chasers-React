@@ -42,13 +42,13 @@ export default function PFAList({ data }) {
   const filteredInternships = useMemo(() => {
     return data.filter((internship) => {
       if (selectedFilter === "isPublished") {
-        return internship.isPublished;
+        return internship?.isPublished;
       } else if (selectedFilter === "isValidResponsible") {
-        return internship.isValidResponsable;
+        return internship?.isValidResponsable;
       } else if (selectedFilter === "isPicked") {
-        return internship.isPicked;
+        return internship?.isPicked;
       } else if (selectedFilter === "createdBy") {
-        return internship.createdBy._id === teacher_id;
+        return internship?.createdBy?._id === teacher_id;
       } else {
         return internship.title
           .toLowerCase()

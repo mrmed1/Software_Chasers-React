@@ -38,7 +38,7 @@ export default function ValidationAndPick({ data, _id, student, iconName }) {
   };
   //UI staff
   const isIdPresent = (id) => {
-    return data.studentsId.some((student) => student._id === id);
+    return data.studentsId.some((student) => student?._id === id);
   };
 
   const aUthorized =

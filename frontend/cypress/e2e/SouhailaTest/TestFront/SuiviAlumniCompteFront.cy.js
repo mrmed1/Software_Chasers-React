@@ -43,4 +43,5 @@ describe('Suivi etat compte alumni coté FrontEnd', () => {
         cy.url().should('include', '/login');
 
     })
+
 })
