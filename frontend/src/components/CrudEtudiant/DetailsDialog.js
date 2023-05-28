@@ -9,12 +9,45 @@ import {
   Typography,
 } from "@mui/material";
 
+import CV from "./CV";
+
 const DetailsDialog = ({ open, onClose, selectedData }) => {
+  const [selectedName, setSelectedName] = useState("");
+  const [selectedId, setSelectedId] = useState("");
+  const [showCv,setShowCv]=useState(false);
+  const [openCv, setOpenCv] = useState(false);
   const handleCancel = () => {
     onClose();
   };
+  const handleClose = () => {
+    setOpenCv(false);
+  };
+  const darkMode = {
+    card: { backgroundColor: "#23283e" },
+    header: { color: "#cdcdff" },
+    btn: { color: "#5bc0de " },
+    text: { color: "#bdbddd" },
+    text2: { color: "#f2f2f2" },
+  };
+  const lightMode = {
+    card: { backgroundColor: "" },
+    header: { color: "" },
+    btn: { color: "" },
+    text: { color: "black" },
+    text2: { color: "" },
+  };
 
+  const handleShowAccount =(data)=>{
+
+    console.log('Show Account clicked')
+setSelectedName(selectedData.name);
+setSelectedId(selectedData._id);
+
+    setShowCv(true);
+    setOpenCv(true);
+  }
   return (
+    <>    {showCv && <CV Mode={lightMode }  open={openCv} onClose={handleClose} name={selectedName} id={selectedId} />}
     <Dialog maxWidth="xs" fullWidth open={open} onClose={onClose}>
       <DialogTitle>Details</DialogTitle>
       <DialogContent>
@@ -61,12 +94,20 @@ const DetailsDialog = ({ open, onClose, selectedData }) => {
                 </Typography>
 
             </div>
+            <br></br>
+            <div key='showCv'>
+            <Button variant="outlined" onClick={handleShowAccount}>
+                  Show CV {selectedData['role']}
+                </Button>
+
+            </div>
           
       </DialogContent>
       <DialogActions>
         <Button onClick={handleCancel}>Close</Button>
       </DialogActions>
     </Dialog>
+    </>
   );
 };
 

@@ -21,6 +21,7 @@ import {Button} from "primereact/button";
  
 import SearchBar2 from "../Search/SearchBar2";
 import { connectedUser } from "../../Service/auth.service";
+import { useNavigate } from 'react-router-dom';
 
 const ROLE = connectedUser()?.role;
 
@@ -29,18 +30,33 @@ const Sidebar = ({
   userRole,
   handleDrawerClose,
   handleDrawerOpen,
-  open,
+  open,access
 }) => {
-  function logoutFn(){
-    localStorage.removeItem("jwtToken")
+  const navigate = useNavigate();
+  function logoutFn() {
+    localStorage.removeItem('jwtToken');
+    navigate('/login');
     window.location.reload();
+
   }
   const drawerWidth = 240;
   const location = useLocation();
+
+  const filteredRoutes = routes.filter( (route) => {
+    if (route.allowedRoles.includes("ALL")) {
+      return true;
+    } else if (userRole === "ADMIN") {
+
+      const hasAccess = access.some((permission) => route.allowedRoles.includes(permission));
+
+      console.log(hasAccess);
+      return hasAccess
+
+    } else {
+      return route.allowedRoles.includes(userRole);
+    }
+  });
   
-  const filteredRoutes = routes.filter((route) =>
-    route.allowedRoles.includes(userRole)
-  );
   const theme = useTheme();
   const openedMixin = (theme) => ({
     width: drawerWidth,

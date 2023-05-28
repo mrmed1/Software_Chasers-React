@@ -14,6 +14,7 @@ import {changeUserPassword} from "../../Service/Service";
 import { useNavigate } from 'react-router-dom';
 import toast, {Toaster} from "react-hot-toast";
 import Typography from "@mui/material/Typography";
+import {TOKEN_KEY} from "../../Config/config";
 
 const theme = createTheme();
 
@@ -28,8 +29,7 @@ export default function UpdatePwd() {
         }
         // Envoyer les données à backend ou
         console.log({currentPassword,newPassword,confirmedPassword});
-        const token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2M3MjBiOWQ3NThjZmU2ZTkxY2NmNzEiLCJyb2xlIjoiU1RVREVOVCIsImlzUmVzcG9uc2libGUiOmZhbHNlLCJpYXQiOjE2ODA2NDUxMDR9.y4NK62jMWjGE-elN3EToqhf_JxZUD2MP3Nq8_IGhqoM'
-        changeUserPassword(token,currentPassword,newPassword)
+        changeUserPassword(window.localStorage.getItem(TOKEN_KEY),currentPassword,newPassword)
             .then((response)=>
             {
                 toast.success('Le mot de passe a été modifié avec succès.');
@@ -93,6 +93,7 @@ export default function UpdatePwd() {
 
                         <TextField
                             margin="normal"
+                            data-test="currentPwd"
                             required
                             fullWidth
                             //value={currentPassword}
@@ -106,6 +107,7 @@ export default function UpdatePwd() {
 
                         <TextField
                             margin="normal"
+                            data-test="newPwd"
                             required
                             fullWidth
                             name="password"
@@ -120,6 +122,7 @@ export default function UpdatePwd() {
                         <TextField
                             margin="normal"
                             required
+                            data-test="confirmedPwd"
                             fullWidth
                             name="confirmPassword"
                             label="Confirmer le mot de passe"
@@ -131,9 +134,10 @@ export default function UpdatePwd() {
                             onChange={handleConfirmedPasswordChange}
                         />
                         <Button
-                            type="submit"
+                            onClick={handleSubmit}
                             fullWidth
                             variant="contained"
+                            data-test="submit"
                             sx={{ mt: 3, mb: 2 }}
                         >
                             Enregistrer
@@ -143,7 +147,9 @@ export default function UpdatePwd() {
 
                             </Grid>
                             <Grid item>
-                                <Link onClick={handleReturnHome} variant="body2" underline="hover">
+                                <Link onClick={handleReturnHome} variant="body2" underline="hover"                             data-test="login"
+                                      data-test="cancel"
+                                >
                                     {"Retour"}
                                 </Link>
                             </Grid>

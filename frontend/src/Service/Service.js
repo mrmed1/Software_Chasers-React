@@ -7,15 +7,14 @@ const API_URL = 'https://school.eastus.cloudapp.azure.com/api/admin/change-passw
 
 export function getUserIdFromToken(token){
     const decodedToken =jwt.decodeToken(token);
-    console.log('token decoded :',decodedToken._id);
     const userId = decodedToken._id;
-    console.log(userId)
     return userId;
 };
 
 export async function changeUserPassword(token, currentPassword, newPassword) {
-    const userId = getUserIdFromToken(token);
-    const data = { currentPassword, newPassword, userId };
+    const _id = getUserIdFromToken(token);
+    const data = { currentPassword, newPassword, _id };
+    console.log(data)
     try {
         const response = await axios.post('/admin/change-password', data);
         if (response.status === 200) {

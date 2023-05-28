@@ -16,9 +16,7 @@ import {auth} from "../../Service/auth.service";
 import {useNavigate} from "react-router-dom";
 import toast, {Toaster} from 'react-hot-toast';
 import {Checkbox, FormControlLabel} from "@mui/material";
-import {useQuery} from "react-query";
-import {GetMyPFE} from "../../Service/internshipService";
-import {getIdClub} from "../../Service/ClubService";
+
 
 const theme = createTheme();
 export default function Login() {
@@ -34,7 +32,6 @@ export default function Login() {
         setLogin(event.target.value);
         setLoginError(false);
     };
-
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
         setPasswordError(false);
@@ -69,8 +66,8 @@ export default function Login() {
                 .then((response) => {
                     toast.success('Login Successful');
                     setTimeout(() => {
-                        navigate('/students');
-                        window.location.reload()
+                        window.location.href = '/accueil';
+                       // window.location.reload();
                     },1000)
                 })
                 .catch((error) => {
@@ -102,8 +99,9 @@ export default function Login() {
                         Sign in
                     </Typography>
                     <Box component="form" noValidate sx={{mt: 1}}>
-                        <Toaster/>
+                        <Toaster containerClassName='uniquetest' />
                         <TextField
+                            data-test="login"
                             margin="normal"
                             required
                             fullWidth
@@ -124,6 +122,7 @@ export default function Login() {
 
                         />
                         <TextField
+                            data-test="password"
                             margin="normal"
                             required
                             fullWidth
@@ -142,11 +141,13 @@ export default function Login() {
                             }}
                         />
                         <FormControlLabel
+                            data-test="isclub"
                             control={<Checkbox value={isclub} onChange={handleChange} color="primary" />}
                             label="Sign in as Club"
                         />
 
                         <Button
+                            data-test="connect"
                             type="button"
                             onClick={handleSubmit}
                             fullWidth
@@ -162,7 +163,7 @@ export default function Login() {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href="/SignUp" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>

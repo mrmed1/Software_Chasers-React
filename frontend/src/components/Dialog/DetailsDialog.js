@@ -15,24 +15,24 @@ const DetailsDialog = ({ open, onClose, selectedData, attributes }) => {
   };
 
   return (
-    <Dialog maxWidth="xs" fullWidth open={open} onClose={onClose}>
+    <Dialog  id="DetailsDialog" maxWidth="xs" fullWidth open={open} onClose={onClose}>
       <DialogTitle>Details</DialogTitle>
       <DialogContent>
         {selectedData &&
           attributes.map((attribute) => (
-            attribute.detailsAttribute&& <div key={attribute.name}>
+            attribute.detailsAttribute&& <div  key={attribute.name}>
               <Typography variant="subtitle1">{attribute.label} :</Typography>
 
               {!attribute.object && attribute.type === "date" ? (
-                <Typography>
+                <Typography  id={attribute.name}>
                   {new Date(selectedData[attribute.name]).toLocaleDateString()}
                 </Typography>
               ) : (
-                <Typography>{selectedData[attribute.name]}</Typography>
+                <Typography id={attribute.name}>{selectedData[attribute.name]}</Typography>
               )}
 
               {attribute.object && (
-                <Typography>
+                <Typography  id={attribute.name.split(".")[0]}>
                   {
                     selectedData[attribute.name.split(".")[0]][
                       attribute.name.split(".")[1]
@@ -45,7 +45,7 @@ const DetailsDialog = ({ open, onClose, selectedData, attributes }) => {
           ))}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCancel}>Close</Button>
+        <Button data-test="cancel-button" onClick={handleCancel}>Close</Button>
       </DialogActions>
     </Dialog>
   );

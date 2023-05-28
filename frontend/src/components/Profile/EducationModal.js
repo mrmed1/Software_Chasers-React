@@ -87,7 +87,8 @@ export default function EducationModal({ data, add, _id, iconName, role }) {
               size="big"
               style={{ float: "right", cursor: "pointer", marginLeft: "8px" }}
               disabled={aUthorization}
-              
+              data-test={`educationModal-${data?.diploma}`}
+             
             />
          
         
@@ -108,6 +109,7 @@ export default function EducationModal({ data, add, _id, iconName, role }) {
               onChange={(e) => setDiploma(e.target.value)}
               defaultValue={data.diploma}
               required
+              data-test="diploma"
             />
             <Form.Input
               fluid
@@ -116,6 +118,7 @@ export default function EducationModal({ data, add, _id, iconName, role }) {
               onChange={(e) => setUniversity(e.target.value)}
               defaultValue={data.university}
               required
+              data-test="university"
             />
           </Form.Group>
 
@@ -128,6 +131,7 @@ export default function EducationModal({ data, add, _id, iconName, role }) {
               defaultValue={data.startDate}
               type="date"
               required
+              data-test="startDate"
             />
             <Form.Input
               fluid
@@ -137,6 +141,7 @@ export default function EducationModal({ data, add, _id, iconName, role }) {
               defaultValue={data.endDate}
               type="date"
               required
+              data-test="endDate"
             />
             <Dropdown
               placeholder="clubs"
@@ -148,6 +153,7 @@ export default function EducationModal({ data, add, _id, iconName, role }) {
               onChange={handleDropdownChange}
               options={clubList}
               required
+              data-test="clubs"
             />
           </Form.Group>
 
@@ -156,6 +162,7 @@ export default function EducationModal({ data, add, _id, iconName, role }) {
             loading={isUpdating}
             disabled={isUpdating}
             color={"blue"}
+            data-test="savingEducation"
           >
             Submit
           </Form.Button>

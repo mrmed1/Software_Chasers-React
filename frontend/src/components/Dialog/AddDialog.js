@@ -41,7 +41,7 @@ const AddDialog = ({ open, onClose, onSubmit, title, attributes }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
+    <Dialog id="AddDialog" open={open} onClose={onClose} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">{title}</DialogTitle>
       <DialogContent>
         {attributes.map(
@@ -58,6 +58,7 @@ const AddDialog = ({ open, onClose, onSubmit, title, attributes }) => {
                           name={attr.name}
                           color="primary"
                           value={values[attr.name]}
+                          data-test={attr.name}
                         />
                       }
                       label={attr.label}
@@ -65,6 +66,7 @@ const AddDialog = ({ open, onClose, onSubmit, title, attributes }) => {
                   </FormControl>
                 ) : (
                   <TextField
+                  data-test={attr.name}
                     required={attr.required}
                     key={attr.id}
                     margin="dense"
@@ -85,10 +87,13 @@ const AddDialog = ({ open, onClose, onSubmit, title, attributes }) => {
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
+        <Button 
+          data-test="cancel-button"
+        onClick={onClose} color="primary">
           Cancel
         </Button>
         <Button
+         data-test="add-button"
           onClick={handleSubmit}
           color="primary"
           disabled={attributes.some(

@@ -43,7 +43,10 @@ export default function DeleteExperience({ data, _id, role }) {
             size="big"
             onClick={show}
             style={{ float: "right", cursor: "pointer" }}
-         disabled={aUthorization}
+            disabled={aUthorization}
+            
+            data-test={`deleteExperienceModal-${data?.jobTitle}`}
+         
           />
         }
         content={

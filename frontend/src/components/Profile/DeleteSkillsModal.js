@@ -36,7 +36,9 @@ export default function DeleteSkillsModal({ skill, _id }) {
      
         header={`Deleting  ${skill}`}
         trigger={
-          <Button color="blue" circular onClick={show} content={skill} />
+          <Button color="blue" circular onClick={show} content={skill} 
+          data-test={`Deleteskill-${skill}`}
+          />
         }
       />
 

@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { Route, Routes, redirect } from "react-router-dom";
 import "./App.css";
 import Hello from "./components/Hello";
@@ -54,11 +54,30 @@ import EventContainer from './components/EventContainer/EventContainer';
 import Admin from './components/CrudAdmin/Admin';
 import CrudOffres from "./components/CRUD Offres/CrudOffres";
 import AlumniStatistics from "./components/StatistiquesAlumni/AlumniStatistics";
+import StatChomage from "./components/StatistiquesChomage/StatChomage";
+import axios from "axios";
+import Accueil from "./components/Home/Accueil";
 function App() {
   const [open, setOpen] = useState(false);
-  const currenUser = { role: "ADMIN" };
+ // const currenUser = connectedUser().role;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [adminAccess, setAdminAccess] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        if(connectedUser()._id){
+          axios.get(`https://school.eastus.cloudapp.azure.com/api/Persons/${connectedUser()._id}`).then((response) => {
+            console.log("rrrr",response.data.access)
 
+            setAdminAccess(response.data.access);
+          })
+        }
+      } catch (e) {
+
+      }
+    }
+    fetchData();
+  }, []);
   function handleLogin(isLoggedIn) {
     setIsLoggedIn(isLoggedIn);
   }
@@ -95,13 +114,15 @@ function App() {
     padding: theme.spacing(0, 1), // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   }));
+
   return (
     <>
       {connectedUser() ? (
         <Box sx={{ display: "flex" }}>
           <Sidebar
+              access={adminAccess}
             routes={ROUTES}
-            userRole={currenUser.role}
+            userRole={connectedUser().role}
             open={open}
             handleDrawerClose={handleDrawerClose}
             handleDrawerOpen={handleDrawerOpen}
@@ -119,13 +140,10 @@ function App() {
                 element={<StudentAccount />}
               />
               <Route exact path="/Enseignant/" element={<Enseignant />} />
-              <Route element={<Home />} path="/" />
+              {/* <Route element={<Home />} path="/" /> */}
               <Route element={<PwdUpdate />} path="/PwdUpdate" />
-              <Route element={<SignUp />} path="/SignUp" />
-              <Route
-                element={<SuiviEtatCompteAllumni />}
-                path="/SuiviEtatCompteAllumni"
-              />
+              
+
               <Route exact path="/AddEvent" element={<CreateEventClub />} />
               <Route exact path="/HomeEvent" element={<HomeEvent />} />
 
@@ -154,12 +172,21 @@ function App() {
               <Route exact path="/Admin/" element={<Admin/>}/>
               <Route exact path="/Offer" element={<CrudOffres/>}/>
               <Route exact path="/StatAlumni" element={<AlumniStatistics/>}/>
-
+              <Route exact path="/StatChomage" element={<StatChomage/>}/>
+              <Route exact path="/accueil" element={<Accueil />} />
             </Routes>
           </Box>
         </Box>
       ) : (
-        <Login onLogin={handleLogin} />
+        <Routes>
+          <Route
+              element={<SuiviEtatCompteAllumni />}
+              path="/SuiviEtatCompteAllumni"
+          />
+          <Route element={<SignUp />} path="/SignUp" />
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/*" element={<Navigate to="/login" />} />
+        </Routes>
       )}
     </>
   );

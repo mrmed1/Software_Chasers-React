@@ -22,7 +22,7 @@ export default function Experience({ data, _id,role,style }) {
 
 
   return (
-    <Card centered fluid style={style.card}>
+    <Card centered fluid style={style.card} data-test="card">
       <Card.Content>
         {/* add Experience */}
 
@@ -35,7 +35,7 @@ export default function Experience({ data, _id,role,style }) {
         />
         {/** Render Experiences !  */}
         <Card.Header>
-          <h1 style={style.header}>My Experiences </h1>
+          <h1 style={style.header} data-test="header">My Experiences </h1>
         </Card.Header>
         <br />
 

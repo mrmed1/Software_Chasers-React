@@ -34,7 +34,7 @@ export function createPFA(pfa){
 }
 
 export function updatePFA(pfa){
-    return axios.put(`${URI}/Internship/${pfa._id}`,pfa).then(r=>r.data)
+    return axios.put(`${URI}/Internship/${pfa._id}`,pfa).then(r=>r.data,window.localStorage.setItem('intern_id',pfa._id))
 }
 export function deletePFA(pfa){
     return axios.delete(`${URI}/Internship/${pfa._id}`).then(r=>r.data)
@@ -58,7 +58,9 @@ export function getInternshipsByStudentId(){
 }
 
 export function createInternship(Internship){
-    return axios.post(`${URI}/Internship`,Internship).then(r=>r.data)
+    return axios.post(`${URI}/Internship`,Internship).then((r)=> {
+        window.localStorage.setItem('intern_id', r.data._id)
+    })
 }
 
 export function getInternshipsByStudentIdAndType(type){

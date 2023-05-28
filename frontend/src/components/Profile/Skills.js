@@ -57,6 +57,7 @@ export default function Skills({ data, _id ,style}) {
               color="blue"
               style={{ float: "right", cursor: "pointer", marginLeft: "8px" }}
               size="big"
+              id="SkillsModal"
             />
           }
         >
@@ -72,6 +73,7 @@ export default function Skills({ data, _id ,style}) {
                 onChange={handleDropdownChange}
                 options={competenceList}
                 required
+               id="SKILLSlIST"
               />
 
               <br />
@@ -82,6 +84,7 @@ export default function Skills({ data, _id ,style}) {
                 loading={isLoading}
                 disabled={isLoading}
                 color={"blue"}
+                data-test="addSkills"
               >
                 Submit
               </Form.Button>

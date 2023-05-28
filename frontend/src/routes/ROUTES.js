@@ -31,6 +31,7 @@ import EventContainer from "../components/EventContainer/EventContainer";
 import Admin from "../components/CrudAdmin/Admin";
 import CrudOffres from "../components/CRUD Offres/CrudOffres";
 import AlumniStatistics from "../components/StatistiquesAlumni/AlumniStatistics";
+import StatChomage from "../components/StatistiquesChomage/StatChomage";
 const ROUTES = [
 
     {
@@ -39,7 +40,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <ListEtudiant/>,
         layout: "/students",
-        allowedRoles: ["ADMIN"]
+        allowedRoles: ["MANAGESTUDENTS"]
     },
     {
         path: "/",
@@ -47,7 +48,7 @@ const ROUTES = [
         icon: <InboxIcon />,
         element: <Enseignant />,
         layout: "/Enseignant",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["MANAGETEACHERS"],
     },
     {
         path: "/",
@@ -55,7 +56,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <Event/>,
         layout: "/Event",
-        allowedRoles :["ADMIN"]
+        allowedRoles :["MANAGEEVENTS"]
     },
     {
         path: "/",
@@ -63,7 +64,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <SignUp/>,
         layout: "/signup",
-        allowedRoles :["ADMIN"]
+        allowedRoles :["ALUMNI"]
     },
     {
         path: "/",
@@ -71,7 +72,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <SuiviEtatCompteAllumni/>,
         layout: "/SuiviEtatCompteAllumni",
-        allowedRoles :["ADMIN"]
+        allowedRoles :["ALUMNI"]
     },
     {
         path: "/",
@@ -79,14 +80,14 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <UpdatePwd/>,
         layout: "/PwdUpdate",
-        allowedRoles :["ADMIN"]
+        allowedRoles :["ALL"]
     },  {
         path: "/profile",
         name: "Show Profile",
         icon: <InboxIcon/>,
         element: <StudentAccount />,
         layout: "/students",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["STUDENT","ALUMNI"],
     },
     {
         path: "/",
@@ -94,7 +95,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <CreateEventClub />,
         layout: "/AddEvent",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["CLUB"],
     },
     {
         path: "/",
@@ -102,7 +103,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <HomeEvent />,
         layout: "/HomeEvent",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["MANAGECLUBS"],
     },
     {
         path: "/",
@@ -110,7 +111,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <HomeClub />,
         layout: "/HomeClub",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["MANAGECLUBS"],
 
     },
     ///PFA
@@ -121,7 +122,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <MyPFA />,
         layout: "/teacher",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["TEACHER"],
     },
     
     {
@@ -130,7 +131,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <CrudPFA />,
         layout: "/teacher",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["TEACHER"],
     },
      {
         path: "/PFA",
@@ -138,7 +139,7 @@ const ROUTES = [
         icon: <InboxIcon />,
         element: <PickPFAstudent />,
         layout: "/students",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["STUDENT"],
       },
       {
         path: "/PFA",
@@ -146,7 +147,7 @@ const ROUTES = [
         icon: <InboxIcon />,
         element: <PublishedPFa />,
         layout: "/admin",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["MANAGEINTERNSHIPS"],
       },
     {
         path: "/",
@@ -154,7 +155,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <ValiderAlumni />,
         layout: "/ValiderAlumni",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["MANAGESTUDENTS"],
     },
     {
         path: "/",
@@ -162,7 +163,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <SummerIntern />,
         layout: "/SummerIntern",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["STUDENT"],
     }
     ,
     {
@@ -171,7 +172,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <InsertPFEIntern />,
         layout: "/InsertPFEIntern",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["STUDENT"],
     },
     {
         path: "/",
@@ -179,7 +180,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <EventClub />,
         layout: "/EventClub",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["CLUB"],
     },
     {
         path: "/",
@@ -187,7 +188,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <EventClubContainer />,
         layout: "/EventClubContainer",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["STUDENT","ALUMNI"],
     },
     {
         path: "/",
@@ -195,7 +196,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <StatisticsPFE />,
         layout: "/StatisticsPFE",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["MANAGEINTERNSHIPS"],
     },
     {
         path: "/",
@@ -203,7 +204,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <DemandeVacation />,
         layout: "/DemandeVacation",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["ALUMNI"],
     },
     {
         path: "/",
@@ -211,7 +212,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <ListDemande />,
         layout: "/AllRequest",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["MANAGESTUDENTS"],
 
     },
     {
@@ -220,7 +221,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <SeeListPFE />,
         layout: "/SeeListPFE",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["MANAGEINTERNSHIPS"],
     },
 
     {
@@ -229,7 +230,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <MyPFE />,
         layout: "/SeeMyPFE",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["TEACHER"],
     }
     ,
     {
@@ -238,14 +239,14 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <PickPFETeacher />,
         layout: "/PickPFETeacher",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["TEACHER"],
     },{
         path: "/",
         name: "Demnde Expert Contract",
         icon: <InboxIcon/>,
         element: <DemandExpertContract />,
         layout: "/DemandeExpertContract",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["ALUMNI"],
     },
      {
         path: "/",
@@ -253,7 +254,7 @@ const ROUTES = [
         icon: <InboxIcon/>,
         element: <EventContainer />,
         layout: "/EventContainer",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["STUDENT","ALUMNI"],
     },
     {
         path: "/",
@@ -261,7 +262,7 @@ const ROUTES = [
         icon: <InboxIcon />,
         element: <Admin />,
         layout: "/Admin",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["MANAGEALL"],
     },
     {
         path: "/",
@@ -269,17 +270,23 @@ const ROUTES = [
         icon: <InboxIcon />,
         element: <CrudOffres />,
         layout: "/Offer",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["ALUMNI"],
     },
-    ,
     {
         path: "/",
         name: "Statistics Alumni",
         icon: <InboxIcon />,
         element: <AlumniStatistics />,
         layout: "/StatAlumni",
-        allowedRoles: ["ADMIN"],
+        allowedRoles: ["MANAGESTUDENTS"],
+    },
+    {
+        path: "/",
+        name: "Statistics Chomage",
+        icon: <InboxIcon />,
+        element: <StatChomage/>,
+        layout: "/StatChomage",
+        allowedRoles: ["MANAGESTUDENTS"],
     }
-
 ]
 export default ROUTES

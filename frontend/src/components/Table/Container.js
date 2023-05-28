@@ -103,6 +103,7 @@ function Container({
 
                 return (
                   <TableRow
+                  data-test="event-row"
                     hover
                     role="checkbox"
                     tabIndex={-1}
@@ -138,6 +139,7 @@ function Container({
                         edge="end"
                         aria-label="delete"
                         onClick={() => handleDelete(row)}
+                        data-test="FirstDelete-button"
                       >
                         <DeleteIcon />
                       </IconButton>
@@ -145,6 +147,7 @@ function Container({
                       <IconButton
                         edge="end"
                         aria-label="edit"
+                        data-test="FirstEdit-button"
                         onClick={() => handleEdit(row)}
                       >
                         <EditIcon />

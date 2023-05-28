@@ -94,7 +94,7 @@ export default function PFAModal({ data, teacher_id, add, iconName }) {
         <Icon
           name={iconName}
           color="blue"
-          disabled={add? false : (teacher_id === data?.createdBy._id ? false : true)}
+          disabled={add? false : (teacher_id === data?.createdBy?._id ? false : true)}
           circular
           size={add? "large" : ""}
           style={{  cursor: "pointer"}}
