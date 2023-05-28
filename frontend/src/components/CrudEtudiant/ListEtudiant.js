@@ -11,6 +11,7 @@ import {Checkbox, FormControlLabel, Switch} from "@mui/material";
 import './ListEtudiant.css';
 import toast, {Toaster} from "react-hot-toast";
 import DetailsDialog from './DetailsDialog';
+import {TOKEN_KEY} from "../../Config/config";
 
 export default function ListEtudiant() {
     const [selectedStudent, setSelectedStudent] = useState(null);
@@ -27,7 +28,8 @@ export default function ListEtudiant() {
     const [dobError, setDobError] = useState(false);
     const [touched, setTouched] = useState(false);
     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
- 
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [token, setToken] = useState(localStorage.getItem(TOKEN_KEY));
     const [newStudent, setNewStudent] = useState({
         lastname: '',
         firstname: '',
@@ -104,7 +106,8 @@ export default function ListEtudiant() {
         return <div>Error: {error.message}</div>;
     }
 
-    const header = (<div className="flex flex-wrap align-items-center justify-content-between gap-2" style={{display:"flex", justifyContent:'flex-end'}}>
+    const header = (<div className="flex flex-wrap align-items-center justify-content-between gap-2"
+                         style={{display: "flex", justifyContent: 'flex-end'}}>
         <Button label="Add Student" onClick={() => {
             setAddStudentDialogVisible(true)
         }}/>
@@ -195,18 +198,17 @@ export default function ListEtudiant() {
         delete newData.__v;
         // Call the updateStudentMutation function to update the student
         updateStudentMutation.mutate(newData);
-   
-       
-     
+
+
     };
 
     function rowEditorTemplate(rowData, props) {
         const rowEditor = props.rowEditor;
         if (rowEditor.editing) {
-           
+
             return rowEditor.element; // default element
         } else {
-         
+
             // custom init element
             return (<React.Fragment>
                     <Button icon="pi pi-pencil" rounded outlined onClick={rowEditor.onInitClick}/>
@@ -231,34 +233,71 @@ export default function ListEtudiant() {
 
     };
     const handleRowClick = (data) => {
- 
-    setSelectedStudent(data);
-    console.log(data)
-   
+
+        setSelectedStudent(data);
+        console.log(data)
+
         setOpenDetailsDialog(true);
- 
-       
-    
-      };
-    return (<div >
+    };
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+    };
+
+    const handleUpload = () => {
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        fetch('https://school.eastus.cloudapp.azure.com/api/dg/importStudent', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((response) => {
+
+                    toast.success('Students imported successfully');
+
+            })
+
+            .catch((error) => {
+                // Handle error
+                toast.error('Error importing students');
+            });
+    };
+    return (<div>
         <Toaster/>
         {selectedStudent && (
-        <DetailsDialog
-            open={openDetailsDialog}
-            onClose={() => {
-              setOpenDetailsDialog(false);
-            }}
-            selectedData={selectedStudent}
-           
-          />)}
-        <h2>List of students</h2>
+            <DetailsDialog
+                open={openDetailsDialog}
+                onClose={() => {
+                    setOpenDetailsDialog(false);
+                }}
+                selectedData={selectedStudent}
+
+            />)}
+        <div style={{display: "flex", justifyContent: "space-between"}}>
+            <h2>List of students</h2>
+            <div>
+                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                    <input type="file" onChange={handleFileChange} style={{
+                        marginRight: '1rem',
+                        padding: '0.5rem',
+                        border: '1px solid #ccc',
+                        borderRadius: '4px'
+                    }}/>
+                    <Button onClick={handleUpload}>Upload</Button>
+                </div>
+            </div>
+        </div>
         <div className="datatable-container">
             <DataTable value={students} editMode="row" selectionMode="single" header={header}
                        onRowEditComplete={onRowEditComplete} dataKey="_id" selection={selectedStudent}
                        responsive={true}
                        onRowClick={(e) => handleRowClick(e.value)}
-                       onSelectionChange={(e) => {setSelectedStudent(e.value)
-                       
+                       onSelectionChange={(e) => {
+                           setSelectedStudent(e.value)
+
                        }}>
                 <Column header="#" headerStyle={{width: '3rem'}}
                         body={(data, options) => options.rowIndex + 1}></Column>
@@ -288,8 +327,8 @@ export default function ListEtudiant() {
             </div>
         </Dialog>
 
-        <Dialog   header="Add Student" visible={addStudentDialogVisible}
-                  onHide={() => setAddStudentDialogVisible(false)} style={{width: "50%"}}>
+        <Dialog header="Add Student" visible={addStudentDialogVisible}
+                onHide={() => setAddStudentDialogVisible(false)} style={{width: "50%"}}>
             <form onSubmit={handleSubmit}>
                 <div className="p-fluid">
 
@@ -359,7 +398,7 @@ export default function ListEtudiant() {
                                     }
                                 }}
                                 onChange={(e) => {
-                                    setNewStudent({ ...newStudent, email: e.target.value });
+                                    setNewStudent({...newStudent, email: e.target.value});
                                     setEmailError(false);
                                 }}
                             />
@@ -424,7 +463,8 @@ export default function ListEtudiant() {
                                        helperText={levelError ? 'Please enter a Level*' : ''}
                                        onBlur={() => {
                                            if (!newStudent.level) {
-                                               setLevelError(true);}
+                                               setLevelError(true);
+                                           }
                                        }
                                        }
                                        onChange={(event) => {
@@ -448,8 +488,9 @@ export default function ListEtudiant() {
                                        helperText={classError ? 'Please enter a Class*' : ''}
                                        onBlur={() => {
                                            if (!newStudent.class) {
-                                               setClassError(true);}
-                                       }   }
+                                               setClassError(true);
+                                           }
+                                       }}
                                        onChange={(event) => {
                                            setNewStudent({...newStudent, class: event.target.value});
                                            setClassError(false);
@@ -470,8 +511,9 @@ export default function ListEtudiant() {
                                        helperText={phoneError ? 'Please enter a Phone*' : ''}
                                        onBlur={() => {
                                            if (!newStudent.phone) {
-                                               setPhoneError(true);}
-                                       }    }
+                                               setPhoneError(true);
+                                           }
+                                       }}
                                        onChange={(event) => {
                                            setNewStudent({...newStudent, phone: event.target.value});
                                            setPhoneError(false);
@@ -494,12 +536,13 @@ export default function ListEtudiant() {
                                       helperText={dobError ? 'Please enter a Date of Birth*' : ''}
                                       onBlur={() => {
                                           if (!newStudent.dob) {
-                                              setDobError(true);}
-                                      }   }
+                                              setDobError(true);
+                                          }
+                                      }}
                                       onChange={(event) => {
                                           setNewStudent({...newStudent, dob: event.value});
                                           setDobError(false);
-                                      }   }
+                                      }}
                             />
                             <span className="error-message">
                                     {dobError && 'Please enter a Date of Birth*'}
@@ -509,10 +552,11 @@ export default function ListEtudiant() {
 
                             <div className="p-field-checkbox " style={{marginTop: 20 + 'px'}}>
                                 <FormControlLabel
-                                    control={<Checkbox value={isPublicChecked}  checked={newStudent.isPublic} onChange={() => {
-                                        setIsPublicChecked(!isPublicChecked);
-                                        setNewStudent({...newStudent, isPublic: !isPublicChecked});
-                                    }} color="primary" />}
+                                    control={<Checkbox value={isPublicChecked} checked={newStudent.isPublic}
+                                                       onChange={() => {
+                                                           setIsPublicChecked(!isPublicChecked);
+                                                           setNewStudent({...newStudent, isPublic: !isPublicChecked});
+                                                       }} color="primary"/>}
                                     label="Is Public"
                                 />
                             </div>
